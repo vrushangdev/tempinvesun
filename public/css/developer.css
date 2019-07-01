@@ -1,0 +1,30 @@
+.error{
+	color:red;
+	border-color: red;
+}
+.cross{
+	margin-top: 32px;
+}
+.second_num{
+	margin-top: 28px;
+}
+.multiple-sign{
+	margin-top: 35px;
+}
+.mt-8{
+	margin-top: 8px;
+}
+.vendors{
+	margin-top: 28px;
+}
+.colors{
+	-webkit-appearance: square-button;
+	width: 24px;height: 35px;
+	background-color: buttonface;
+	cursor: default;padding: 1px 2px;
+	background-color: buttonface;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(160, 169, 169);
+	padding: 5px 2px;
+}
