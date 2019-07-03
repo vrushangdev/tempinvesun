@@ -29,60 +29,80 @@ $(document).ready(function() {
     $("#userForm").validate({
         errorElement: 'span',
         rules: {
-            role_id:{
+            title:{
                 required: true,
             },
-            name: {
+            first_name:{
                 required: true,
+            },
+            middle_name: {
+                required: true,
+            },
+            surname: {
+              required: true,  
             },
             email: {
                 required: true,
                 email: true,
                 customemail : true,
                 remote:{
-                    url: "/admin-panel/check-email",
+                    url: "/check-user-email",
                     type: "post",
                     data:{
-                        role_id: function() {
-                            return $("#inputRole").val();
-                        },
                         user_id:function() {
-                            return $("#id").val();
+                            return $("#user_id").val();
                         },
                     }
                 }
-            },
-            password: {
-                required: true,
-                minlength: 6
             },
             mobile:{
                 required: true,
                 minlength:10,
                 maxlength:10,
                 remote:{
-                    url: "/admin-panel/check-mobile-number",
+                    url: "/check-user-mobile",
                     type: "post",
                     data:{
-                        role_id: function() {
-                            return $("#inputRole").val();
-                        },
                         user_id:function() {
-                            return $("#id").val();
+                            return $("#user_id").val();
                         },
                     }
                 }
+            },
+            address1: {
+              required: true,  
+            },
+            city: {
+              required: true,  
+            },
+            pincode: {
+              required: true,  
+            },
+            state: {
+              required: true,  
+            },
+            country: {
+              required: true,  
+            },
+            gst_number: {
+              required: true,  
+            },
+            district:{
+              required: true,    
             }
         },
         messages: {
-            role_id:{
-                required:"Please select role from list",
+            title:{
+                required: "Please select title",
             },
-            name:{
-                required:"Please enter name",
+            first_name:{
+                required:"Please enter first name",
             },
-            password:{
-                required:"Please enter password",
+            middle_name: {
+                required: "Please enter middle name",
+            },
+            surname: {
+              required: "Please enter surname",  
             },
             email:{
                 required:"Please enter email address",
@@ -92,6 +112,27 @@ $(document).ready(function() {
             mobile:{
                 required:"Please enter mobile",
                 remote:"Mobile already exists!"
+            },
+            address1: {
+              required: "Please enter address",  
+            },
+            city: {
+              required: "Please enter city",  
+            },
+            pincode: {
+              required: "Please enter pincode",  
+            },
+            state: {
+              required: "Please enter state",  
+            },
+            country: {
+              required: "Please enter country",  
+            },
+            gst_number: {
+              required: "Please enter GST number",  
+            },
+            district:{
+              required: "Please enter district",    
             }
         }
     });

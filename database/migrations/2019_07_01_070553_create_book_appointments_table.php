@@ -15,6 +15,8 @@ class CreateBookAppointmentsTable extends Migration
     {
         Schema::create('book_appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('time_slot_id');
             $table->timestamps();
         });
     }

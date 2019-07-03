@@ -21,6 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::post('save-get-call-request', 'HomeController@saveGetCallRequest')->name('saveGetCallRequest');
+
+Route::post('/check-user-email', 'HomeController@checkUserEmail')->name('checkUserEmail');
+Route::post('/check-user-mobile', 'HomeController@checkUserMobile')->name('checkUserMobile');
+
+
+
 Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {
 
 	// Authentication Routes...
@@ -85,6 +92,14 @@ Route::group(['prefix' => 'call-center-agent', 'namespace' => 'Callcenter'], fun
 	Route::get('/change-password', 'CallCenterController@changePassword')->name('callcenter.changePassoword');
 	Route::post('/update-password', 'CallCenterController@updatePassword')->name('callcenter.updatePassword');
 
+	//Get call request
+	Route::get('/get-call-request', 'CallRequestController@getCallRequest')->name('callcenter.getCallRequest');
+
+	//user route
+	Route::get('/edit-user-info/{id}', 'UserController@editUserInfo')->name('callcenter.editUserInfo');	
+	Route::post('/save-user-info', 'UserController@saveUserInfo')->name('callcenter.saveUserInfo');	
+	
+	Route::post('/get-lead-assistant', 'UserController@getLeadAssistant')->name('callcenter.getLeadAssistant');	
 });
 
 Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], function () {
@@ -108,6 +123,9 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::get('/', 'LeadAssistantController@index')->name('lead_assistant.dashboard');
 	Route::get('/change-password', 'LeadAssistantController@changePassword')->name('lead_assistant.changePassoword');
 	Route::post('/update-password', 'LeadAssistantController@updatePassword')->name('lead_assistant.updatePassword');
+
+	//Get call request
+	Route::get('/get-lead-request', 'LeadRequestController@getLeadRequest')->name('lead_assistant.getLeadRequest');
 
 });
 

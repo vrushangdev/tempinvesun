@@ -15,6 +15,12 @@ class CreateEnergyDataSetsTable extends Migration
     {
         Schema::create('energy_data_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->double('monthly_bill')->nullable();
+            $table->double('plan_size')->nullable();
+            $table->double('energy_generation')->nullable();
+            $table->double('monthly_energy_saving')->nullable();
+            $table->double('payback_period')->nullable();
+            $table->double('free_energy_generation')->nullable();
             $table->timestamps();
         });
     }

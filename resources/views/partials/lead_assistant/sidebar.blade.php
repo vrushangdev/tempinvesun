@@ -17,6 +17,15 @@
                     <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
                 </a>
             </li>
+
+            <li class="menu-item @if(route::is('lead_assistant.getLeadRequest')) active @endif">
+                <a href="{{ route('lead_assistant.getLeadRequest') }}" class="menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Lead Request</span>
+                    </span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

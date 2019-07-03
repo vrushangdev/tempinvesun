@@ -17,6 +17,15 @@
                     <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
                 </a>
             </li>
+
+            <li class="menu-item @if(route::is('callcenter.getCallRequest')) active @endif">
+                <a href="{{ route('callcenter.getCallRequest') }}" class="menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Get Call Request</span>
+                    </span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

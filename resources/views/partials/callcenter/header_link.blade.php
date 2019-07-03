@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/fonts/materialdesignicons/materialdesignicons.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/fonts/feather/feather-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/front/atmos.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/developer_ngo.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/developer.css') }}">
 
 <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}">
