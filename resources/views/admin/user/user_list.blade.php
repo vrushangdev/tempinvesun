@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="col-md-2 mt-4">
-                                <button type="submit" class="btn btn-primary mt-1" id="filter" name="save_and_list" value="save_and_list">Filter Order</button>
+                                <button type="submit" class="btn btn-primary mt-1" id="filter" name="save_and_list" value="save_and_list">Filter Role</button>
                             </div>
                             @if($filter == 1)
                                 <div class="col-md-2 mt-4">

@@ -38,7 +38,11 @@
                                     @foreach($getCallRequest as $ck => $cv)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $cv->user->first_name }}</td>
+                                            @if($cv->user->first_name != '')
+                                                <td>{{ $cv->user->first_name }}</td>
+                                            @else
+                                                <td>{{ $cv->user->form_name }}</td>
+                                            @endif
                                             <td>{{ $cv->user->mobile }}</td>
                                             <td>{{ date('d-m-Y',strtotime($cv->created_at)) }}</td>
                                             <td>{{ $cv->is_attend == 1? "Attended" : "Unattended"}}</td>

@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function saveGetCallRequest(Request $request){
 
         $user = new User;
-        $user->first_name = $request->name;
+        $user->form_name = $request->name;
         $user->mobile = $request->mobile;
         $user->save();
 

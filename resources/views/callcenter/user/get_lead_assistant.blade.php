@@ -1,4 +1,4 @@
-<div class="card m-b-30">
+<div class="card m-b-30 leadPopup">
     <div class="card-header">
         <h5 class="m-b-0">
              Assign Lead Assistant

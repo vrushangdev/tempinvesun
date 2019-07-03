@@ -153,11 +153,19 @@ class UserController extends GlobalController
 
    	public function deleteUser($id){
 
-   		$deleteUser = User::where('id',$id)->update(['is_delete' => 1]);
+   		if($id == 1){
+            $query = Admin::where('id',$id)->delete();
+        } elseif($id == 2){
+            $query = CallCenterAgent::where('id',$id)->delete();
+        } elseif($id == 3){
+            $query = LeadAssistant::where('id',$id)->delete();
+        } elseif($id == 4){
+            $query = TechPartner::where('id',$id)->delete();
+        }
 
-    	if($deleteUser){
+    	if($query){
 
-    		return redirect(route('roleList'))->with('messages', [
+    		return redirect(route('userList'))->with('messages', [
                 [
 	                'type' => 'success',
 	                'title' => 'User',

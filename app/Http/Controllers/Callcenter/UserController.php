@@ -19,11 +19,39 @@ class UserController extends Controller
 
     public function editUserInfo($id){
 
-    	$getUserInfo =  User::where('id',$id)->first();
+    	$getUserInfo =  User::where('id',$id)
+                            ->with(['assigned_lead' => function($q){ $q->with(['lead_assistant','slot']); }])
+                            ->first();
 
     	$getTimeSlot = TimeSlot::all();
 
-    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot'));
+        $getLeadAssistant = LeadAssistant::all();
+
+        $lead_data = array();
+
+        if(!is_null($getUserInfo->assigned_lead)){
+
+            if(!is_null($getLeadAssistant)){
+                foreach($getLeadAssistant as $lk => $lv){
+                    $getTimeSlot = TimeSlot::all();
+                    foreach($getTimeSlot as $ek => $tv){
+                        $findAppointment = AssignedLeadAssistant::where('lead_assistant_id',$lv->id)->where('time_slot_id',$tv->id)->where('date',$getUserInfo->assigned_lead->date)->count();
+                        $lead_data[$lk]['id'] = $lv->id;
+                        $lead_data[$lk]['name'] = $lv->name;
+                        $lead_data[$lk]['appointment_data'][$ek]['id'] = $tv->id;
+                        $lead_data[$lk]['appointment_data'][$ek]['name'] = $tv->name;
+                        $lead_data[$lk]['appointment_data'][$ek]['count'] = $findAppointment;
+                        if($getUserInfo->assigned_lead->user_id == $getUserInfo->id && $getUserInfo->assigned_lead->lead_assistant_id == $lv->id && $getUserInfo->assigned_lead->time_slot_id == $tv->id){
+                            $lead_data[$lk]['appointment_data'][$ek]['assign'] = 1;
+                        } else {
+                            $lead_data[$lk]['appointment_data'][$ek]['assign'] = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot','lead_data'));
     }
 
     public function saveUserInfo(Request $request){
@@ -49,10 +77,12 @@ class UserController extends Controller
 
     	if($user){
 
+            $deleteAssignedUser = AssignedLeadAssistant::where('user_id',$request->id)->delete();
+
     		$assign = new AssignedLeadAssistant;
     		$assign->lead_assistant_id = $request->lead_assistant;
     		$assign->time_slot_id = $request->time_slot_id;
-    		$assign->user_id = $user->id;
+    		$assign->user_id = $request->id;
     		$assign->date = $request->appointment_date;
     		$assign->save();
 

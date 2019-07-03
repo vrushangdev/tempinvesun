@@ -64,4 +64,8 @@ class User extends Authenticatable
         return $randomString;
     }
 
+    public function assigned_lead(){
+        return $this->hasOne('App\Models\AssignedLeadAssistant','user_id','id');
+    } 
+
 }

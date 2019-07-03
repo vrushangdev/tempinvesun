@@ -1,5 +1,5 @@
 @extends('layouts.callcenter')
-@section('title','Add Company | Suraj Creations')
+@section('title','Edit User | Invesun')
 @section('content')
 <section class="admin-content">
     <div class="bg-dark">
@@ -31,63 +31,63 @@
                             <label for="inputName">Title</label>
                             <select class="form-control" id="inputName" name="title" required>
                                 <option value="">Select User Title</option>
-                                <option value="1">Mr.</option>
-                                <option value="2">Mrs.</option>
-                                <option value="3">Ms.</option>
-                                <option value="4">Dr.</option>
-                                <option value="5">Er.</option>
+                                <option value="1" @if($getUserInfo->title == 1) selected="selected" @endif>Mr.</option>
+                                <option value="2" @if($getUserInfo->title == 2) selected="selected" @endif>Mrs.</option>
+                                <option value="3" @if($getUserInfo->title == 3) selected="selected" @endif>Ms.</option>
+                                <option value="4" @if($getUserInfo->title == 4) selected="selected" @endif>Dr.</option>
+                                <option value="5" @if($getUserInfo->title == 5) selected="selected" @endif>Er.</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" required>
+                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" value="{{ $getUserInfo->first_name }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputMiddleName">Middle Name</label>
-                                <input type="text" class="form-control width" id="inputMiddleName" name="middle_name" placeholder="Middle Name" required>
+                                <input type="text" class="form-control width" id="inputMiddleName" name="middle_name" placeholder="Middle Name" value="{{ $getUserInfo->middle_name }}" required>
                         </div>  
 
                         <div class="form-group">
                             <label for="inputSurname">Surname</label>
-                            <input type="text" class="form-control" id="inputSurname" name="surname" placeholder="Surname" required>
+                            <input type="text" class="form-control" id="inputSurname" name="surname" placeholder="Surname" value="{{ $getUserInfo->last_name }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputAddress">Address 1</label>
-                            <textarea class="form-control" class="form-control" id="inputAddress" name="address1" placeholder="Address" required></textarea>
+                            <textarea class="form-control" class="form-control" id="inputAddress" name="address1" placeholder="Address" required>{{ $getUserInfo->address1 }} </textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="inputAddress2">Address 2</label>
-                            <textarea class="form-control" class="form-control" id="inputAddress2" name="address2" placeholder="Address"></textarea>
+                            <textarea class="form-control" class="form-control" id="inputAddress2" name="address2" placeholder="Address">{{ $getUserInfo->address2 }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" name="city" placeholder="City" required>
+                            <input type="text" class="form-control" id="inputCity" name="city" placeholder="City" value="{{ $getUserInfo->city }}" required>
                         </div>
 
 
                         <div class="form-group">
                             <label for="inputPincode">Pincode</label>
-                            <input type="number" class="form-control" id="inputPincode" placeholder="Pincode" name="pincode" required>
+                            <input type="text" class="form-control number" minlength="6"  maxlength="6" id="inputPincode" placeholder="Pincode" name="pincode" value="{{ $getUserInfo->pincode }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputDistrict">District </label>
-                            <input type="text" class="form-control" id="inputDistrict" name="district" placeholder="District" required>
+                            <input type="text" class="form-control" id="inputDistrict" name="district" value="{{ $getUserInfo->district }}" placeholder="District" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputState">State</label>
-                            <input type="text" class="form-control" minlength="6" id="inputState" placeholder="State" name="state" required>
+                            <input type="text" class="form-control" id="inputState" placeholder="State" value="{{ $getUserInfo->state }}" name="state" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputCountry">Country</label>
-                            <input type="text" class="form-control" id="inputCountry" placeholder="Country" name="country" required>
+                            <input type="text" class="form-control" id="inputCountry" value="{{ $getUserInfo->country }}" placeholder="Country" name="country" required>
                         </div>
 
                         
@@ -108,40 +108,107 @@
 
                         <div class="form-group">
                             <label for="inputGst">GST Number</label>
-                            <input type="text" class="form-control gst" id="inputGst" placeholder="GST Number" maxLength="15" name="gst" required>
+                            <input type="text" class="form-control gst" id="inputGst" placeholder="GST Number" maxLength="15" name="gst" value="{{ $getUserInfo->gst_number }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="inputMobile">Mobile</label>
-                            <input type="text" class="form-control number" id="inputMobile" maxLength="10" name="mobile" placeholder="Mobile" value="{{ $getUserInfo->mobile }}" required>
+                            <input type="text" class="form-control number" id="inputMobile" maxLength="10" name="mobile" placeholder="Mobile" value="{{ $getUserInfo->mobile }}" value="{{ $getUserInfo->mobile }}" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="alt_mobile">Alt Mobile</label>
-                            <input type="text" class="form-control" id="alt_mobile" name="alt_mobile" placeholder="Alternate Mobile">
+                            <input type="text" class="form-control number" maxLength="10" id="alt_mobile" value="{{ $getUserInfo->alt_no }}" name="alt_mobile" placeholder="Alternate Mobile">
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail">Email</label>
-                            <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
+                            <input type="text" class="form-control" id="inputEmail" value="{{ $getUserInfo->email }}" name="email" placeholder="Email" required>
                         </div>
 
                     </div>
                 </div>
+
+                 @if(!is_null($getUserInfo->assigned_lead))
+                    <div class="card m-b-30">
+                        <div class="card-header">
+                            <h5 class="m-b-0">
+                                Assigend Lead Assistant
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Lead Assistant : <b>{{ $getUserInfo->assigned_lead->lead_assistant->name }}</b></p>
+                            <p>Time Slot : <b>{{ $getUserInfo->assigned_lead->slot->name }}</b></p>                           
+                        </div>
+                    </div>
+                @endif
 
                 <div class="card m-b-30 addLeadAssistant">
                     <div class="card-body">
 
                         <div class="form-group">
                             <label for="inputAppoDate">Appointment Date</label>
-                            <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" required>
+                            <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="@if(!is_null($getUserInfo->assigned_lead)) {{ $getUserInfo->assigned_lead->date }} @endif" required>
                         </div>
-
-                        <input type="hidden" id="lead_assistant" name="lead_assistant" >
-                        <input type="hidden" id="time_slot_id" name="time_slot_id" >
-                        <input type="hidden" id="lead_button_id" value="">
+                        @if(is_null($getUserInfo->assigned_lead))
+                            <input type="hidden" id="lead_assistant" name="lead_assistant" >
+                            <input type="hidden" id="time_slot_id" name="time_slot_id" >
+                            <input type="hidden" id="lead_button_id" value="">
+                        @else
+                            <input type="hidden" id="lead_assistant" name="lead_assistant" value="{{$getUserInfo->assigned_lead->lead_assistant_id}}" >
+                            <input type="hidden" id="time_slot_id" name="time_slot_id" value="{{$getUserInfo->assigned_lead->time_slot_id}}">
+                            <input type="hidden" id="lead_button_id" value="assign_{{$getUserInfo->assigned_lead->lead_assistant_id}}_{{$getUserInfo->assigned_lead->time_slot_id}}">
+                        @endif
                     </div>
                 </div>
+
+                @if(!is_null($getUserInfo->assigned_lead))
+
+                    <div class="card m-b-30 leadPopup">
+                        <div class="card-header">
+                            <h5 class="m-b-0">
+                                 Assign Lead Assistant
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                        @if(!is_null($lead_data))
+                            @foreach($lead_data as $lk => $lv)
+                                <p>Lead Assistant Name : {{ $lv['name'] }} </p>
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Time Slot</th>
+                                                <th>Count</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if(!is_null($lv['appointment_data']))
+                                                @foreach($lv['appointment_data'] as $ak => $av)
+                                                <tr>
+                                                    <td>{{ $av['name'] }}</td>
+                                                    <td>{{ $av['count'] }}</td>
+                                                    <td>
+                                                        <a href="javscript:void(0);" class="btn btn-primary assign assign_{{ $lv['id'] }}_{{ $av['id'] }}" data-id="{{ $lv['id'] }}" data-value="{{ $av['id'] }}">
+                                                        @if($av['assign'] == 0)
+                                                            Assign
+                                                        @else
+                                                            Assigned
+                                                        @endif
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endforeach
+                        @endif
+                        </div>
+                    </div>
+                @endif
 
 
                 <div class="card m-b-30">
@@ -169,6 +236,7 @@
                 date: $(this).val(),
             },
             success: function(data){
+                $('.leadPopup').remove();
                 $(data).insertAfter('.addLeadAssistant');
             }
         });
