@@ -153,4 +153,11 @@ class TechPartnerController extends Controller
               ]); 
         }
     }
+
+    public function getMyLeads(){
+
+        $findMyLeads = User::where('signup_sharing',Auth::guard('tech_partner')->user()->sharing_id)->where('signup_sharing_by','techpartner')->get();
+
+        return view('techpartner.dashboard.my_leads',compact('findMyLeads'));
+    }
 }

@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -25,7 +25,7 @@ Route::post('save-get-call-request', 'HomeController@saveGetCallRequest')->name(
 
 Route::post('/check-user-email', 'HomeController@checkUserEmail')->name('checkUserEmail');
 Route::post('/check-user-mobile', 'HomeController@checkUserMobile')->name('checkUserMobile');
-
+Route::post('/check-city-name', 'HomeController@getCityName')->name('getCityName');
 
 
 Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {
@@ -92,6 +92,9 @@ Route::group(['prefix' => 'call-center-agent', 'namespace' => 'Callcenter'], fun
 	Route::get('/change-password', 'CallCenterController@changePassword')->name('callcenter.changePassoword');
 	Route::post('/update-password', 'CallCenterController@updatePassword')->name('callcenter.updatePassword');
 
+	//My Leads
+	Route::get('/get-call-center-leads', 'CallCenterController@getMyLeads')->name('callcenter.getMyLeads');	
+
 	//Get call request
 	Route::get('/get-call-request', 'CallRequestController@getCallRequest')->name('callcenter.getCallRequest');
 
@@ -100,6 +103,8 @@ Route::group(['prefix' => 'call-center-agent', 'namespace' => 'Callcenter'], fun
 	Route::post('/save-user-info', 'UserController@saveUserInfo')->name('callcenter.saveUserInfo');	
 	
 	Route::post('/get-lead-assistant', 'UserController@getLeadAssistant')->name('callcenter.getLeadAssistant');	
+
+
 });
 
 Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], function () {
@@ -123,6 +128,9 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::get('/', 'LeadAssistantController@index')->name('lead_assistant.dashboard');
 	Route::get('/change-password', 'LeadAssistantController@changePassword')->name('lead_assistant.changePassoword');
 	Route::post('/update-password', 'LeadAssistantController@updatePassword')->name('lead_assistant.updatePassword');
+
+	//My Leads
+	Route::get('/get-lead-assistant-leads', 'LeadAssistantController@getMyLeads')->name('lead_assistant.getMyLeads');
 
 	//Get call request
 	Route::get('/get-lead-request', 'LeadRequestController@getLeadRequest')->name('lead_assistant.getLeadRequest');
@@ -150,6 +158,36 @@ Route::group(['prefix' => 'tech-partner', 'namespace' => 'Techpartner'], functio
 	Route::get('/', 'TechPartnerController@index')->name('tech_partner.dashboard');
 	Route::get('/change-password', 'TechPartnerController@changePassword')->name('tech_partner.changePassoword');
 	Route::post('/update-password', 'TechPartnerController@updatePassword')->name('tech_partner.updatePassword');
+
+	//My Leads
+	Route::get('/get-tech-partner-leads', 'TechPartnerController@getMyLeads')->name('tech_partner.getMyLeads');
+
+});
+
+Route::group(['prefix' => 'retailer', 'namespace' => 'Retailer'], function () {
+
+	// Authentication Routes...
+	Route::get('login', 'Auth\LoginController@showLoginForm')->name('retailer.login');
+	Route::post('login', 'Auth\LoginController@login')->name('retailer.postlogin');
+	Route::get('logout', 'Auth\LoginController@logout')->name('retailer.logout');
+
+	// Registration Routes...
+	Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('retailer.register');
+	Route::post('register', 'Auth\RegisterController@register')->name('retailer.postregister');;
+
+	// Password Reset Routes...
+	Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('retailer.auth.password.reset');
+	Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('retailer.passwordemail');
+	Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm')->name('retailer.auth.password.reset');
+	Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('retailer.resetpassword');
+
+	//Dashboard Route....
+	Route::get('/', 'RetailerController@index')->name('retailer.dashboard');
+	Route::get('/change-password', 'RetailerController@changePassword')->name('retailer.changePassoword');
+	Route::post('/update-password', 'RetailerController@updatePassword')->name('retailer.updatePassword');
+
+	//My Leads
+	Route::get('/get-retailer-leads', 'RetailerController@getMyLeads')->name('retailer.getMyLeads');
 
 });
 

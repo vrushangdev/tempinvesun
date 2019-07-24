@@ -23,9 +23,19 @@
                     <span class="menu-label">
                         <span class="menu-name">Get Call Request</span>
                     </span>
-                    <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-phone "></i></span>
                 </a>
             </li>
+
+            <li class="menu-item @if(route::is('callcenter.getMyLeads')) active @endif">
+                <a href="{{ route('callcenter.getMyLeads') }}" class="menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">My Leads</span>
+                    </span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-edit "></i></span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </aside>

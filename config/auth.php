@@ -56,6 +56,10 @@ return [
             'driver' => 'session',
             'provider' => 'tech_partners',
         ],
+        'retailer' => [
+            'driver' => 'session',
+            'provider' => 'retailers',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -100,6 +104,10 @@ return [
         'tech_partners' => [
             'driver' => 'eloquent',
             'model' => App\Models\TechPartner::class,
+        ],
+        'retailers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Retailer::class,
         ],
 
         // 'users' => [
@@ -151,6 +159,12 @@ return [
             'provider' => 'tech_partners',
             'email' => 'tech_partner.auth.emails.password',
             'table' => 'tech_partners_password_resets',
+            'expire' => 60,
+        ],
+        'retailers' => [
+            'provider' => 'retailers',
+            'email' => 'retailer.auth.emails.password',
+            'table' => 'retailer_password_resets',
             'expire' => 60,
         ],
     ],

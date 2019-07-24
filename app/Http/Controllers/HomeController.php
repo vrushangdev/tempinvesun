@@ -9,24 +9,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    
+    public function index(Request $request)
+    {   
+        $shared = '';
+        $shared_id = '';
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
+        if(count($request)){
+            $shared = $request->shared;
+            $shared_id = $request->sharing_id;
+        }
+
+        return view('front.home.index',compact('shared','shared_id'));
     }
 
     public function saveGetCallRequest(Request $request){
@@ -34,11 +28,14 @@ class HomeController extends Controller
         $user = new User;
         $user->form_name = $request->name;
         $user->mobile = $request->mobile;
+        if($request->shared_id != '' && $request->shared != ''){
+            $user->signup_sharing_by = $request->shared;
+            $user->signup_sharing = $request->shared_id;
+        }
         $user->save();
 
         $energy = new EnergyDataSet;
         $energy->user_id = $user->id;
-        $energy->plant_size = $request->plant_size;
         $energy->monthly_energy_saving = $request->monthly_energy_saving;
         $energy->save();
 
@@ -85,5 +82,46 @@ class HomeController extends Controller
         } else {
             return 'true';
         }
+    }
+
+    public function getCityName(Request $request){
+
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDbX_JirTlqgj9BO002nMah8CQSD7f4ypI&address=" . $request->zip . "&sensor=true";
+
+        $address_info = file_get_contents($url);
+        $json = json_decode($address_info);
+        // echo "<pre>";
+        // print_r($json);
+        // exit;
+        $city = "";
+        $state = "";
+        $country = "";
+        if (count($json->results) > 0) {
+            //break up the components
+            $arrComponents = $json->results[0]->address_components;
+
+            foreach($arrComponents as $index=>$component) {
+               
+                $type = $component->types[0];
+
+                if ($city == "" && ($type == "sublocality_level_1" || $type == "locality") ) {
+                    $city = trim($component->short_name);
+                }
+                if ($state == "" && $type=="administrative_area_level_1" || $type=="administrative_area_level_2") {
+                    $state = trim($component->short_name);
+                }
+                if ($country == "" && $type=="country") {
+                    $country = trim($component->short_name);
+                }
+                if ($city != "" && $state != "" && $country != "") {
+                    //we're done
+                    break;
+                }
+            }
+        }
+
+        $arrReturn = array("city"=>$city, "state"=>$state, "country"=>$country);
+
+        return $arrReturn;
     }
 }

@@ -7,6 +7,7 @@ use App\Models\CallCenterAgent;
 use App\Models\LeadAssistant;
 use App\Models\Role;
 use App\Models\TechPartner;
+use App\Models\Retailer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +38,9 @@ class UserController extends GlobalController
 	   			$query = LeadAssistant::query();
 	   		} elseif($request->filter_role_id == 4){
 	   			$query = TechPartner::query();
-	   		}
+	   		} elseif($request->filter_role_id == 5){
+          $query = Retailer::query();
+        }
 	   		$userList = $query->get();
 	   	}
 
@@ -67,7 +70,9 @@ class UserController extends GlobalController
    			$user = new LeadAssistant;
    		} elseif($request->role_id == 4){
    			$user = new TechPartner;
-   		}
+   		} elseif($request->role_id == 5){
+        $user = new Retailer;
+      }
       
       $user->role_id = $request->role_id;
    		$user->name = $request->name;
@@ -75,6 +80,7 @@ class UserController extends GlobalController
    		$user->email = $request->email;
    		$user->password = Hash::make($request->password);
    		$user->mobile = $request->mobile;
+      $user->sharing_id = $this->randomStringGenerater(32);
    		$user->save();
 
       $mail_message = '';
@@ -111,7 +117,9 @@ class UserController extends GlobalController
    			$query = new LeadAssistant;
    		} elseif($role_id == 4){
    			$query = new TechPartner;
-   		}
+   		} elseif($request->role_id == 5){
+        $query = new Retailer;
+      }
    		$query->where('id',$id);
    		$userDetail = $query->first();
 
@@ -134,7 +142,10 @@ class UserController extends GlobalController
             $user = LeadAssistant::findOrFail($request->id);
         } elseif($request->role == 4){
             $user = TechPartner::findOrFail($request->id);
+        } elseif($request->role == 4){
+            $user = Retailer::findOrFail($request->id);
         }
+
         $user->role_id = $request->role;
         $user->name = $request->name;
         $user->occupation = $request->occupation;

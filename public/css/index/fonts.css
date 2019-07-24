@@ -1,0 +1,59 @@
+@font-face {
+	font-family: 'MetropolisRegular';
+	src: url('../fonts/MetropolisRegular.eot');
+	src: url('../fonts/MetropolisRegular.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisRegular.woff2') format('woff2'),
+	url('../fonts/MetropolisRegular.woff') format('woff'),
+	url('../fonts/MetropolisRegular.ttf') format('truetype'),
+	url('../fonts/MetropolisRegular.svg#MetropolisRegular') format('svg');
+}
+
+@font-face {
+	font-family: 'MetropolisThin';
+	src: url('../fonts/MetropolisThin.eot');
+	src: url('../fonts/MetropolisThin.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisThin.woff2') format('woff2'),
+	url('../fonts/MetropolisThin.woff') format('woff'),
+	url('../fonts/MetropolisThin.ttf') format('truetype'),
+	url('../fonts/MetropolisThin.svg#MetropolisThin') format('svg');
+}
+
+@font-face {
+	font-family: 'MetropolisMedium';
+	src: url('../fonts/MetropolisMedium.eot');
+	src: url('../fonts/MetropolisMedium.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisMedium.woff2') format('woff2'),
+	url('../fonts/MetropolisMedium.woff') format('woff'),
+	url('../fonts/MetropolisMedium.ttf') format('truetype'),
+	url('../fonts/MetropolisMedium.svg#MetropolisMedium') format('svg');
+}
+
+@font-face {
+	font-family: 'MetropolisSemiBold';
+	src: url('../fonts/MetropolisSemiBold.eot');
+	src: url('../fonts/MetropolisSemiBold.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisSemiBold.woff2') format('woff2'),
+	url('../fonts/MetropolisSemiBold.woff') format('woff'),
+	url('../fonts/MetropolisSemiBold.ttf') format('truetype'),
+	url('../fonts/MetropolisSemiBold.svg#MetropolisSemiBold') format('svg');
+}
+
+@font-face {
+	font-family: 'MetropolisExtraBold';
+	src: url('../fonts/MetropolisExtraBold.eot');
+	src: url('../fonts/MetropolisExtraBold.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisExtraBold.woff2') format('woff2'),
+	url('../fonts/MetropolisExtraBold.woff') format('woff'),
+	url('../fonts/MetropolisExtraBold.ttf') format('truetype'),
+	url('../fonts/MetropolisExtraBold.svg#MetropolisExtraBold') format('svg');
+}
+
+@font-face {
+	font-family: 'MetropolisBold';
+	src: url('../fonts/MetropolisBold.eot');
+	src: url('../fonts/MetropolisBold.eot') format('embedded-opentype'),
+	url('../fonts/MetropolisBold.woff2') format('woff2'),
+	url('../fonts/MetropolisBold.woff') format('woff'),
+	url('../fonts/MetropolisBold.ttf') format('truetype'),
+	url('../fonts/MetropolisBold.svg#MetropolisBold') format('svg');
+}

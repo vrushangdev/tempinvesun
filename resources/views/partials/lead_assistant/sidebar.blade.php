@@ -23,9 +23,19 @@
                     <span class="menu-label">
                         <span class="menu-name">Lead Request</span>
                     </span>
-                    <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-user "></i></span>
                 </a>
             </li>
+
+             <li class="menu-item @if(route::is('lead_assistant.getMyLeads')) active @endif">
+                <a href="{{ route('lead_assistant.getMyLeads') }}" class="menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">My Leads</span>
+                    </span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-edit "></i></span>
+                </a>
+            </li>
+            
         </ul>
     </div>
 </aside>

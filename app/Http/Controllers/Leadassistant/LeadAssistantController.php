@@ -153,4 +153,11 @@ class LeadAssistantController extends Controller
               ]); 
         }
     }
+
+    public function getMyLeads(){
+
+        $findMyLeads = User::where('signup_sharing',Auth::guard('lead_assistant')->user()->sharing_id)->where('signup_sharing_by','leadassistant')->get();
+
+        return view('lead_assistant.dashboard.my_leads',compact('findMyLeads'));
+    }
 }

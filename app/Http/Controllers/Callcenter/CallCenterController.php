@@ -153,4 +153,11 @@ class CallCenterController extends Controller
               ]); 
         }
     }
+
+    public function getMyLeads(){
+
+        $findMyLeads = User::where('signup_sharing',Auth::guard('callcenter')->user()->sharing_id)->where('signup_sharing_by','callcenter')->get();
+
+        return view('callcenter.dashboard.my_leads',compact('findMyLeads'));
+    }
 }
