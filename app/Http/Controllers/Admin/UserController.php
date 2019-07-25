@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\GlobalController;
+use App\Models\Admin;
 use App\Models\CallCenterAgent;
 use App\Models\LeadAssistant;
 use App\Models\Role;
@@ -162,15 +163,15 @@ class UserController extends GlobalController
         ]);
    	}
 
-   	public function deleteUser($id){
+   	public function deleteUser($role_id,$id){
 
-   		if($id == 1){
+   		if($role_id == 1){
             $query = Admin::where('id',$id)->delete();
-        } elseif($id == 2){
+        } elseif($role_id == 2){
             $query = CallCenterAgent::where('id',$id)->delete();
-        } elseif($id == 3){
+        } elseif($role_id == 3){
             $query = LeadAssistant::where('id',$id)->delete();
-        } elseif($id == 4){
+        } elseif($role_id == 4){
             $query = TechPartner::where('id',$id)->delete();
         }
 

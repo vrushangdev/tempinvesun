@@ -64,7 +64,7 @@ Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {
 	Route::post('/save-user', 'UserController@saveUser')->name('saveUser');
 	Route::get('/edit-user/{role_id}/{id}', 'UserController@editUser')->name('editUser');
 	Route::post('/save-edited-user', 'UserController@saveEditedUser')->name('saveEditedUser');
-	Route::get('/delete-user/{id}', 'UserController@deleteUser')->name('deleteUser');
+	Route::get('/delete-user/{role_id}/{id}', 'UserController@deleteUser')->name('deleteUser');
   	Route::post('/check-email', 'UserController@checkEmail')->name('checkEmail');
   	Route::post('/check-mobile-number', 'UserController@checkMobileNumber')->name('checkMobileNumber');
 

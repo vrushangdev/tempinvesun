@@ -11,7 +11,7 @@
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right">
                     <a class="dropdown-item" id="copyButton" href="javascript:void(0);">  Sharing Link</a>
-                    <input type="hidden" class="copyLinkUrl" id="copyTarget" value="http://localhost:8000?shared=leadassistant&sharing_id={{ Auth::guard('lead_assistant')->user()->sharing_id }}">
+                    <input type="hidden" class="copyLinkUrl" id="copyTarget" value="http://invesun.homipod.com?shared=leadassistant&sharing_id={{ Auth::guard('lead_assistant')->user()->sharing_id }}">
                    <!--  <a class="dropdown-item" href="{{ route('lead_assistant.changePassoword') }}">  Change Password</a>
                     <div class="dropdown-divider"></div> -->
                     <a class="dropdown-item" href="{{ route('lead_assistant.logout') }}"> Logout</a>

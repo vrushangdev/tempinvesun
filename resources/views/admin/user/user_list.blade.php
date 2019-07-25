@@ -75,7 +75,7 @@
                                                 <td>{{ $uv->mobile }}</td>
                                                 <td>
                                                     <a href="{{ route('editUser',[$filter_role_id,$uv->id]) }}" class="btn m-b-15 ml-2 mr-2 btn-dark"><i class="fe fe-edit"></i></a>
-                                                    <a href="{{ route('deleteUser',$uv->id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" onclick="return confirm('Are your sure want to delete this user ?')"><i class="fe fe-trash"></i></a>
+                                                    <a href="{{ route('deleteUser',[$filter_role_id,$uv->id]) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" onclick="return confirm('Are your sure want to delete this user ?')"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

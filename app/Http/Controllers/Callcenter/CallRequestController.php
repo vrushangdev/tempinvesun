@@ -17,6 +17,7 @@ class CallRequestController extends Controller
 
     	$getCallRequest = GetCallRequest::with(['user','attened' => function($q){ $q->with(['user','slot','lead_assistant']); }])->get();
 
+    	
     	return view('callcenter.callrequest.callrequest',compact('getCallRequest'));
     }
 }

@@ -140,7 +140,11 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <p>Lead Assistant : <b>{{ $getUserInfo->assigned_lead->lead_assistant->name }}</b></p>
+                            @if(!is_null($getUserInfo->assigned_lead->lead_assistant))
+                                <p>Lead Assistant : <b>{{ $getUserInfo->assigned_lead->lead_assistant->name }}</b></p>
+                            @else
+                                <p>Lead Assistant : <b>--------------</b></p>
+                            @endif
                             <p>Time Slot : <b>{{ $getUserInfo->assigned_lead->slot->name }}</b></p>                           
                         </div>
                     </div>

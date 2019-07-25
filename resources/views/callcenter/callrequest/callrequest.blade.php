@@ -45,9 +45,13 @@
                                             @endif
                                             <td>{{ $cv->user->mobile }}</td>
                                             <td>{{ date('d-m-Y',strtotime($cv->created_at)) }}</td>
-                                            <td>{{ $cv->is_attend == 1? "Attended" : "Unattended"}}</td>
+                                            <td>{{ $cv->is_attend == 1 ? "Attended" : "Unattended"}}</td>
                                             @if($cv->is_attend == 1 && !is_null($cv->attened))
-                                                <td>{{ $cv->attened->lead_assistant->name }}</td>
+                                                @if(!is_null($cv->attened->lead_assistant))
+                                                    <td>{{ $cv->attened->lead_assistant->name }}</td>
+                                                @else
+                                                    <td>----------</td>
+                                                @endif
                                                 <td>{{ $cv->attened->date }}</td>
                                                 <td>{{ $cv->attened->slot->name }}</td>
                                             @else
