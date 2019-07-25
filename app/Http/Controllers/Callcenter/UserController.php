@@ -73,6 +73,7 @@ class UserController extends Controller
     	$user->mobile = $request->mobile;
     	$user->alt_no = $request->alt_mobile;
     	$user->email = $request->email;
+        $user->remarks = $request->remark;
     	$user->save();
 
     	if($user){

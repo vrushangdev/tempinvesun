@@ -42,7 +42,7 @@
 
 			<section class="info_section overlay_content_mob">
 				<div class="content_block">
-					<p>You can save upto <span class="highlight">₹2000</span> on your current bill by installing <span class="highlight">3kW</span> of solar power plant</p>
+					<p>You can save upto <span class="highlight money_saving">₹2000</span> on your current bill by installing <span class="highlight plantSize">3kW</span> of solar power plant</p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/house.png)">
 					<img class="visible-xs" src="{{ asset('img/front/house_mob.png')}}" alt="">
@@ -51,7 +51,7 @@
 
 			<section class="info_section left_img">
 				<div class="content_block">
-					<p>Switch to solar with easy emi options starting from <span class="highlight">₹2499</span></p>
+					<p>Switch to solar with easy emi options starting from <span class="highlight loadAmount">₹2499</span></p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/buildings.png);">
 					<img class="visible-xs" src="{{ asset('img/front/buildings_mob.png') }}" alt="">
@@ -65,7 +65,7 @@
 				<div class="img_block">
 					<div class="form_outer">
 						<h2>We will soon call you back!</h2>
-						<form action="{{ route('saveGetCallRequest') }}" method="post">
+						<form action="{{ route('saveGetCallRequest') }}" method="post" id="callRequest">
 							@csrf
 
 							<input type="hidden" name="pincode" id="pincode" value="">
@@ -75,6 +75,8 @@
 							<input type="hidden" name="shared_id" value="{{ $shared_id }}">
 
 							<input type="hidden" name="monthly_energy_saving" id="monthly" value="">
+
+							<input type="hidden" name="plant_size" id="plant_size" value="">
 
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Name" name="name" autocomlpete="off" required>
@@ -104,6 +106,8 @@
 		
 	</footer>
 	<script type="text/javascript" src="{{ asset('js/index/main.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/pages/validation.js') }}"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
@@ -123,4 +127,20 @@
         @endforeach     
     });
 @endif
+</script>
+<script type="text/javascript">
+    $(document).on('change','#calculate',function(){
+        var amount = $('#amount').val();
+        $('#planSize').val(parseFloat(amount / 750).toFixed(2));
+        $('#monthly_energy').val(parseFloat((amount * 75) / 100).toFixed(2));
+        $('.show').show();
+        $('.getCall').show();
+    });
+
+    $(document).on('click','#getCall',function(){
+        $('#modal_planSize').val($('#planSize').val());
+        $('#modal_monthly_energy_saving').val($('#monthly_energy').val());
+        $('#modal_amount').val($('#amount').val());
+        $('#myModal').modal('show');
+    });
 </script>

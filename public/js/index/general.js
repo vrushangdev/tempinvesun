@@ -42,7 +42,16 @@ $(document).ready(function() {
 		max: 10000,
 		tooltipFormat: tooltipVal2,
 		change: function (args) {
-            $('#monthly').val(args.value)
+			var amount = args.value;
+            var plantSize = parseFloat(amount / 750).toFixed(2);
+            var money_saving = parseFloat((amount * 75) / 100).toFixed(0);
+            var loadAmount = (parseFloat(plantSize) * 749).toFixed(0);
+            $('.plantSize').text(plantSize+'kW');
+        	$('.money_saving').text('₹'+money_saving);
+        	$('.loadAmount').text('₹'+loadAmount);
+        	$('#monthly').val(amount);
+        	$('#plant_size').val(plantSize);
+        	$('#monthly').val(amount);
         } ,
 	});
 

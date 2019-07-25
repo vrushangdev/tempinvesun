@@ -36,6 +36,7 @@ class HomeController extends Controller
 
         $energy = new EnergyDataSet;
         $energy->user_id = $user->id;
+        $energy->plant_size = $request->plant_size;
         $energy->monthly_energy_saving = $request->monthly_energy_saving;
         $energy->save();
 
@@ -124,4 +125,5 @@ class HomeController extends Controller
 
         return $arrReturn;
     }
+
 }

@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" value="{{ $getUserInfo->first_name }}" required>
+                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" value="{{ $getUserInfo->form_name }}" required>
                         </div>
 
                         <div class="form-group">
@@ -90,7 +90,10 @@
                             <input type="text" class="form-control" id="inputCountry" value="{{ $getUserInfo->country }}" placeholder="Country" name="country" required>
                         </div>
 
-                        
+                         <div class="form-group">
+                            <label for="inputRemark">Remarks</label>
+                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark }}" placeholder="Remark" name="remark">
+                        </div>                        
 
                     </div>
                 </div>
@@ -108,7 +111,7 @@
 
                         <div class="form-group">
                             <label for="inputGst">GST Number</label>
-                            <input type="text" class="form-control gst" id="inputGst" placeholder="GST Number" maxLength="15" name="gst" value="{{ $getUserInfo->gst_number }}" required>
+                            <input type="text" class="form-control gst" id="inputGst" placeholder="GST Number" maxLength="15" name="gst" value="{{ $getUserInfo->gst_number }}">
                         </div>
 
                         <div class="form-group">
