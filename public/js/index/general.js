@@ -36,7 +36,7 @@ $(document).ready(function() {
 		radius: 125,
 		circleShape: "pie",
 		sliderType: "min-range",
-		value: 500,
+		value: 3727,
 		startAngle: 315,
 		min: 500,
 		max: 10000,
