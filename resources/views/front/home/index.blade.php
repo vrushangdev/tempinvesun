@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" class="no_scroll">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no_scroll">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
@@ -29,20 +29,20 @@
 		<main>
 			<section class="hero_banner">
 				<div class="container">
-					<h1>Reduce Your Energy Bill With Solar</h1>
+					<h1>{{ trans('sentence.Reduce Your Energy Bill With Solar') }}</h1>
 					<div class="area_code">
 						<span class="area_name">Ahmedabad</span>
 						<input type="text" class="area_input" maxlength="6" placeholder="Pin code" value="380015">
 					</div>
-					<p>Set your approx monthly energy bill amount</p>
+					<p>{{ trans('sentence.Set your approx monthly energy bill amount') }}</p>
 					<div class="price_slider"></div>
-					<a href="#" class="orange_btn" title="Know How To Save">Know How To Save</a>
+					<a href="#" class="orange_btn" title="Know How To Save">{{ trans('sentence.Know How To Save') }}</a>
 				</div>
 			</section>
 
 			<section class="info_section overlay_content_mob">
 				<div class="content_block">
-					<p>You can save upto <span class="highlight money_saving">₹2000</span> on your current bill by installing <span class="highlight plantSize">3kW</span> of solar power plant</p>
+					<p>{{ trans('sentence.You can save upto') }} <span class="highlight money_saving">₹2000</span> {{ trans('sentence.on your current bill by installing') }} <span class="highlight plantSize">3kW</span>{{ trans('sentence.of solar power plant') }}</p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/house.png)">
 					<img class="visible-xs" src="{{ asset('img/front/house_mob.png')}}" alt="">
@@ -51,7 +51,7 @@
 
 			<section class="info_section left_img">
 				<div class="content_block">
-					<p>Switch to solar with easy emi options starting from <span class="highlight loadAmount">₹2499</span></p>
+					<p>{{ trans('sentence.Switch to solar with easy emi options starting from')}} <span class="highlight loadAmount">₹2499</span></p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/buildings.png);">
 					<img class="visible-xs" src="{{ asset('img/front/buildings_mob.png') }}" alt="">
@@ -60,11 +60,11 @@
 
 			<section class="info_section contact_form">
 				<div class="content_block">
-					<p>Our salesperson will explain product details and price for solar installation!</p>
+					<p>{{ trans('sentence.Our salesperson will explain product details and price for solar installation!') }}</p>
 				</div>
 				<div class="img_block">
 					<div class="form_outer">
-						<h2>We will soon call you back!</h2>
+						<h2>{{ trans('sentence.We will soon call you back!') }}</h2>
 						<form action="{{ route('saveGetCallRequest') }}" method="post" id="callRequest">
 							@csrf
 
@@ -79,21 +79,24 @@
 							<input type="hidden" name="plant_size" id="plant_size" value="">
 
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Name" name="name" autocomlpete="off" required>
+								<input type="text" class="form-control" placeholder="{{ trans('sentence.Name') }}" name="name" autocomlpete="off" required>
 							</div>
 							<div class="form-group">
-								<input type="tel" class="form-control" placeholder="Mobile Number" maxlength="10" pattern="^\d{10}$" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"  name="mobile" autocomlpete="off" required>
+								<input type="tel" class="form-control" placeholder="{{ trans('sentence.Mobile Number') }}" maxlength="10" pattern="^\d{10}$" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"  name="mobile" autocomlpete="off" required>
 							</div>
-							<button type="submit" class="orange_btn">Submit</button>
+							<button type="submit" class="orange_btn">{{ trans('sentence.Submit') }}</button>
 						</form>
 						<footer>
 							<p>@Straut renewables</p>
 							<nav>
 								<ul>
-									<li><a href="#" title="About US">About US</a></li>
-									<li><a href="#" title="Terms & Privacy">Terms & Privacy</a></li>
-									<li><a href="#" title="Solar101">Solar101</a></li>
-									<li><a href="#" title="Installer">Installer</a></li>
+									<li><a href="#" title="About US">{{ trans('sentence.About US') }}</a></li>
+									<li><a href="#" title="Terms & Privacy">{{ trans('sentence.Terms & Privacy') }}</a></li>
+									<li><a href="#" title="Solar101">{{ trans('sentence.Solar101') }}</a></li>
+									<li><a href="#" title="Installer">{{ trans('sentence.Installer') }}</a></li>
+									<li><a href="lang/en" title="Installer">{{ trans('sentence.English') }}</a></li>
+									<li><a href="lang/gj" title="Installer">{{ trans('sentence.Gujarati') }}</a></li>
+									<li><a href="lang/hi" title="Installer">{{ trans('sentence.Hindi') }}</a></li>
 								</ul>
 							</nav>
 						</footer>

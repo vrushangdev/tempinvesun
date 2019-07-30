@@ -27,6 +27,8 @@ Route::post('/check-user-email', 'HomeController@checkUserEmail')->name('checkUs
 Route::post('/check-user-mobile', 'HomeController@checkUserMobile')->name('checkUserMobile');
 Route::post('/check-city-name', 'HomeController@getCityName')->name('getCityName');
 
+Route::get('lang/{locale}', 'HomeController@lang');
+
 
 Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {
 
@@ -134,6 +136,16 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 
 	//Get call request
 	Route::get('/get-lead-request', 'LeadRequestController@getLeadRequest')->name('lead_assistant.getLeadRequest');
+
+	Route::get('/presentation/image_one/{id}', 'PresentationController@imageOne')->name('imageOne');
+	Route::get('/presentation/image_two/{id}', 'PresentationController@imageTwo')->name('imageTwo');
+	Route::get('/presentation/image_three/{id}', 'PresentationController@imageThree')->name('imageThree');
+	Route::get('/presentation/image_four/{id}', 'PresentationController@imageFour')->name('imageFour');
+	Route::get('/presentation/image_five/{id}', 'PresentationController@imageFive')->name('imageFive');
+	Route::get('/presentation/image_six/{id}', 'PresentationController@imageSix')->name('imageSix');
+	Route::get('/presentation/form_one/{id}', 'PresentationController@formOne')->name('formOne');
+	Route::get('/presentation/form_two/{id}', 'PresentationController@formTwo')->name('formTwo');
+	Route::get('/presentation/form_three/{id}', 'PresentationController@formThree')->name('formThree');
 
 });
 

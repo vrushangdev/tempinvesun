@@ -40,7 +40,7 @@
                                             <td>{{ $cv->date }}</td>
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
-                                                <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Start</a>
+                                                <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Start</a>
                                             </td>
                                         </tr>
                                     @endforeach
