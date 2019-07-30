@@ -8,6 +8,6 @@
 <br>
 <center>
 	<a href="{{ route('imageFour',$id) }}" class="previous">&laquo; Previous</a>
-	<a href="{{ route('imageSix',$id) }}" class="next">Next &raquo;</a>
+	<a href="{{ route('formOne',$id) }}" class="next">Next &raquo;</a>
 </center>
 @endsection

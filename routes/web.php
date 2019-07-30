@@ -146,7 +146,8 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::get('/presentation/form_one/{id}', 'PresentationController@formOne')->name('formOne');
 	Route::get('/presentation/form_two/{id}', 'PresentationController@formTwo')->name('formTwo');
 	Route::get('/presentation/form_three/{id}', 'PresentationController@formThree')->name('formThree');
-
+	Route::post('/presentation/save_form_one', 'PresentationController@saveFormOne')->name('saveFormOne');
+	
 });
 
 Route::group(['prefix' => 'tech-partner', 'namespace' => 'Techpartner'], function () {
