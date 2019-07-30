@@ -46,4 +46,10 @@
             
         </div>
     </body>
+    <link href="{{ asset('plugins/dropify/dist/css/dropify.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('plugins/dropify/dist/js/dropify.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('.dropify').dropify();
+    </script>
+    @yield('js')
 </html>

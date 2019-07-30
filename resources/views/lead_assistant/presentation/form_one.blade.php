@@ -101,13 +101,20 @@
                 <input type="text" class="form-control" id="inputEmail" value="{{ $getUserInfo->email }}" name="email" placeholder="Email" required>
             </div>
 
-            <div class="form-group">
-                <a href="{{ route('imageFive',$id) }}" class="btn btn-danger" style="width: 18%;float: left;margin-right: 3%;background-color: red;border-color: #4e75cd;">&laquo; Previous</a>
-                <button class="btn btn-primary" name="save_and_list" value="save_and_list">Update</button>
-            </div>
-
 	  </form>
 	</div>                
 </div>
+<br>
+<center>
+	<a href="{{ route('imageFive',$id) }}" class="previous">&laquo; Previous</a>
+	<a href="javascript:void(0);" class="next submit">Submit</a>
+</center>
 
+@endsection
+@section('js')
+<script type="text/javascript">
+	$('.submit').on('click',function(){
+		$('#login').submit();
+	})
+</script>
 @endsection
