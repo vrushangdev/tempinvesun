@@ -26,6 +26,8 @@ Route::post('save-get-call-request', 'HomeController@saveGetCallRequest')->name(
 Route::post('/check-user-email', 'HomeController@checkUserEmail')->name('checkUserEmail');
 Route::post('/check-user-mobile', 'HomeController@checkUserMobile')->name('checkUserMobile');
 Route::post('/check-city-name', 'HomeController@getCityName')->name('getCityName');
+Route::post('/get-state-list', 'HomeController@getStateList')->name('getStateList');
+Route::post('/get-city-list', 'HomeController@getCityList')->name('getCityList');
 
 Route::get('lang/{locale}', 'HomeController@lang');
 
@@ -146,9 +148,14 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::get('/presentation/form_one/{id}', 'PresentationController@formOne')->name('formOne');
 	Route::get('/presentation/form_two/{id}', 'PresentationController@formTwo')->name('formTwo');
 	Route::get('/presentation/form_three/{id}', 'PresentationController@formThree')->name('formThree');
+	Route::get('/presentation/form_four/{id}', 'PresentationController@formFour')->name('formFour');
+	Route::get('/presentation/form_five/{id}', 'PresentationController@formFive')->name('formFive');
 	Route::post('/presentation/save_form_one', 'PresentationController@saveFormOne')->name('saveFormOne');
-	
+	Route::post('/presentation/save_form_two', 'PresentationController@saveFormTwo')->name('saveFormTwo');
+	Route::post('/presentation/save_form_three', 'PresentationController@saveFormThree')->name('saveFormThree');
+	Route::post('/presentation/save_form_four', 'PresentationController@saveFormFour')->name('saveFormFour');
 });
+
 
 Route::group(['prefix' => 'tech-partner', 'namespace' => 'Techpartner'], function () {
 

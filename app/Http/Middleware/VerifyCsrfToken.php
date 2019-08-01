@@ -21,6 +21,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/apis/*',
         '/check-city-name',
-        '/check-user-mobile'
+        '/check-user-mobile',
+        '/get-state-list',
+        '/get-city-list',
     ];
 }

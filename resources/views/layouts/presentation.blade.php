@@ -48,6 +48,7 @@
     </body>
     <link href="{{ asset('plugins/dropify/dist/css/dropify.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('plugins/dropify/dist/js/dropify.js') }}" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCG_sqbBhTzUacobqwsf3_QNbBaKu9dM_c&signed_in=true&libraries=places"></script>
     <script type="text/javascript">
         $('.dropify').dropify();
     </script>

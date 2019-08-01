@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\EnergyDataSet;
 use App\Models\GetCallRequest;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -132,6 +134,34 @@ class HomeController extends Controller
         $arrReturn = array("city"=>$city, "state"=>$state, "country"=>$country);
 
         return $arrReturn;
+    }
+
+    public function getStateList(Request $request){
+
+        $getStateList = State::where('country_id',$request->id)->get();
+
+        $html = '<option value="">Select State</option>';
+        if(isset($getStateList) && count($getStateList) > 0){
+            foreach($getStateList as $sk => $sv){
+                $html .= '<option value="'.$sv->id.'">'.$sv->name.'</option>';
+            }
+        }
+
+        return $html;
+    }
+
+    public function getCityList(Request $request){
+
+        $getCityList = City::where('state_id',$request->id)->get();
+
+        $html = '<option value="">Select City</option>';
+        if(isset($getCityList) && count($getCityList) > 0){
+            foreach($getCityList as $sk => $sv){
+                $html .= '<option value="'.$sv->id.'">'.$sv->name.'</option>';
+            }
+        }
+
+        return $html;
     }
 
 }
