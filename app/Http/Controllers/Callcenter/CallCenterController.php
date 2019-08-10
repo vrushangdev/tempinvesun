@@ -12,6 +12,7 @@ use App\Models\NgoContact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CallCenterController extends Controller
@@ -23,9 +24,17 @@ class CallCenterController extends Controller
 
     public function index(){
 
-    	$total_user = User::count();
+    	$unattendList = User::where('user_status',2)->count();
 
-    	return view('callcenter.dashboard.dashboard',compact('total_user'));
+        $callbackList = User::where('user_status',1)->count();
+
+        $totalLeads = User::count();
+
+        $attendList = User::where('user_status','!=',2)->count();
+
+        $newLeads = User::whereDate('created_at', DB::raw('CURDATE()'))->count();
+
+    	return view('callcenter.dashboard.dashboard',compact('total_user','unattendList','callbackList','totalLeads','attendList','newLeads'));
     }
 
     public function editProfile(){

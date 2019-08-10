@@ -31,6 +31,12 @@ Route::post('/get-city-list', 'HomeController@getCityList')->name('getCityList')
 
 Route::get('lang/{locale}', 'HomeController@lang');
 
+Route::get('/edit-pdf', 'HomeController@editPdf')->name('editPdf');
+
+Route::get('/terms-and-privacy', 'HomeController@termsAndPrivacy')->name('termsAndPrivacy');
+Route::get('/privacy-policy', 'HomeController@privacyPolicy')->name('privacyPolicy');
+
+
 
 Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {
 

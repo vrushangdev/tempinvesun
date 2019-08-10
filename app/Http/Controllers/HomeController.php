@@ -9,6 +9,9 @@ use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdi\PdfReader;
+
 
 class HomeController extends Controller
 {
@@ -22,6 +25,7 @@ class HomeController extends Controller
     
     public function index(Request $request)
     {   
+       
         $shared = '';
         $shared_id = '';
 
@@ -162,6 +166,45 @@ class HomeController extends Controller
         }
 
         return $html;
+    }
+
+    public function editPdf(){
+
+        $pdf = new FPDI('l');
+
+        $name = "6.5 KWH";
+        $ngo = 'test';
+
+        $pageCount = $pdf->setSourceFile(public_path()."/pdf/invesun.pdf");
+        $tpl = $pdf->importPage(6);
+
+        $pdf->AddPage('L');
+        $pdf->useTemplate($tpl,10);
+        $pdf->SetFont('Helvetica');
+        // Use the imported page as the template
+        $pdf->SetFontSize('25'); // set font size
+        $pdf->SetXY(10, 89); // set the position of the box
+        $pdf->Cell(0, -13, $name, 0, -20, 'C');
+
+
+
+        //$pdf->Image($imageUrl, 125, 95, 0, '', '', 'http://www.tcpdf.org', '', false, 0);
+
+        $pdf->SetFontSize('10'); // set font size
+        $pdf->SetXY(90, 123); // set the position of the box
+        $pdf->Cell(0, 25, $ngo, 0, -20, 'C');
+
+        $filename = md5(time()).".pdf";
+
+        $pdf->Output(public_path()."/pdf/".$filename,'F');
+    }
+
+    public function termsAndPrivacy(){
+        return view('front.home.terms_and_conditions');
+    }
+
+    public function privacyPolicy(){
+        return view('front.home.privacy_policy');
     }
 
 }

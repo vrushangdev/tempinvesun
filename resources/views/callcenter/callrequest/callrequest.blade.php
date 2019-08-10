@@ -38,29 +38,29 @@
                                     @foreach($getCallRequest as $ck => $cv)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            @if($cv->user->first_name != '')
-                                                <td>{{ $cv->user->first_name }}</td>
+                                            @if($cv->first_name != '')
+                                                <td>{{ $cv->first_name }}</td>
                                             @else
-                                                <td>{{ $cv->user->form_name }}</td>
+                                                <td>{{ $cv->form_name }}</td>
                                             @endif
-                                            <td>{{ $cv->user->mobile }}</td>
+                                            <td>{{ $cv->mobile }}</td>
                                             <td>{{ date('d-m-Y',strtotime($cv->created_at)) }}</td>
-                                            <td>{{ $cv->is_attend == 1 ? "Attended" : "Unattended"}}</td>
-                                            @if($cv->is_attend == 1 && !is_null($cv->attened))
-                                                @if(!is_null($cv->attened->lead_assistant))
-                                                    <td>{{ $cv->attened->lead_assistant->name }}</td>
+                                            <td>{{ $cv->callRequest->is_attend == 1 ? "Attended" : "Unattended"}}</td>
+                                            @if($cv->callRequest->is_attend == 1 && count($cv->callRequest->attened) > 0)
+                                                @if(!is_null($cv->callRequest->attened->lead_assistant))
+                                                    <td>{{ $cv->callRequest->attened->lead_assistant->name }}</td>
                                                 @else
                                                     <td>----------</td>
                                                 @endif
-                                                <td>{{ $cv->attened->date }}</td>
-                                                <td>{{ $cv->attened->slot->name }}</td>
+                                                <td>{{ $cv->callRequest->attened->date }}</td>
+                                                <td>{{ $cv->callRequest->attened->slot->name }}</td>
                                             @else
                                                 <td>----------</td>
                                                 <td>----------</td>
                                                 <td>----------</td>
                                             @endif
                                             <td>
-                                                <a href="{{ route('callcenter.editUserInfo',$cv->user_id)}}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Attend</a>
+                                                <a href="{{ route('callcenter.editUserInfo',$cv->id)}}" class="btn m-b-15 ml-2 mr-2 btn-dark">Attend</a>
                                             </td>
                                         </tr>
                                     @endforeach

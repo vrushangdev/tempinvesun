@@ -36,17 +36,20 @@ $(document).ready(function() {
 		radius: 125,
 		circleShape: "pie",
 		sliderType: "min-range",
-		value: 3727,
+		value: 500,
 		startAngle: 315,
 		min: 500,
 		max: 10000,
+		value: 4000,
 		tooltipFormat: tooltipVal2,
 		change: function (args) {
 			var amount = args.value;
-            var plantSize = parseFloat(amount / 750).toFixed(2);
-            var money_saving = parseFloat((amount * 75) / 100).toFixed(0);
-            var loadAmount = (parseFloat(plantSize) * 749).toFixed(0);
+            var plantSize = parseFloat(amount / 900).toFixed(0);
+            var money_saving = parseFloat((amount * 900) / 100).toFixed(0);
+            var loadAmount = (parseFloat(plantSize) * 750).toFixed(0);
             $('.plantSize').text(plantSize+'kW');
+            money_saving = Math.round(money_saving/1000)*1000;
+            loadAmount = Math.round(loadAmount/1000)*1000;
         	$('.money_saving').text('₹'+money_saving);
         	$('.loadAmount').text('₹'+loadAmount);
         	$('#monthly').val(amount);
@@ -59,25 +62,47 @@ $(document).ready(function() {
 		return "₹ " + args.value;
 	}
 
-	$(document).on('keyup','.area_input',function(){
-		if($('.area_input').val().length == 6){
-			var pincode = $(this).val();
-			$.ajax({
-	            url: "/check-city-name",
-	            type: "POST",
-	            data:{ zip : pincode},
-	            success: function(data){
-	            	if(data.city != ''){
-	            		$('.area_name').text(data.city);
-	            	} else if(data.state != ''){
-	            		$('.area_name').text(data.state);
-	            	} else {
-	            		$('.area_name').text('Enter other pincode');
-	            	}
-	            	$('#pincode').val(pincode);
-	            }
-	        });
-		}
+	$(".custom_select").dropkick({
+		mobile: true
 	});
 
 })
+
+$(window).resize(function(){
+	$(".price_slider").roundSlider({
+		radius: 125,
+		circleShape: "pie",
+		sliderType: "min-range",
+		value: 500,
+		startAngle: 315,
+		min: 500,
+		max: 10000,
+		value: 4000,
+		tooltipFormat: tooltipVal2,
+
+	});
+	function tooltipVal2(args) {
+		return "₹ " + args.value;
+	}
+})
+
+$(document).on('keyup','.area_input',function(){
+	if($('.area_input').val().length == 6){
+		var pincode = $(this).val();
+		$.ajax({
+            url: "/check-city-name",
+            type: "POST",
+            data:{ zip : pincode},
+            success: function(data){
+            	if(data.city != ''){
+            		$('.area_name').text(data.city);
+            	} else if(data.state != ''){
+            		$('.area_name').text(data.state);
+            	} else {
+            		$('.area_name').text('Enter other pincode');
+            	}
+            	$('#pincode').val(pincode);
+            }
+        });
+	}
+});

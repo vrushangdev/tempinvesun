@@ -7,9 +7,11 @@
 
 @media(max-width: 1440px){
 	header { height: 74px; padding: 0 110px; }
-	header .logo { font-size: 26px; line-height: 32px; }
-	header .tel_no { font-size: 18px; line-height: 22px; margin-right: 36px; }
-
+	header .logo { font-size: 26px; line-height: 32px; width: 166px; }
+	header .tel_no { font-size: 19px; line-height: 21px; height: 44px; padding: 0 21px 0 16px; }
+	.dk-selected { height: 44px; font-size: 15px; line-height: 19px; padding: 0 28px 0 11px; }
+	.dk-selected:before { right: 11px; background-size: 10px; }
+	.dk-option { font-size: 14px; line-height: 18px; }
 	.hero_banner { padding-top: 74px; }
 	.hero_banner h1 { font-size: 34px; line-height: 40px; margin: 13px 0 32px; }
 	.hero_banner p { margin-bottom: 20px; font-size: 18px; line-height: 22px; }
@@ -24,7 +26,7 @@
 
 	.info_section.left_img .content_block p { max-width: 400px; }
 
-	.info_section.contact_form .img_block h2 { font-size: 32px; line-height: 40px; margin-bottom: 54px; }
+	.info_section.contact_form .img_block h2 { font-size: 32px; line-height: 40px; margin-bottom: 50px; }
 	.form_outer { width: 433px; }
 
 	.form-group { margin-bottom: 20px; }
@@ -35,7 +37,7 @@
 	:-ms-input-placeholder { font-size: 18px; line-height: 22px; }
 	:-moz-placeholder { font-size: 18px; line-height: 22px; }
 
-	footer { margin-top: 97px; }
+	footer { margin-top: 63px; }
 	footer nav { margin-top: 17px; }
 	footer p { font-size: 16px; line-height: 20px; }
 	footer nav ul li { margin-right: 34px; }
@@ -69,20 +71,31 @@
 	footer { margin-top: 45px; }
 	footer nav ul { flex-wrap: wrap; }
 	footer nav ul li { margin: 0 0 10px 0; width: 50%; text-align: center; }
+	.hero_banner .container { margin-top: -50px; }
+	.custom_checkbox { margin: 20px 0; }
 }
 
 @media(max-width: 767px){
+	.no_scroll { overflow: auto !important; }
+	.hero_banner .container { padding: 21px 25px 57px; margin-top: 0; }
 	.visible-xs { display: block !important; }
-	header { height: 44px; padding: 0 20px; }
-	header .logo { font-size: 16px; line-height: 20px; }
-	header .tel_no { font-size: 12px; line-height: 16px; }
-	.hero_banner { padding-top: 44px; background: #fff; }
-	.hero_banner h1 { font-size: 20px; line-height: 30px; margin: 1px 20px 10px; }
-	.hero_banner p { margin-bottom: 15px; font-size: 14px; line-height: 18px; }
-	.hero_banner .area_code { height: 42px; margin-bottom: 15px; }
+	.hidden-xs { display: none !important; }
+	header { height: 52px; padding: 0 18px; }
+	header .logo { font-size: 16px; line-height: 20px; width: 110px; }
+	header .tel_no { font-size: 14px; line-height: 18px; height: 32px; background: #7d52df; border: none; color: #fff !important; padding: 0 11px; letter-spacing: -0.8px; font-family: 'MetropolisMedium'; }
+	header .tel_no i { margin-right: 3px; }
+	header .tel_no i svg path { fill: #fff !important; }
+	.dk-selected { height: 32px; font-size: 12px; line-height: 16px; padding: 0 22px 0 9px; }
+	.dk-selected:before { right: 6px; }
+	.dk-option { font-size: 12px; line-height: 16px; }
+	.dk-select-open-up .dk-selected:before, .dk-select-open-down .dk-selected:before { top: calc(50% - 4px); }
+	.hero_banner { padding-top: 52px; background: #fff url(../images/hero-bg-mob.png); align-items: flex-start; height: auto; }
+	.hero_banner h1 { font-size: 20px; line-height: 30px; margin: 1px 20px 20px; }
+	.hero_banner p { margin: 0 45px 30px; font-size: 16px; line-height: 22px; }
+	.hero_banner .area_code { height: 42px; margin-bottom: 25px; }
 	.hero_banner .area_code .area_name { font-size: 14px; line-height: 18px; padding: 0 14px; }
 	.hero_banner .area_code .area_input { font-size: 14px; line-height: 18px; max-width: 74px; }
-	.price_slider { margin: 0 auto 15px; height: 170px !important; width: 170px !important; }
+	.price_slider { margin: 0 auto; height: 196px !important; width: 196px !important; }
 	.info_section { flex-wrap: wrap; position: relative; }
 	.info_section:not(.contact_form) { margin-bottom: -6px; }
 	.info_section.overlay_content_mob .content_block { position: absolute; left: 0; right: 0; top: 40px; }
@@ -93,7 +106,7 @@
 	.info_section .img_block { width: 100%; background-image: none !important; height: auto !important; order: 2 !important; }
 	.info_section.left_img .content_block p { padding: 41px 30px 0 0; margin-bottom: -4px; }
 	.info_section .img_block, .info_section .img_block img { width: 100%; }
-	.rs-container { height: 170px !important; width: 170px !important; }
+	.rs-container { height: 196px !important; width: 196px !important; }
 	.orange_btn { font-size: 14px; line-height: 18px; height: 45px; padding: 0 25px; }
 	.info_section.contact_form { background: -webkit-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -o-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -ms-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -moz-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: linear-gradient(163deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); padding: 40px 25px 28px; }
 	.info_section.contact_form .content_block p { font-size: 20px; line-height: 26px; color: #fff; text-align: center; margin: 0 20px 37px; }
@@ -112,7 +125,7 @@
 	footer p { font-size: 12px; line-height: 16px; }
 	footer nav ul li { width: auto; margin: 0 23px 0 0; }
 	footer nav ul li a { font-size: 12px; line-height: 16px; }
-
+	.custom_checkbox { font-size: 15px; line-height: 19px; }
 }
 
 @media (max-width: 991px) and (orientation: landscape){
@@ -121,21 +134,15 @@
 }
 
 @media (max-width: 767px) and (orientation: portrait){
-	.hero_banner .container { margin-top: -50px; }
+	/*.hero_banner .container { margin-top: -50px; }*/
 }
 
 @media(max-width: 359px){
-	.hero_banner h1 { margin: 1px 10px 23px; }
+	.hero_banner h1 { margin: 1px 10px 20px; }
+	.hero_banner p { margin: 0 30px 30px; }
 	.info_section.overlay_content_mob .content_block p { padding-right: 0; }
 	.info_section.contact_form .content_block p { margin-left: 0; margin-right: 0; }
 
 	footer nav ul { margin: 0 -10px; }
 	footer nav ul li { margin: 0 15px 0 0; }
-}
-
-@media (max-width: 320px) and (max-height: 480px){
-	.hero_banner h1 { margin-bottom: 10px; }
-	.hero_banner .area_code { margin-bottom: 10px; }
-	.price_slider { margin-bottom: 10px; }
-	.hero_banner .container { margin-top: -30px; }
 }

@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" value="{{ $getUserInfo->form_name }}" required>
+                            <input type="text" class="form-control" id="inputFirstName" name="first_name" placeholder="First Name" value="{{ $getUserInfo->first_name }}" required>
                         </div>
 
                         <div class="form-group">
@@ -53,6 +53,7 @@
                             <label for="inputSurname">Surname</label>
                             <input type="text" class="form-control" id="inputSurname" name="surname" placeholder="Surname" value="{{ $getUserInfo->last_name }}" required>
                         </div>
+
 
                         <div class="form-group">
                             <label for="inputAddress">Address 1</label>
@@ -93,6 +94,11 @@
                          <div class="form-group">
                             <label for="inputRemark">Remarks</label>
                             <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark }}" placeholder="Remark" name="remark">
+                        </div>   
+
+                        <div class="form-group">
+                            <label for="inputRemark">Remarks to Lead Assistant</label>
+                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark_lead_assistant }}" placeholder="Remark" name="remark_lead_assistant">
                         </div>                        
 
                     </div>
@@ -104,10 +110,10 @@
                 <div class="card m-b-30">
                     <div class="card-body">
 
-                        <div class="form-group">
+                     <!--    <div class="form-group">
                             <label for="inputCountry">Billing Address</label>
                             <input type="text" class="form-control" id="inputCountry" placeholder="Country" name="country" value="Same as above" disabled required>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="inputGst">GST Number</label>
@@ -153,10 +159,36 @@
                 <div class="card m-b-30 addLeadAssistant">
                     <div class="card-body">
 
+
                         <div class="form-group">
                             <label for="inputAppoDate">Appointment Date</label>
-                            <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="@if(!is_null($getUserInfo->assigned_lead)) {{ $getUserInfo->assigned_lead->date }} @endif" required>
+                            <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="@if(!is_null($getUserInfo->assigned_lead)) {{ $getUserInfo->assigned_lead->date }} @else {{ date('d/m/Y') }} @endif" autocomplete="off" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="inputAppoDate">Status</label>
+                            <select class="form-control" name="user_status">
+                                <option value="1"
+                                @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 1) selected="selected" @endif
+                                >Callback</option>
+                                <option value="2"
+                                @if(!is_null($getUserInfo->assigned_lead)) @if($getUserInfo->user_status == 2) selected="selected" @endif @else selected="selected" @endif
+                                >Pending</option>
+                                <option value="3"
+                                @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 3) selected="selected" @endif
+                                >Successfull</option>
+                                <option value="4"
+                                @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 4) selected="selected" @endif
+                                >Negative</option>
+                                
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputCallingId">Calling ID</label>
+                            <input type="text" class="form-control" id="inputCallingId" placeholder="Calling ID" name="calling_id" value="@if(!is_null($getUserInfo->calling_id)) {{ $getUserInfo->calling_id }} @endif" autocomplete="off" required>
+                        </div>
+
                         @if(is_null($getUserInfo->assigned_lead))
                             <input type="hidden" id="lead_assistant" name="lead_assistant" >
                             <input type="hidden" id="time_slot_id" name="time_slot_id" >
@@ -167,6 +199,7 @@
                             <input type="hidden" id="lead_button_id" value="assign_{{$getUserInfo->assigned_lead->lead_assistant_id}}_{{$getUserInfo->assigned_lead->time_slot_id}}">
                         @endif
                     </div>
+
                 </div>
 
                 @if(!is_null($getUserInfo->assigned_lead))

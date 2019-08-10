@@ -68,4 +68,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\AssignedLeadAssistant','user_id','id');
     } 
 
+    public function callRequest(){
+        return $this->hasOne('App\Models\GetCallRequest','user_id','id');  
+    }
+
 }

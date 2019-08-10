@@ -26,6 +26,11 @@ $(document).ready(function() {
                 remote:{
                     url: "/check-user-mobile",
                     type: "post",
+                    data:{
+                        user_id : function() {
+                            return $('#user_id').val()
+                        },
+                    }
                 }
             },
             address1: {
@@ -48,7 +53,10 @@ $(document).ready(function() {
             },
             district:{
               required: true,    
-            }
+            },
+            calling_id:{
+              required: true,    
+            },
         },
         messages: {
             title:{
@@ -92,6 +100,9 @@ $(document).ready(function() {
             },
             district:{
               required: "Please enter district",    
+            },
+            calling_id:{
+              required: "Please enter calling id",     
             }
         }
     });
@@ -111,6 +122,17 @@ $(document).ready(function() {
                     type: "post",
                 }
             },
+            checkbox:{
+                required: true,
+            }
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr("type") == "checkbox") {                   
+                error.insertAfter('#check_error');
+            }
+            else { // This is the default behavior of the script for all fields
+                error.insertAfter( element );
+            }
         },
         messages: {
             name:{
@@ -120,6 +142,9 @@ $(document).ready(function() {
                 required:"Please enter mobile",
                 remote:"This mobile no already registerd with us!"
             },
+            checkbox:{
+                required: 'Please check this field',
+            }
         }
     });
 
