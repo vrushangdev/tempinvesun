@@ -106,7 +106,7 @@ Route::group(['prefix' => 'call-center-agent', 'namespace' => 'Callcenter'], fun
 	Route::get('/get-call-center-leads', 'CallCenterController@getMyLeads')->name('callcenter.getMyLeads');	
 
 	//Get call request
-	Route::get('/get-call-request', 'CallRequestController@getCallRequest')->name('callcenter.getCallRequest');
+	Route::match(['get','post'],'/get-call-request', 'CallRequestController@getCallRequest')->name('callcenter.getCallRequest');
 
 	//user route
 	Route::get('/edit-user-info/{id}', 'UserController@editUserInfo')->name('callcenter.editUserInfo');	

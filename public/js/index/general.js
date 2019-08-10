@@ -39,7 +39,7 @@ $(document).ready(function() {
 		value: 500,
 		startAngle: 315,
 		min: 500,
-		max: 10000,
+		max: 7500,
 		value: 4000,
 		tooltipFormat: tooltipVal2,
 		change: function (args) {
@@ -76,7 +76,7 @@ $(window).resize(function(){
 		value: 500,
 		startAngle: 315,
 		min: 500,
-		max: 10000,
+		max: 7500,
 		value: 4000,
 		tooltipFormat: tooltipVal2,
 

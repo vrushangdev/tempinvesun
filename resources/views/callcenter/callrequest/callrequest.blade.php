@@ -14,6 +14,50 @@
         </div>
     </div>
     <div class="container  pull-up">
+        <div class="row m-b-30">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{ route('callcenter.getCallRequest') }}" method="post">    
+                            @csrf
+
+                            <div class="form-row">
+
+                                <div class="col-md-4 mb-3">
+                                    <label for=""> Date </label>
+                                    <input type="text" class="form-control js-datepicker" id="date" name="date" placeholder="Date" autocomplete="off" value="{{ $date }}" readonly="">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="">Select Status</option>
+                                        <option value="1" @if($status == 1) selected="selected" @endif>Callback</option>
+                                        <option value="2" @if($status == 2) selected="selected" @endif>Pending</option>
+                                        <option value="3" @if($status == 3) selected="selected" @endif>Successfull</option>
+                                        <option value="4" @if($status == 4) selected="selected" @endif>Negative</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-2 mt-4">
+                                    <button type="submit" class="btn btn-primary mt-1" id="filter" name="save_and_list" value="save_and_list">Filter Request</button>
+                                </div>
+
+                                @if($filter == 1)
+                                    <div class="col-md-2 mt-4">
+                                        <a href="{{ route('callcenter.getCallRequest') }}" class="btn btn-danger mt-1" id="filter" name="save_and_list" value="save_and_list" style="margin-left: -50px;">Reset</a>
+                                    </div>
+                                @endif
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card">

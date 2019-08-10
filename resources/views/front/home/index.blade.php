@@ -110,11 +110,11 @@
 							<button type="submit" class="orange_btn">{{ trans('sentence.Submit') }}</button>
 						</form>
 						<footer>
-							<p>Invesun</p>
+							<p>&copy; Invesun</p>
 							<nav>
 								<ul>
-									<li><a href="#" title="About US">{{ trans('sentence.About US') }}</a></li>
-									<li><a href="#" title="Terms & Privacy">{{ trans('sentence.Terms & Privacy') }}</a></li>
+									<li><a href="#" title="About US">{{ trans('sentence.About') }}</a></li>
+									<li><a href="#" title="Terms & Privacy">{{ trans('sentence.T&C') }}</a></li>
 									<li><a href="#" title="Solar101">{{ trans('sentence.Solar101') }}</a></li>
 									<li><a href="#" title="Installer">{{ trans('sentence.Installer') }}</a></li>
 								</ul>

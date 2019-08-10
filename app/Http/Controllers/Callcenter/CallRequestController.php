@@ -14,28 +14,32 @@ class CallRequestController extends Controller
     	$this->middleware('callcenter');
     }
 
-    public function getCallRequest(){
+    public function getCallRequest(Request $request){
 
-    	$getCallRequest = User::orderBy('user_status','ASC')->with(['callRequest' => function($q) { $q->with(['attened' => function($q){ $q->with(['user','slot','lead_assistant']); }]); }])->get();
+        $date = '';
+        $status = '';
+        $filter = 0;
 
-    	/*echo "<pre>";
-    	print_r($getCallRequest->toArray());
-    	exit;*/
+        $query = User::query();
+
+        
+        if(isset($request->date) && $request->date != ''){
+            $filter = 1;
+            $date = $request->date;
+            $query->where('date',$request->date);
+        }
+        
+        if(isset($request->status) && $request->status != ''){
+            $filter = 1;
+            $status = $request->status;
+            $query->where('user_status',$status);
+        }   
+
+        $query->orderBy('user_status','ASC');
+        $query->with(['callRequest' => function($q) { $q->with(['attened' => function($q){ $q->with(['user','slot','lead_assistant']); }]); }]);
+        $getCallRequest = $query->get();
     	
-    	return view('callcenter.callrequest.callrequest',compact('getCallRequest'));
+    	return view('callcenter.callrequest.callrequest',compact('getCallRequest','date','status','filter'));
     }
 
-
-
-	public function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
-	    $sort_col = array();
-	    foreach ($arr as $key=> $row) {
-	        $sort_col[$key] = $row[$col];
-	    }
-
-	    array_multisort($sort_col, $dir, $arr);
-	}
-
-
-	
 }
