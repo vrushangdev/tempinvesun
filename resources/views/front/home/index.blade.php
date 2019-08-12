@@ -150,4 +150,7 @@
         @endforeach     
     });
 @endif
+$(document).on('change','.custom_select',function(){
+	window.location.href = $(this).val();
+});
 </script>

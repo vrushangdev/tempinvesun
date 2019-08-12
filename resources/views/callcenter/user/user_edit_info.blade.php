@@ -17,6 +17,7 @@
             <div class="col-lg-6">
                 @csrf
                 <input type="hidden" id="user_id" name="id" value="{{ $getUserInfo->id }}">
+                <input type="hidden" id="is_update" value="{{ $getUserInfo->email }}">
 
                 <!--widget card begin-->
                 <div class="card m-b-30">
@@ -91,15 +92,7 @@
                             <input type="text" class="form-control" id="inputCountry" value="{{ $getUserInfo->country }}" placeholder="Country" name="country" required>
                         </div>
 
-                         <div class="form-group">
-                            <label for="inputRemark">Remarks</label>
-                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark }}" placeholder="Remark" name="remark">
-                        </div>   
-
-                        <div class="form-group">
-                            <label for="inputRemark">Remarks to Lead Assistant</label>
-                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark_lead_assistant }}" placeholder="Remark" name="remark_lead_assistant">
-                        </div>                        
+                                       
 
                     </div>
                 </div>
@@ -134,6 +127,16 @@
                             <label for="inputEmail">Email</label>
                             <input type="text" class="form-control" id="inputEmail" value="{{ $getUserInfo->email }}" name="email" placeholder="Email" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="inputRemark">Remarks</label>
+                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark }}" placeholder="Remark" name="remark">
+                        </div>   
+
+                        <div class="form-group">
+                            <label for="inputRemark">Remarks to Lead Assistant</label>
+                            <input type="text" class="form-control" id="inputRemark" value="{{ $getUserInfo->remark_lead_assistant }}" placeholder="Remark" name="remark_lead_assistant">
+                        </div>         
 
                     </div>
                 </div>
@@ -179,7 +182,7 @@
                                 >Successfull</option>
                                 <option value="4"
                                 @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 4) selected="selected" @endif
-                                >Negative</option>
+                                >Not Interested</option>
                                 
                             </select>
                         </div>
@@ -268,6 +271,12 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+    $(document).ready(function(){
+        if($('#is_update').val() == ''){
+            $('.js-datepicker').change();
+        }
+    });
+
     $(document).on('change','.js-datepicker',function(){
         $.ajax({
             url: "{{ route('callcenter.getLeadAssistant') }}",
