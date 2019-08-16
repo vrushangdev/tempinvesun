@@ -1,6 +1,6 @@
 <aside class="admin-sidebar">
     <div class="admin-sidebar-brand">
-        <img class="admin-brand-logo" src="{{ asset('img/logo.png') }}" width="40" alt="atmos Logo">
+        <img class="admin-brand-logo" src="{{ asset('img/front/logo.png') }}" width="150" alt="Invesun Logo">
         <div class="ml-auto">
             <!-- <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a> -->
             <a href="#" class="admin-close-sidebar"></a>
@@ -21,7 +21,7 @@
             <li class="menu-item @if(route::is('callcenter.getCallRequest')) active @endif">
                 <a href="{{ route('callcenter.getCallRequest') }}" class="menu-link">
                     <span class="menu-label">
-                        <span class="menu-name">Get Call Request</span>
+                        <span class="menu-name">Call Request</span>
                     </span>
                     <span class="menu-icon"><i class="icon-placeholder fe fe-phone "></i></span>
                 </a>

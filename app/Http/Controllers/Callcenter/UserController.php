@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Callcenter;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignedLeadAssistant;
+use App\Models\City;
 use App\Models\GetCallRequest;
 use App\Models\LeadAssistant;
 use App\Models\TimeSlot;
 use App\Models\User;
+use App\Models\UserCity;
+use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -28,6 +31,8 @@ class UserController extends Controller
         $getLeadAssistant = LeadAssistant::all();
 
         $lead_data = array();
+
+        $getCityList = City::all();
 
         if(!is_null($getUserInfo->assigned_lead)){
 
@@ -51,7 +56,7 @@ class UserController extends Controller
             }
         }
 
-    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot','lead_data'));
+    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot','lead_data','getCityList'));
     }
 
     public function saveUserInfo(Request $request){
@@ -77,20 +82,25 @@ class UserController extends Controller
         $user->user_status = $request->user_status;
         $user->calling_id = $request->calling_id;
         $user->remark_lead_assistant = $request->remark_lead_assistant;
+        $user->reschedule_date = $request->reschedule_date;
+        $user->reschedule_time = $request->reschedule_time;
+        $user->city_id = $request->city_id;
     	$user->save();
+
 
     	if($user){
 
             $deleteAssignedUser = AssignedLeadAssistant::where('user_id',$request->id)->delete();
 
     		$assign = new AssignedLeadAssistant;
-    		$assign->lead_assistant_id = $request->lead_assistant;
-    		$assign->time_slot_id = $request->time_slot_id;
+            $leadData = explode('-',$request->lead_assistant);
+    		$assign->lead_assistant_id = $leadData[0];
+    		$assign->time_slot_id = $leadData[1];
     		$assign->user_id = $request->id;
     		$assign->date = $request->appointment_date;
     		$assign->save();
 
-    		$getCallRequest = GetCallRequest::where('user_id',$user->id)->update(['is_attend' => 1]);
+    		$getCallRequest = GetCallRequest::where('user_id',$request->id)->update(['is_attend' => 1]);
     	}
 
     	return redirect(route('callcenter.getCallRequest'))->with('messages', [
@@ -105,24 +115,37 @@ class UserController extends Controller
 
     public function getLeadAssistant(Request $request){
 
-    	$getLeadAssistant = LeadAssistant::all();
+        $date = explode('/',$request->date);
+        $date = implode('-', $date);
 
-    	$lead_data = array();
+    	$findLeadAssistant = UserCity::where('city_id',$request->city_id)->with(['leadassistant'])->get();
 
-    	if(!is_null($getLeadAssistant)){
-    		foreach($getLeadAssistant as $lk => $lv){
-    			$getTimeSlot = TimeSlot::all();
-    			foreach($getTimeSlot as $ek => $tv){
-    				$findAppointment = AssignedLeadAssistant::where('lead_assistant_id',$lv->id)->where('time_slot_id',$tv->id)->where('date',$request->date)->count();
-    				$lead_data[$lk]['id'] = $lv->id;
-    				$lead_data[$lk]['name'] = $lv->name;
-    				$lead_data[$lk]['appointment_data'][$ek]['id'] = $tv->id;
-    				$lead_data[$lk]['appointment_data'][$ek]['name'] = $tv->name;
-    				$lead_data[$lk]['appointment_data'][$ek]['count'] = $findAppointment;
-    			}
-    		}
-    	}
+        $leadAssistantArray = array();
 
-    	return view('callcenter.user.get_lead_assistant',compact('lead_data'));	
+        if(!is_null($findLeadAssistant)){
+            foreach($findLeadAssistant as $fk => $fv){
+                $getLeadAssistantData = AssignedLeadAssistant::where('lead_assistant_id',$fv->user_id)->where('date',$request->date)->get();
+                $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->get();
+                $leadAssistantArray[$fk]['lead_assistant_id'] = $fv->leadassistant->id;
+                $leadAssistantArray[$fk]['lead_assistant'] = $fv->leadassistant->name;
+                if(!is_null($getLeadAssistantData)){
+                    foreach($getLeadAssistantData as $lk => $lv){
+                        $leadAssistantArray[$fk]['data'][] = $lv->time_slot_id;
+                    }
+                }
+
+                $leaveArray = array(1,2,3);
+
+                foreach($leaveArray as $lk => $lv){
+                    $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->where('type',$lv)->first();
+                    if(!is_null($getWorkSchedule)){
+                        $leadAssistantArray[$fk]['leave_data'][$lk]['is_selected'] = 1;
+                    }
+                }
+
+            }
+        }
+
+        return view('callcenter.user.get_lead_assistant',compact('leadAssistantArray'));
     }
 }

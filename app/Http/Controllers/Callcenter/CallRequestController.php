@@ -38,7 +38,7 @@ class CallRequestController extends Controller
         $query->orderBy('user_status','ASC');
         $query->with(['callRequest' => function($q) { $q->with(['attened' => function($q){ $q->with(['user','slot','lead_assistant']); }]); }]);
         $getCallRequest = $query->get();
-    	
+
     	return view('callcenter.callrequest.callrequest',compact('getCallRequest','date','status','filter'));
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.login')
-@section('title','Invesun | Login')
+@section('title','Invesun | Partener Login')
 @section('content')
 <main class="admin-main  ">
     <div class="container-fluid">
@@ -9,11 +9,11 @@
                     <div class="mx-auto col-md-8">
                         <div class="p-b-20 text-center">
                             <p>
-                                <img src="{{ asset('img/logo.svg') }}" width="80" alt="">
+                                <img src="{{ asset('img/front/logo.png') }}" width="200" alt="">
                             </p>
-                            <p class="admin-brand-content">
+                            <!-- <p class="admin-brand-content">
                                 Invesun
-                            </p>
+                            </p> -->
                         </div>
                         <h3 class="text-center p-b-20 fw-400">Login</h3>
                         <form class="needs-validation" method="POST" action="{{ route('retailer.postlogin') }}" id="loginForm">

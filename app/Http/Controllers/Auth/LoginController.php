@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/consumer/dashboard';
 
     /**
      * Create a new controller instance.
@@ -43,5 +44,14 @@ class LoginController extends Controller
         
         $this->performLogout($request);
         return redirect()->back();
+    }
+
+    protected function credentials(Request $request)
+    {
+        if(is_numeric($request->get('email'))){
+            return ['mobile'=>$request->get('email'),'password'=>$request->get('password')];
+        }
+        
+        return $request->only($this->username(), 'password');
     }
 }

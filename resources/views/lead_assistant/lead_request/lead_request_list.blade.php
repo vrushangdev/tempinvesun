@@ -1,6 +1,14 @@
 @extends('layouts.lead_assistant')
 @section('title','User Lead Request | Invesun')
 @section('content')
+<style type="text/css">
+.js-datepicker{
+    z-index: 1100 !important;
+}
+.datepicker{
+    z-index: 1100 !important;
+}
+</style>
 <section class="admin-content">
     <div class="bg-dark">
         <div class="container  m-b-30">
@@ -41,6 +49,8 @@
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
                                                 <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Start</a>
+                                                <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark reschedule" data-id="{{ $cv->user->id }}">Reschedule</a>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
@@ -54,5 +64,106 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reschedule</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('lead_assistant.saveSchedule') }}" method="post" id="userForm">
+                    @csrf
+                    <input type="hidden" name="id" value="" id="id">
+                    <div class="form-group">
+                        <label for="inputAppoDate">Appointment Date</label>
+                        <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="" autocomplete="off" required>
+                    </div>
+                    <div class="schedule">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" name="save_and_list" id="save_and_list">Reschedule</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('js')
+<script type="text/javascript">
+
+    $('.js-datepicker').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
+
+    $(document).on('click','.reschedule',function(){
+        $('#myModal').modal({ backdrop: 'static', keyboard: false });
+        $('#myModal').modal('show');
+        $('#id').val($(this).data('id'));
+    });
+
+    $(document).on('change','.js-datepicker',function(){
+        $.ajax({
+            type: "post",
+            url: '{{ route("lead_assistant.rescheduleLead") }}',
+            data:{ 
+                date: $(this).val()
+            },
+            success:function(data){
+                $('.schedule').html(data);
+            }
+        });
+    });
+
+    $(document).on('change','.checkbox',function(){
+        var selected = [];
+        $(".checkbox:checked").each(function(){
+            selected.push($(this).data('id'));
+        });
+
+        if(selected.length > 1){
+            $(this).prop('checked',false);
+            $.notify({
+                title: '',
+                    message: "You can select only one lead assistant to user"
+                }, {
+                    placement: {
+                        align: "right",
+                        from: "top"
+                    },
+                    timer: 500,
+                    type: 'danger',
+            });   
+        }
+    });
+
+    $(document).on('submit','#userForm',function(e){
+        e.preventDefault();
+        var selected = [];
+        $(".checkbox:checked").each(function(){
+            selected.push($(this).data('id'));
+        });
+
+        if(selected.length > 0){
+            $('#userForm')[0].submit();
+        } else {
+            $.notify({
+                title: '',
+                    message: "Please assign lead assistant to user"
+                }, {
+                    placement: {
+                        align: "right",
+                        from: "top"
+                    },
+                    timer: 500,
+                    type: 'danger',
+            });
+        }
+    });
+</script>
 @endsection
 

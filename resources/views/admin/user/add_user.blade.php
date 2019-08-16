@@ -44,10 +44,22 @@
 	                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Please enter name" required>
 	                        </div>
 
+                            <div class="form-group city" style="display:none;">
+                                <label class="font-secondary">City List</label>
+                                <select multiple class="form-control js-select2-module" name="city[]">
+                                @if(count($cityList) > 0)
+                                    @foreach($cityList as $mk => $mv)
+                                        <option value="{{ $mv->id }}">{{ $mv->name }}</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                            </div>
+
                             <div class="form-group occupation" style="display:none;">
                                 <label for="inputOccupation">Occupation</label>
                                 <input type="text" class="form-control" name="occupation" id="inputOccupation" placeholder="Please enter occupation" autocomplete="false" data-msg="Please enter occpation">
                             </div>
+
 
                             <div class="form-group">
                                 <label for="inputEmail">Email</label>
@@ -81,8 +93,13 @@
     $(document).on('change','#inputRole',function(){
         if($(this).val() == 3){
             $('.occupation').show();
+            $('.city').show();
+            $(".js-select2-module").select2({
+                placeholder: "Select City Name",
+            });
         } else {
             $('.occupation').hide();
+            $('.city').hide();
         }
     });
 </script>

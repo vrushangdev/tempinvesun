@@ -9,7 +9,7 @@ return [
   	'You can save upto' => 'You can save upto',
   	'on your current bill by installing' => 'on your current bill by installing',
   	'of solar power plant' => 'of solar power plant',
-	'Switch to solar with easy emi options starting from' => 'Switch to solar with easy emi options starting from',
+	'Switch to solar with easy emi options starting from' => 'Switch to solar with easy EMI options starting from',
 	'We will soon call you back!' => 'We will soon call you back!',
 	'Our salesperson will explain product details and price for solar installation!' => 'Our salesperson will explain product details and price for solar installation!',
 	'About' => 'About',

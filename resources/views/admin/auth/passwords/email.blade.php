@@ -1,5 +1,5 @@
 @extends('layouts.login')
-@section('title','Socialink | Forgot Password')
+@section('title','Invesun | Forgot Password')
 @section('content')
 <main class="admin-main  ">
     <div class="container-fluid">
@@ -9,11 +9,11 @@
                     <div class="mx-auto col-md-8">
                         <div class="p-b-20 text-center">
                             <p>
-                                <img src="{{ asset('img/logo.svg') }}" width="80" alt="">
+                                <img src="{{ asset('img/front/logo.png') }}" width="200" alt="">
                             </p>
-                            <p class="admin-brand-content">
+                            <!-- <p class="admin-brand-content">
                                 Socialink
-                            </p>
+                            </p> -->
                         </div>
                         <h3 class="text-center p-b-20 fw-400">Reset Password</h3>
                         @if (session('status'))

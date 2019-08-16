@@ -170,7 +170,8 @@
 
                         <div class="form-group">
                             <label for="inputAppoDate">Status</label>
-                            <select class="form-control" name="user_status">
+                            <select class="form-control" name="user_status" id="status">
+                                <option value="">Select Status</option>
                                 <option value="1"
                                 @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 1) selected="selected" @endif
                                 >Callback</option>
@@ -184,6 +185,22 @@
                                 @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 4) selected="selected" @endif
                                 >Not Interested</option>
                                 
+                            </select>
+                        </div>
+
+                       
+                        <div class="form-group reschedule_date"  @if(!is_null($getUserInfo) && $getUserInfo->reschedule_date == '') style="display:none;" @endif>
+                            <label for="inputAppoDate">Reschedule Date</label>
+                            <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="reschedule_date" value="@if(!is_null($getUserInfo) && $getUserInfo->reschedule_date != '') {{ $getUserInfo->reschedule_date }} @endif" autocomplete="off" required>
+                        </div>
+
+                        <div class="form-group reschedule_time" @if(!is_null($getUserInfo) && $getUserInfo->reschedule_time == '') style="display:none;" @endif>
+                            <label for="inputAppoDate">Reschedule Time</label>
+                            <select name="reschedule_time" class="form-control">
+                                <option value="">Select Reschedule Time</option>
+                                <option value="1" @if($getUserInfo->reschedule_time == 1) selected="selected" @endif>Morning</option>
+                                <option value="2" @if($getUserInfo->reschedule_time == 2) selected="selected" @endif>Afternoon</option>
+                                <option value="3" @if($getUserInfo->reschedule_time == 3) selected="selected" @endif>Evening</option>
                             </select>
                         </div>
 
@@ -205,65 +222,50 @@
 
                 </div>
 
-                @if(!is_null($getUserInfo->assigned_lead))
+               
+            </div>
 
-                    <div class="card m-b-30 leadPopup">
-                        <div class="card-header">
-                            <h5 class="m-b-0">
-                                 Assign Lead Assistant
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                        @if(!is_null($lead_data))
-                            @foreach($lead_data as $lk => $lv)
-                                <p>Lead Assistant Name : {{ $lv['name'] }} </p>
-                                <div class="table-responsive">
-                                    <table class="table table-hover ">
-                                        <thead>
-                                            <tr>
-                                                <th>Time Slot</th>
-                                                <th>Count</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if(!is_null($lv['appointment_data']))
-                                                @foreach($lv['appointment_data'] as $ak => $av)
-                                                <tr>
-                                                    <td>{{ $av['name'] }}</td>
-                                                    <td>{{ $av['count'] }}</td>
-                                                    <td>
-                                                        <a href="javscript:void(0);" class="btn btn-primary assign assign_{{ $lv['id'] }}_{{ $av['id'] }}" data-id="{{ $lv['id'] }}" data-value="{{ $av['id'] }}">
-                                                        @if($av['assign'] == 0)
-                                                            Assign
-                                                        @else
-                                                            Assigned
-                                                        @endif
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endforeach
-                        @endif
-                        </div>
-                    </div>
-                @endif
-
-
+            <div class="col-lg-12">
                 <div class="card m-b-30">
                     <div class="card-body ">
                         <br>
                         <div class="form-group">
-                            <button class="btn btn-primary" name="save_and_list" value="save_and_list">Update</button>
+                            <label for="inputAppoDate">Status</label>
+                            <select class="form-control col-lg-4" name="city_id" id="selectCity">
+                                <option value="">Select City</option>
+                                @if(count($getCityList) > 0)
+                                    @foreach($getCityList as $gk => $gv)
+                                        <option value="{{ $gv->id }}">{{ $gv->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 lead" style="display:none;">
+                <div class="card m-b-30">
+                    <div class="card-body ">
+                        <div class="lead_assistant">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" > 
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" name="save_and_list" value="save_and_list">Update</button>
                             <button class="btn btn-danger cancel">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </form>
         </div>
     </div>
@@ -271,40 +273,65 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    $(document).ready(function(){
-        if($('#is_update').val() == ''){
-            $('.js-datepicker').change();
-        }
-    });
-
-    $(document).on('change','.js-datepicker',function(){
+    $(document).on('change','#selectCity',function(){
         $.ajax({
-            url: "{{ route('callcenter.getLeadAssistant') }}",
-            type: "POST",
+            type: "post",
+            url: '{{ route("callcenter.getLeadAssistant") }}',
             data:{ 
-                date: $(this).val(),
+                date: $('#inputAppoDate').val(),
+                city_id: $(this).val()
             },
-            success: function(data){
-                $('.leadPopup').remove();
-                $(data).insertAfter('.addLeadAssistant');
+            success:function(data){
+                $('.lead').show();
+                $('.lead_assistant').html(data);
+
             }
         });
     });
 
-    $(document).on('click','.assign',function(){
-        var lead_button_id = $('#lead_button_id').val();
-        var lead_assistant = $(this).data('id');
-        var time_slot_id = $(this).data('value');
-        
-        $('#lead_assistant').val(lead_assistant);
-        $('#time_slot_id').val(time_slot_id);
-        if(lead_button_id != ''){
-            $('.'+lead_button_id).text('Assign');
-            $('#lead_button_id').val('assign_'+lead_assistant+'_'+time_slot_id);
-            $(this).text('Assigned');
+    $(document).on('change','.checkbox',function(){
+        var selected = [];
+        $(".checkbox:checked").each(function(){
+            selected.push($(this).data('id'));
+        });
+
+        if(selected.length > 1){
+            $(this).prop('checked',false);
+            $.notify({
+                title: '',
+                    message: "You can select only one lead assistant to user"
+                }, {
+                    placement: {
+                        align: "right",
+                        from: "top"
+                    },
+                    timer: 500,
+                    type: 'danger',
+            });   
+        }
+    });
+
+    $(document).on('submit','#userForm',function(e){
+        e.preventDefault();
+        var selected = [];
+        $(".checkbox:checked").each(function(){
+            selected.push($(this).data('id'));
+        });
+
+        if(selected.length > 0){
+            $('#userForm')[0].submit();
         } else {
-            $('#lead_button_id').val('assign_'+lead_assistant+'_'+time_slot_id);
-            $(this).text('Assigned');
+            $.notify({
+                title: '',
+                    message: "Please assign lead assistant to user"
+                }, {
+                    placement: {
+                        align: "right",
+                        from: "top"
+                    },
+                    timer: 500,
+                    type: 'danger',
+            });
         }
     });
 </script>

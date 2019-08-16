@@ -1,5 +1,5 @@
 @extends('layouts.retailer')
-@section('title','Change Password | Socialink')
+@section('title','Change Password | Invesun')
 @section('content')
 <section class="admin-content">
     <div class="bg-dark">

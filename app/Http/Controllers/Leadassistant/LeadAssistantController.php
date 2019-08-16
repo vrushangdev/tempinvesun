@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Leadassistant;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignedLeadAssistant;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Ngo;
@@ -23,9 +24,19 @@ class LeadAssistantController extends Controller
 
     public function index(){
 
-    	$total_user = User::count();
+        $id = Auth::guard('lead_assistant')->user()->id;
 
-    	return view('lead_assistant.dashboard.dashboard',compact('total_user'));
+        $slot = array('1'=>'Morning','2'=>'Afternoon','3' => 'Evening');
+
+    	$getTotalLead = AssignedLeadAssistant::where('lead_assistant_id',$id)->where('date',date('d/m/Y'))->with(['user'])->get();
+
+
+        $getTotal = AssignedLeadAssistant::where('lead_assistant_id',$id)->count();
+
+        $getCompleted = AssignedLeadAssistant::where('lead_assistant_id',$id)->where('is_attend',1)->count();
+
+
+    	return view('lead_assistant.dashboard.dashboard',compact('getTotalLead','slot'));
     }
 
     public function editProfile(){

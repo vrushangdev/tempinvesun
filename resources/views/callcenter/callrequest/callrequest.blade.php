@@ -80,7 +80,16 @@
                                 <tbody>
                                 @if(!is_null($getCallRequest))
                                     @foreach($getCallRequest as $ck => $cv)
-                                        <tr>
+                                        @if($cv->user_status == 1)
+                                            <tr style="background:#F3E5F5;">
+                                        @elseif($cv->user_status == 2)
+                                            <tr style="background:#E3F2FD">
+                                        @elseif($cv->user_status == 3)
+                                            <tr style="background:#E8F5E9">
+                                        @elseif($cv->user_status == 4)
+                                            <tr style="background:#FFEBEE">
+                                        @endif
+                                        
                                             <td>{{ $loop->iteration }}</td>
                                             @if($cv->first_name != '')
                                                 <td>{{ $cv->first_name }}</td>
@@ -89,8 +98,14 @@
                                             @endif
                                             <td>{{ $cv->mobile }}</td>
                                             <td>{{ date('d-m-Y',strtotime($cv->created_at)) }}</td>
-                                            <td>{{ $cv->callRequest->is_attend == 1 ? "Attended" : "Unattended"}}</td>
-                                            @if($cv->callRequest->is_attend == 1 && count($cv->callRequest->attened) > 0)
+                                            @if($cv->user_status == 1)
+                                                <td>{{ $cv->callRequest->is_attend == 1 ? "Follow Up" : "Unattended"}}</td>
+                                            @elseif($cv->user_status == 3)
+                                                <td>{{ $cv->callRequest->is_attend == 1 ? "Attended" : "Unattended"}}</td>
+                                            @else
+                                                <td>{{ $cv->callRequest->is_attend == 1 ? "Attended(Reschedule)" : "Unattended"}}</td>
+                                            @endif
+                                            @if($cv->callRequest->is_attend == 1 && !is_null($cv->callRequest->attened))
                                                 @if(!is_null($cv->callRequest->attened->lead_assistant))
                                                     <td>{{ $cv->callRequest->attened->lead_assistant->name }}</td>
                                                 @else
@@ -104,7 +119,11 @@
                                                 <td>----------</td>
                                             @endif
                                             <td>
-                                                <a href="{{ route('callcenter.editUserInfo',$cv->id)}}" class="btn m-b-15 ml-2 mr-2 btn-dark">Attend</a>
+                                                @if($cv->user_status == 2)
+                                                    <a href="{{ route('callcenter.editUserInfo',$cv->id)}}" class="btn m-b-15 ml-2 mr-2 btn-dark">Attend</a>
+                                                @elseif($cv->user_status == 1)
+                                                    <a href="{{ route('callcenter.editUserInfo',$cv->id)}}" class="btn m-b-15 ml-2 mr-2 btn-dark">Follow Up</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

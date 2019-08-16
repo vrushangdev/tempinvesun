@@ -1,21 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Auth::routes();
+Route::get('/consumer/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('postLogin');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::get('/', 'HomeController@index')->name('index');
 
@@ -145,6 +137,13 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	//Get call request
 	Route::get('/get-lead-request', 'LeadRequestController@getLeadRequest')->name('lead_assistant.getLeadRequest');
 
+	Route::get('/week-work-schedule', 'WorkScheduleController@workSchedule')->name('lead_assistant.workSchedule');
+	Route::post('/save-work-schedule', 'WorkScheduleController@saveWorkSchedule')->name('saveWorkSchedule');
+	Route::post('/get-next-schedule-data', 'WorkScheduleController@getNextScheduleData')->name('lead_assistant.getNextScheduleData');	
+	Route::post('/reschedule-lead', 'LeadRequestController@rescheduleLead')->name('lead_assistant.rescheduleLead');
+	Route::post('/save-schedule', 'LeadRequestController@saveSchedule')->name('lead_assistant.saveSchedule');
+	
+
 	Route::get('/presentation/image_one/{id}', 'PresentationController@imageOne')->name('imageOne');
 	Route::get('/presentation/image_two/{id}', 'PresentationController@imageTwo')->name('imageTwo');
 	Route::get('/presentation/image_three/{id}', 'PresentationController@imageThree')->name('imageThree');
@@ -190,7 +189,7 @@ Route::group(['prefix' => 'tech-partner', 'namespace' => 'Techpartner'], functio
 
 });
 
-Route::group(['prefix' => 'retailer', 'namespace' => 'Retailer'], function () {
+Route::group(['prefix' => 'partner', 'namespace' => 'Retailer'], function () {
 
 	// Authentication Routes...
 	Route::get('login', 'Auth\LoginController@showLoginForm')->name('retailer.login');
@@ -217,5 +216,14 @@ Route::group(['prefix' => 'retailer', 'namespace' => 'Retailer'], function () {
 
 });
 
+
+Route::group(['prefix' => 'consumer'], function () {
+
+	//Dashboard Route....
+	Route::get('/dashboard', 'ConsumerController@index')->name('consumer.dashboard');
+	Route::get('/change-password', 'ConsumerController@changePassword')->name('consumer.changePassoword');
+	Route::post('/update-password', 'ConsumerController@updatePassword')->name('consumer.updatePassword');
+
+});
 
 

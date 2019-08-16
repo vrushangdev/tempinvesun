@@ -1,5 +1,5 @@
 @extends('layouts.ngo')
-@section('title','Edit NGO | Socialink')
+@section('title','Edit NGO | Invesun')
 @section('content')
 <section class="admin-content">
     <div class="bg-dark">

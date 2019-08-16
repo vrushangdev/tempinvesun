@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ConsumerResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,6 +65,11 @@ class User extends Authenticatable
         return $randomString;
     }
 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ConsumerResetPasswordNotification($token));
+    }
+
     public function assigned_lead(){
         return $this->hasOne('App\Models\AssignedLeadAssistant','user_id','id');
     } 
@@ -71,5 +77,7 @@ class User extends Authenticatable
     public function callRequest(){
         return $this->hasOne('App\Models\GetCallRequest','user_id','id');  
     }
+
+   
 
 }

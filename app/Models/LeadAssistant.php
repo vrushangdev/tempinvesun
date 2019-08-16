@@ -33,4 +33,8 @@ class LeadAssistant extends Authenticatable
     {
         $this->notify(new LeadAssistantResetPasswordNotification($token));
     }
+
+    public function usercity(){
+        return $this->hasMany('App\Models\UserCity','user_id','id');     
+    }
 }

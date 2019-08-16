@@ -1,73 +1,52 @@
-@extends('layouts.app')
-
+@extends('layouts.login')
+@section('title','Consumer Login | Invesun')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+<main class="admin-main  ">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-lg-4  bg-white">
+                <div class="row align-items-center m-h-100">
+                    <div class="mx-auto col-md-8">
+                        <div class="p-b-20 text-center">
+                            <p>
+                                <img src="{{ asset('img/front/logo.png') }}" width="200" alt="">
+                            </p>
+                           <!--  <p class="admin-brand-content">
+                                Consumer
+                            </p> -->
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                        <h3 class="text-center p-b-20 fw-400">Login</h3>
+                        <form class="needs-validation" method="POST" action="{{ route('postLogin') }}" id="loginForm">
+                            @csrf   
+                            <div class="form-row">
+                                <div class="form-group floating-label col-md-12">
+                                    <label>Mobile Number</label>
+                                    <input type="text" required name="email" class="form-control number" maxLength="10" placeholder="Mobile Number">
+                                </div>
+                                <div class="form-group floating-label col-md-12">
+                                    <label>Password</label>
+                                    <input type="password" required name="password" class="form-control" placeholder="Password">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                        </form>
+                        @if (count($errors) > 0) 
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                These credentials do not match our records or your account is temporarily disabled. please contact to system administrator.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                    <span aria-hidden="true">×</span> 
+                                </button> 
                             </div>
-                        </div>
-                    </form>
+                        @endif    
+                        <p class="text-right p-t-10">
+                            <a href="{{ route('password.request') }}" class="text-underline">Forgot Password?</a>
+                        </p>
+                    </div>
                 </div>
             </div>
+            <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('../img/login.svg');"></div>
         </div>
     </div>
-</div>
+</main>
 @endsection
