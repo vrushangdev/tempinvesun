@@ -33,17 +33,17 @@ class WorkScheduleController extends Controller
 
     	if(count($getWeekDates) > 0){
     		foreach($getWeekDates as $k => $v){
-    			$findMorningDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',0)->where('is_selected',1)->first();
+    			$findMorningDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',1)->where('is_selected',1)->first();
     			if(!is_null($findMorningDate)){
     				$morningDate[] = $v['date'];
     			}
 
-    			$findNoonDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',1)->where('is_selected',1)->first();
+    			$findNoonDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',2)->where('is_selected',1)->first();
     			if(!is_null($findNoonDate)){
     				$noonDate[] = $v['date'];
     			}
 
-    			$findEveningDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',2)->where('is_selected',1)->first();
+    			$findEveningDate = WorkSchedule::where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)->where('date',$v['date'])->where('type',3)->where('is_selected',1)->first();
     			if(!is_null($findEveningDate)){
     				$eveningDate[] = $v['date'];
     			}

@@ -34,7 +34,13 @@ class LeadRequestController extends Controller
         $leadAssistantArray = array();
       
         $getLeadAssistantData = AssignedLeadAssistant::where('lead_assistant_id',$id)->where('date',$request->date)->get();
+
         $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$id)->where('date',$date)->get();
+
+        // echo "<pre>";
+        // print_r($getLeadAssistantData->toArray());
+        // print_r($getWorkSchedule->toArray());
+        // exit;
 
         $leadAssistantArray['lead_assistant_id'] = $id;
 
@@ -53,7 +59,10 @@ class LeadRequestController extends Controller
             }
         }
 
-        return view('lead_assistant.lead_request.reschedule',compact('leadAssistantArray'));
+        // echo "<pre>";
+        // print_r($leadAssistantArray);
+        // exit;
+        return view('lead_assistant.lead_request.reschedule',compact('leadAssistantArray'));;
     }
 
     public function saveSchedule(Request $request){

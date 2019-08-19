@@ -49,7 +49,7 @@
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
                                                 <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Start</a>
-                                                <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark reschedule" data-id="{{ $cv->user->id }}">Reschedule</a>
+                                                <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark reschedule" data-id="{{ $cv->user->id }}" data-value="{{ $cv->id }}">Reschedule</a>
                                                 
                                             </td>
                                         </tr>
@@ -75,6 +75,7 @@
                 <form action="{{ route('lead_assistant.saveSchedule') }}" method="post" id="userForm">
                     @csrf
                     <input type="hidden" name="id" value="" id="id">
+                    <input type="hidden" name="reschedule_id" value="" id="reschedule_id">
                     <div class="form-group">
                         <label for="inputAppoDate">Appointment Date</label>
                         <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="" autocomplete="off" required>
@@ -104,6 +105,8 @@
         $('#myModal').modal({ backdrop: 'static', keyboard: false });
         $('#myModal').modal('show');
         $('#id').val($(this).data('id'));
+        $('#reschedule_id').val($(this).data('value'));
+        
     });
 
     $(document).on('change','.js-datepicker',function(){
@@ -111,7 +114,8 @@
             type: "post",
             url: '{{ route("lead_assistant.rescheduleLead") }}',
             data:{ 
-                date: $(this).val()
+                date: $(this).val(),
+                reschedule: $('#reschedule_id').val()
             },
             success:function(data){
                 $('.schedule').html(data);

@@ -32,7 +32,7 @@
                 @endif
             </td>
             <td style="text-align: center">
-                @if(isset($leadAssistantArray['leave_data']) && isset($leadAssistantArray['leave_data'][1]))
+                @if(isset($leadAssistantArray['leave_data']) && isset($leadAssistantArray['leave_data'][2]))
                     @if(isset($leadAssistantArray['data']) && in_array(3,$leadAssistantArray['data'])) 
                         Assigned 
                     @else 

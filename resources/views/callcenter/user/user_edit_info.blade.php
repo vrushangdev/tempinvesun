@@ -289,6 +289,22 @@
         });
     });
 
+    $(document).on('change','#inputAppoDate',function(){
+        $.ajax({
+            type: "post",
+            url: '{{ route("callcenter.getLeadAssistant") }}',
+            data:{ 
+                date: $(this).val(),
+                city_id: $('#selectCity').val()
+            },
+            success:function(data){
+                $('.lead').show();
+                $('.lead_assistant').html(data);
+
+            }
+        });
+    });
+
     $(document).on('change','.checkbox',function(){
         var selected = [];
         $(".checkbox:checked").each(function(){
@@ -296,18 +312,10 @@
         });
 
         if(selected.length > 1){
-            $(this).prop('checked',false);
-            $.notify({
-                title: '',
-                    message: "You can select only one lead assistant to user"
-                }, {
-                    placement: {
-                        align: "right",
-                        from: "top"
-                    },
-                    timer: 500,
-                    type: 'danger',
-            });   
+            $(".checkbox:checked").each(function(){
+                $(this).prop('checked',false);
+            });
+            $(this).prop('checked',true);
         }
     });
 
