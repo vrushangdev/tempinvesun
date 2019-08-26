@@ -58,7 +58,7 @@ class HomeController extends Controller
         $getRequest->user_id = $user->id;
         $getRequest->save();
 
-        return redirect()->back()->with('messages', [
+        return redirect(route('thankYou'))->with('messages', [
               [
                   'type' => 'success',
                   'title' => 'Request',
@@ -205,6 +205,10 @@ class HomeController extends Controller
 
     public function privacyPolicy(){
         return view('front.home.privacy_policy');
+    }
+
+    public function thankYou(){
+        return view('front.home.thankyou');   
     }
 
 }

@@ -19,9 +19,9 @@
 			<a href="#" title="Invesun" class="logo"><i><img src="{{ asset('img/front/logo.png') }}" alt=""></i></a>
 			<div class="contact_lang">
 				<select class="custom_select">
-					<option value="lang/en" @if(str_replace('_', '-', app()->getLocale()) == 'en') selected="selected" @endif>EN</option>
-					<option value="lang/gj" @if(str_replace('_', '-', app()->getLocale()) == 'gj') selected="selected" @endif>GJ</option>
- 					<option value="lang/hi" @if(str_replace('_', '-', app()->getLocale()) == 'hi') selected="selected" @endif>HI</option>
+					<option value="lang/en" @if(str_replace('_', '-', app()->getLocale()) == 'en') selected="selected" @endif>ENG</option>
+					<option value="lang/gj" @if(str_replace('_', '-', app()->getLocale()) == 'gj') selected="selected" @endif>GUJ</option>
+ 					<option value="lang/hi" @if(str_replace('_', '-', app()->getLocale()) == 'hi') selected="selected" @endif>HIN</option>
 				</select>
 				<a href="tel:+918521356483" class="tel_no" title="Call">
 					<i>
@@ -45,7 +45,7 @@
 					<h1>{{ trans('sentence.Reduce Your Energy Bill With Solar') }}</h1>
 					<div class="area_code">
 						<span class="area_name">Ahmedabad</span>
-						<input type="text" class="area_input" maxlength="6" placeholder="Pin code" value="380015">
+						<input type="text" class="area_input" maxlength="6" value="380015">
 					</div>
 					<p>{{ trans('sentence.Set your approx monthly energy bill amount') }}</p>
 					<div class="price_slider"></div>
@@ -55,7 +55,7 @@
 
 			<section class="info_section overlay_content_mob">
 				<div class="content_block">
-					<p>{{ trans('sentence.You can save upto') }} <span class="highlight money_saving">₹2000</span> {{ trans('sentence.on your current bill by installing') }} <span class="highlight plantSize">3kW</span>{{ trans('sentence.of solar power plant') }}</p>
+					<p>{{ trans('sentence.You can save upto') }} <span class="highlight money_saving">₹5250</span> {{ trans('sentence.on your current bill by installing') }} <span class="highlight plantSize">4kW </span>{{ trans('sentence.of solar power plant') }}</p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/house.png)">
 					<img class="visible-xs" src="{{ asset('img/front/house_mob.png')}}" alt="">
@@ -64,7 +64,7 @@
 
 			<section class="info_section left_img">
 				<div class="content_block">
-					<p>{{ trans('sentence.Switch to solar with easy emi options starting from')}} <span class="highlight loadAmount">₹2499</span></p>
+					<p>{{ trans('sentence.Switch to solar with easy emi options starting from')}} <span class="highlight loadAmount">₹2600</span></p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/buildings.png);">
 					<img class="visible-xs" src="{{ asset('img/front/buildings_mob.png') }}" alt="">

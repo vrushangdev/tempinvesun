@@ -45,11 +45,11 @@ $(document).ready(function() {
 		change: function (args) {
 			var amount = args.value;
             var plantSize = parseFloat(amount / 900).toFixed(2);
+            plantSize = Math.round(plantSize);
             var money_saving = parseFloat((plantSize * 750)).toFixed(0);
             var loadAmount = (parseFloat(plantSize) * 650).toFixed(0);
             var plantSize = parseFloat(plantSize).toFixed(0);
             $('.plantSize').text(plantSize+'kW');
-            plantSize = Math.round(plantSize);
         	$('.money_saving').text('₹'+money_saving);
         	$('.loadAmount').text('₹'+loadAmount);
         	$('#monthly').val(amount);
@@ -81,6 +81,7 @@ $(window).resize(function(){
 		change: function (args) {
 			var amount = args.value;
             var plantSize = parseFloat(amount / 900).toFixed(0);
+            plantSize = Math.round(plantSize);
             var money_saving = parseFloat((plantSize * 750)).toFixed(0);
             var loadAmount = (parseFloat(plantSize) * 650).toFixed(0);
             var plantSize = parseFloat(plantSize).toFixed(0);
