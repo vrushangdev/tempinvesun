@@ -39,23 +39,21 @@ $(document).ready(function() {
 		value: 500,
 		startAngle: 315,
 		min: 500,
-		max: 7500,
+		max: 9000,
 		value: 4000,
 		tooltipFormat: tooltipVal2,
 		change: function (args) {
 			var amount = args.value;
-            var plantSize = parseFloat(amount / 750).toFixed(0);
+            var plantSize = parseFloat(amount / 900).toFixed(2);
             var money_saving = parseFloat((plantSize * 750)).toFixed(0);
-            var loadAmount = (parseFloat(plantSize) * 1500).toFixed(0);
+            var loadAmount = (parseFloat(plantSize) * 650).toFixed(0);
+            var plantSize = parseFloat(plantSize).toFixed(0);
             $('.plantSize').text(plantSize+'kW');
-            money_saving = Math.round(money_saving/1000)*1000;
-            money_saving = money_saving - 500;
-            loanAmount = Math.round(loanAmount/1000)*1000;
+            plantSize = Math.round(plantSize);
         	$('.money_saving').text('₹'+money_saving);
-        	$('.loadAmount').text('₹'+loanAmount);
+        	$('.loadAmount').text('₹'+loadAmount);
         	$('#monthly').val(amount);
         	$('#plant_size').val(plantSize);
-        	$('#monthly').val(amount);
         } ,
 	});
 
@@ -77,20 +75,18 @@ $(window).resize(function(){
 		value: 500,
 		startAngle: 315,
 		min: 500,
-		max: 7500,
+		max: 9000,
 		value: 4000,
 		tooltipFormat: tooltipVal2,
 		change: function (args) {
 			var amount = args.value;
-            var plantSize = parseFloat(amount / 750).toFixed(0);
+            var plantSize = parseFloat(amount / 900).toFixed(0);
             var money_saving = parseFloat((plantSize * 750)).toFixed(0);
-            var loadAmount = (parseFloat(plantSize) * 1500).toFixed(0);
+            var loadAmount = (parseFloat(plantSize) * 650).toFixed(0);
+            var plantSize = parseFloat(plantSize).toFixed(0);
             $('.plantSize').text(plantSize+'kW');
-            money_saving = Math.round(money_saving/1000)*1000;
-            money_saving = money_saving - 500;
-            loanAmount = Math.round(loanAmount/1000)*1000;
         	$('.money_saving').text('₹'+money_saving);
-        	$('.loadAmount').text('₹'+loanAmount);
+        	$('.loadAmount').text('₹'+loadAmount);
         	$('#monthly').val(amount);
         	$('#plant_size').val(plantSize);
         	$('#monthly').val(amount);

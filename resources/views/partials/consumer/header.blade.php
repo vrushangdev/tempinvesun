@@ -10,9 +10,9 @@
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('consumer.changePassoword') }}">  Change Password</a>
+                   <!--  <a class="dropdown-item" href="{{ route('consumer.changePassoword') }}">  Change Password</a> -->
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('consumer.logout') }}"> Logout</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"> Logout</a>
                 </div>
             </li>
 
