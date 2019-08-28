@@ -55,7 +55,7 @@
 
 			<section class="info_section overlay_content_mob">
 				<div class="content_block">
-					<p>{{ trans('sentence.You can save upto') }} <span class="highlight money_saving">₹5250</span> {{ trans('sentence.on your current bill by installing') }} <span class="highlight plantSize">4kW </span>{{ trans('sentence.of solar power plant') }}</p>
+					<p>{{ trans('sentence.You can save upto') }} <span class="highlight money_saving">₹3750</span> {{ trans('sentence.on your current bill by installing') }} <span class="highlight plantSize">5kW </span>{{ trans('sentence.of solar power plant') }}</p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/house.png)">
 					<img class="visible-xs" src="{{ asset('img/front/house_mob.png')}}" alt="">
@@ -64,7 +64,7 @@
 
 			<section class="info_section left_img">
 				<div class="content_block">
-					<p>{{ trans('sentence.Switch to solar with easy emi options starting from')}} <span class="highlight loadAmount">₹2600</span></p>
+					<p>{{ trans('sentence.Switch to solar with easy emi options starting from')}} <span class="highlight loadAmount">₹3250</span></p>
 				</div>
 				<div class="img_block" style="background: url(../img/front/buildings.png);">
 					<img class="visible-xs" src="{{ asset('img/front/buildings_mob.png') }}" alt="">

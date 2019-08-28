@@ -8,6 +8,7 @@
 	    <form id="login" name="login" action="{{ route('saveFormTwo') }}" method="post" enctype="multipart/form-data">
 	    	@csrf
 	    	
+            <input type="hidden" name="proposal_id" id ="proposal_id" value="{{ $proposal_id }}">
             <input type="hidden" id="user_id" name="id" value="{{ $id }}">
             <input type="hidden" name="energy_consumption_id"  @if(!is_null($energyConsumptionData) && $energyConsumptionData->id) value="{{ $energyConsumptionData->id }}" @endif>
 
@@ -25,7 +26,7 @@
 
             <div class="form-group">
                 <label for="service_name">Service Numaber</label>
-                <input type="text" class="form-control" id="service_name" name="service_number" placeholder="Service Numaber" @if(!is_null($energyConsumptionData) && $energyConsumptionData->service_number != '') value="{{ $energyConsumptionData->service_number }}" @endif required>
+                <input type="text" class="form-control width" id="service_name" name="service_number" placeholder="Service Numaber" @if(!is_null($energyConsumptionData) && $energyConsumptionData->service_number != '') value="{{ $energyConsumptionData->service_number }}" @endif required>
             </div>
 
             <div class="form-group">
@@ -123,7 +124,7 @@
 </div>
 <br>
 <center>
-    <a href="{{ route('formOne',$id) }}" class="previous">&laquo; Previous</a>
+    <a href="{{ route('formOne',[$id,$proposal_id]) }}" class="previous">&laquo; Previous</a>
     <a href="javascript:void(0);" class="next submit">Submit</a>
 </center>
 

@@ -146,20 +146,34 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	
 
 	Route::get('/presentation/image_one/{id}', 'PresentationController@imageOne')->name('imageOne');
-	Route::get('/presentation/image_two/{id}', 'PresentationController@imageTwo')->name('imageTwo');
-	Route::get('/presentation/image_three/{id}', 'PresentationController@imageThree')->name('imageThree');
-	Route::get('/presentation/image_four/{id}', 'PresentationController@imageFour')->name('imageFour');
-	Route::get('/presentation/image_five/{id}', 'PresentationController@imageFive')->name('imageFive');
-	Route::get('/presentation/image_six/{id}', 'PresentationController@imageSix')->name('imageSix');
-	Route::get('/presentation/form_one/{id}', 'PresentationController@formOne')->name('formOne');
-	Route::get('/presentation/form_two/{id}', 'PresentationController@formTwo')->name('formTwo');
-	Route::get('/presentation/form_three/{id}', 'PresentationController@formThree')->name('formThree');
-	Route::get('/presentation/form_four/{id}', 'PresentationController@formFour')->name('formFour');
+	Route::get('/presentation/image_two/{id}/{proposal_id}', 'PresentationController@imageTwo')->name('imageTwo');
+	Route::get('/presentation/image_three/{id}/{proposal_id}', 'PresentationController@imageThree')->name('imageThree');
+	Route::get('/presentation/image_four/{id}/{proposal_id}', 'PresentationController@imageFour')->name('imageFour');
+	Route::get('/presentation/image_five/{id}/{proposal_id}', 'PresentationController@imageFive')->name('imageFive');
+	Route::get('/presentation/image_six/{id}/{proposal_id}', 'PresentationController@imageSix')->name('imageSix');
+	Route::get('/presentation/form_one/{id}/{proposal_id}', 'PresentationController@formOne')->name('formOne');
+	Route::get('/presentation/form_two/{id}/{proposal_id}', 'PresentationController@formTwo')->name('formTwo');
+	Route::get('/presentation/form_three/{id}/{proposal_id}', 'PresentationController@formThree')->name('formThree');
+	Route::get('/presentation/form_four/{id}/{proposal_id}', 'PresentationController@formFour')->name('formFour');
 	Route::get('/presentation/form_five/{id}', 'PresentationController@formFive')->name('formFive');
 	Route::post('/presentation/save_form_one', 'PresentationController@saveFormOne')->name('saveFormOne');
 	Route::post('/presentation/save_form_two', 'PresentationController@saveFormTwo')->name('saveFormTwo');
 	Route::post('/presentation/save_form_three', 'PresentationController@saveFormThree')->name('saveFormThree');
 	Route::post('/presentation/save_form_four', 'PresentationController@saveFormFour')->name('saveFormFour');
+
+	Route::get('/presentation/image_seven/{id}/{proposal_id}', 'PresentationController@imageSeven')->name('imageSeven');
+	Route::get('/presentation/image_eight/{id}/{proposal_id}', 'PresentationController@imageEight')->name('imageEight');
+	Route::get('/presentation/image_nine/{id}/{proposal_id}', 'PresentationController@imageNine')->name('imageNine');
+	Route::get('/presentation/image_ten/{id}/{proposal_id}', 'PresentationController@imageTen')->name('imageTen');
+
+	Route::get('/presentation/image_eleven/{id}/{proposal_id}', 'PresentationController@imageEleven')->name('imageEleven');
+	Route::get('/presentation/image_twelve/{id}/{proposal_id}', 'PresentationController@imageTwelve')->name('imageTwelve');
+	Route::get('/presentation/image_thirteen/{id}/{proposal_id}', 'PresentationController@imageThirteen')->name('imageThirteen');
+
+	Route::post('/presentation/get-calculation-data', 'PresentationController@getCalculationData')->name('getCalculationData');
+
+	
+
 });
 
 

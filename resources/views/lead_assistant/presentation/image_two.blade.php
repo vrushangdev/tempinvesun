@@ -8,6 +8,6 @@
 <br>
 <center>
 	<a href="{{ route('imageOne',$id) }}" class="previous">&laquo; Previous</a>
-	<a href="{{ route('imageThree',$id) }}" class="next">Next &raquo;</a>
+	<a href="{{ route('imageThree',[$id,$proposal_id]) }}" class="next">Next &raquo;</a>
 </center>
 @endsection

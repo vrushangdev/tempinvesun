@@ -7,7 +7,7 @@
 </div>
 <br>
 <center>
-	<a href="{{ route('imageFour',$id) }}" class="previous">&laquo; Previous</a>
-	<a href="{{ route('formOne',$id) }}" class="next">Next &raquo;</a>
+	<a href="{{ route('imageFour',[$id,$proposal_id]) }}" class="previous">&laquo; Previous</a>
+	<a href="{{ route('formOne',[$id,$proposal_id]) }}" class="next">Next &raquo;</a>
 </center>
 @endsection

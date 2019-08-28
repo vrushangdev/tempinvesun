@@ -9,7 +9,8 @@
 	    	
             <input type="hidden" id="user_id" name="id" value="{{ $getUserInfo->id }}">
             <input type="hidden" name="latitude" id="latitude" value="{{ $getUserInfo->lat }}">  
-            <input type="hidden" name="longitude" id ="longitude" value="{{ $getUserInfo->lang }}">    
+            <input type="hidden" name="longitude" id ="longitude" value="{{ $getUserInfo->lang }}">
+            <input type="hidden" name="proposal_id" id ="proposal_id" value="{{ $proposal_id }}">    
             
 	    	<div class="form-group">
                 <label for="inputName">Title</label>
@@ -141,7 +142,7 @@
 </div>
 <br>
 <center>
-	<a href="{{ route('imageFive',$id) }}" class="previous">&laquo; Previous</a>
+	<a href="{{ route('imageFive',[$id,$proposal_id]) }}" class="previous">&laquo; Previous</a>
 	<a href="javascript:void(0);" class="next submit">Submit</a>
 </center>
 

@@ -3,10 +3,10 @@
 @section('content')
 
 <div id="page">
-	<img src="{{ asset('img/presentation/img_one.jpg') }}">                
+	<img src="{{ asset('pdf') }}/{{ $imageName }}">                
 </div>
 <br>
 <center>
-	<a href="{{ route('imageTwo',$id) }}" class="next">Next &raquo;</a>
+	<a href="{{ route('imageTwo',[$id,$proposalId]) }}" class="next">Next &raquo;</a>
 </center>
 @endsection

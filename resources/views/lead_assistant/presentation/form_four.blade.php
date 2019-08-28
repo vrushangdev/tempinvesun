@@ -6,6 +6,8 @@
         <h2>Site Survey</h2>
 	    <form id="login" name="login" action="{{ route('saveFormFour') }}" method="post" enctype="multipart/form-data">
 	    	@csrf
+            
+            <input type="hidden" name="proposal_id" id ="proposal_id" value="{{ $proposal_id }}">
 	    	<input type="hidden" id="user_id" name="id" value="{{ $id }}">
             <input type="hidden" name="user_site_survey" @if(count($energy) > 0) value="{{ $energy->id }}" @else value="" @endif>
 
@@ -203,7 +205,7 @@
 </div>
 <br>
 <center>
-    <a href="{{ route('formThree',$id) }}" class="previous">&laquo; Previous</a>
+    <a href="{{ route('formThree',[$id,$proposal_id]) }}" class="previous">&laquo; Previous</a>
     <a href="javascript:void(0);" class="next submit">Submit</a>
 </center>
 @endsection
