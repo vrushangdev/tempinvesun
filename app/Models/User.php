@@ -78,6 +78,13 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\GetCallRequest','user_id','id');  
     }
 
+    public function cityname(){
+        return $this->hasOne('App\Models\City','id','city');
+    }
+
+    public function countryname(){
+        return $this->hasOne('App\Models\Country','id','country');
+    }
    
 
 }

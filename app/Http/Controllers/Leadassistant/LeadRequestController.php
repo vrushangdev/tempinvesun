@@ -24,6 +24,15 @@ class LeadRequestController extends Controller
     	return view('lead_assistant.lead_request.lead_request_list',compact('getLeadRequest'));
     }
 
+    public function attendedList(){
+
+        $getLeadRequest = AssignedLeadAssistant::where('is_attend',1)
+                                               ->where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)
+                                               ->with(['user','slot','userpropasal'])->get();
+       
+        return view('lead_assistant.lead_request.attended_lead_request_list',compact('getLeadRequest'));   
+    }
+
     public function rescheduleLead(Request $request){
         
         $id = Auth::guard('lead_assistant')->user()->id;

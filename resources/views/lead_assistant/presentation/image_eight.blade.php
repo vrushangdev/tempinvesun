@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="page">
-	<img src="{{ asset('img/img/order.jpg') }}">                
+	<img src="{{ asset('pdf') }}/{{ $imageName }}">                
 </div>
 <br>
 <center>

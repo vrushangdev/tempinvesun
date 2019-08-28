@@ -85,6 +85,7 @@ class UserController extends Controller
         $user->reschedule_date = $request->reschedule_date;
         $user->reschedule_time = $request->reschedule_time;
         $user->city_id = $request->city_id;
+        $user->site_visit = $request->appointment_date;
     	$user->save();
 
 

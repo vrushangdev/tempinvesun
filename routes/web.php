@@ -135,8 +135,11 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	//My Leads
 	Route::get('/get-lead-assistant-leads', 'LeadAssistantController@getMyLeads')->name('lead_assistant.getMyLeads');
 
+
+	
 	//Get call request
 	Route::get('/get-lead-request', 'LeadRequestController@getLeadRequest')->name('lead_assistant.getLeadRequest');
+	Route::get('/get-attended-lead-assistant-leads', 'LeadRequestController@attendedList')->name('lead_assistant.attendedList');
 
 	Route::get('/week-work-schedule', 'WorkScheduleController@workSchedule')->name('lead_assistant.workSchedule');
 	Route::post('/save-work-schedule', 'WorkScheduleController@saveWorkSchedule')->name('saveWorkSchedule');
@@ -172,6 +175,9 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 
 	Route::post('/presentation/get-calculation-data', 'PresentationController@getCalculationData')->name('getCalculationData');
 
+	Route::get('/presentation/verify-presentation/{id}/{proposal_id}', 'PresentationController@verifyPresentation')->name('verifyPresentation');
+	Route::post('/presentation/verify-otp', 'PresentationController@verifyOtp')->name('verifyOtp');
+	
 	
 
 });

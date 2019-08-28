@@ -47,12 +47,12 @@ class PresentationController extends GlobalController
         $saveProposal->proposal_id = $proposalId;
         $saveProposal->save();
 
-        $findUser = User::where('id',$id)->first();
+        $findUser = User::where('id',$id)->with(['cityname','countryname'])->first();
 
         $leadAssistant = LeadAssistant::where('id',Auth::guard('lead_assistant')->user()->id)->first();
 
         $name = $findUser->first_name." ".$findUser->middle_name." ".$findUser->last_name;
-        $location = $findUser->city.", ".$findUser->country;
+        $location = $findUser->cityname->name.", ".$findUser->countryname->name;
 
         $lname = $leadAssistant->name;
         $ldetails = $leadAssistant->email;
@@ -83,10 +83,13 @@ class PresentationController extends GlobalController
 
         $picin->writeimage($proposalImageOne); 
 
+        $deleteProposalImage = UserProposalImage::where('proposal_id',$proposalId)->where('type',1)->delete();
+
         $saveProposal = new UserProposalImage;
         $saveProposal->user_id = $id;
         $saveProposal->proposal_id = $proposalId;
         $saveProposal->image = $imageName;
+        $saveProposal->type = 1;
         $saveProposal->save();
 
     	return view('lead_assistant.presentation.image_one',compact('id','proposalId','imageName'));
@@ -365,16 +368,32 @@ class PresentationController extends GlobalController
         $draw->setFontSize(48);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,1210,452,0,"5kWp"); 
-        $picin->annotateImage($draw,930,670,0,"750 sqft"); 
-        $picin->annotateImage($draw,920,850,0,"Rs. 6500"); 
+        $systemSize = intval($request->suggested_system_size,0)."kWp";
+        $area = $request->area_required." sqft";
+        $investment = "Rs. ".intval($request->investment,0);
+        $netpayble = "Rs. ".intval($request->net_payable,0);
+        $saveing_per_year = "Rs. ".intval($request->net_saving,0);
+        $emi = "Rs. ".intval($request->emi_start,0);
 
-        $picin->annotateImage($draw,1390,670,0,"Rs. 6500"); 
-        $picin->annotateImage($draw,1390,850,0,"Rs. 6500"); 
+        //system size
+        $picin->annotateImage($draw,1210,452,0,$systemSize); 
+        
+        //area required
+        $picin->annotateImage($draw,930,670,0,$area); 
+
+        //net payble
+        $picin->annotateImage($draw,920,850,0,$netpayble); 
+
+        //investment
+        $picin->annotateImage($draw,1390,670,0,$investment); 
+
+        //net saving per year
+        $picin->annotateImage($draw,1390,850,0,$saveing_per_year); 
 
         $draw->setFillColor('#9580ce');
 
-        $picin->annotateImage($draw,1315,982,0,"Rs. 6500"); 
+        //emi start at
+        $picin->annotateImage($draw,1315,982,0,$emi); 
 
         $imageName = md5(microtime()).".jpg";
 
@@ -388,9 +407,9 @@ class PresentationController extends GlobalController
         $saveProposal->user_id = $request->id;
         $saveProposal->proposal_id = $request->proposal_id;
         $saveProposal->image = $imageName;
-        $saveProposal->type = 9;
+        $saveProposal->type = 6;
         $saveProposal->save();
-        
+
         return redirect(route('formFour',[$request->id,$request->proposal_id]))->with('messages', [
               [
                   'type' => 'success',
@@ -503,6 +522,21 @@ class PresentationController extends GlobalController
 
     public function imageSeven($id,$proposal_id){
 
+
+        $userPreview = UserPreview::where('user_id',$id)->first();
+
+        $suggestedSystem = intval($userPreview->suggest_system_size,0)." kWp";
+        $perYearProduction =  intval($userPreview->suggest_system_size * 1500)." kWp";
+        $saving_per_year = "Rs. ".intval($userPreview->saving_per_year,0);
+
+        $solar_panel = $userPreview->solar_panel; 
+        $grid_tie_inverter = $userPreview->grid_tie_inverter; 
+        $structure = $userPreview->structure;
+
+        $investment = "Rs. ".$userPreview->investment;
+        $incentive = "Rs. ".$userPreview->subsidize_amount;
+        $net_payable = "Rs. ".$userPreview->net_payable;
+
         $img9 = public_path()."/img/img/9-09.jpg";
 
         $picin = new \Imagick($img9); 
@@ -514,21 +548,21 @@ class PresentationController extends GlobalController
         $draw->setFontSize(48);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,260,380,0,"Rs. 6500"); 
-        $picin->annotateImage($draw,260,560,0,"Rs. 6500"); 
-        $picin->annotateImage($draw,260,740,0,"Rs. 6500"); 
+        $picin->annotateImage($draw,285,380,0,$suggestedSystem); 
+        $picin->annotateImage($draw,260,560,0,$perYearProduction); 
+        $picin->annotateImage($draw,250,740,0,$saving_per_year); 
         //Area Required
         $draw->setFillColor('#000'); 
 
-        $picin->annotateImage($draw,770,380,0,"Adani/Equivalent"); 
-        $picin->annotateImage($draw,780,560,0,"SMA/Equivalent"); 
-        $picin->annotateImage($draw,860,740,0,"Modified"); 
+        $picin->annotateImage($draw,770,380,0,$solar_panel); 
+        $picin->annotateImage($draw,780,560,0,$grid_tie_inverter); 
+        $picin->annotateImage($draw,860,740,0,$structure); 
 
         $draw->setFillColor('#fff');
         //Investment
-        $picin->annotateImage($draw,1460,380,0,"Rs. 4500"); 
-        $picin->annotateImage($draw,1460,560,0,"Rs. 4500"); 
-        $picin->annotateImage($draw,1460,740,0,"Rs. 4500"); 
+        $picin->annotateImage($draw,1440,380,0,$investment); 
+        $picin->annotateImage($draw,1440,560,0,$incentive); 
+        $picin->annotateImage($draw,1440,740,0,$net_payable); 
 
         $imageName = md5(microtime()).".jpg";
 
@@ -550,16 +584,114 @@ class PresentationController extends GlobalController
 
     public function imageEight($id,$proposal_id){
 
-        return view('lead_assistant.presentation.image_eight',compact('id','proposal_id'));
+        $userPreview = UserPreview::where('user_id',$id)->first();
+
+        $basic = "Rs. ".$userPreview->basic;
+        $structure_modification = "Rs. ".$userPreview->structure_modification;
+        $discom_charge = "Rs. ".$userPreview->discom_charge;
+        $mobile_application = "Rs. ".$userPreview->mobile_app;
+        $solar_monitoring = "Rs. ".$userPreview->solar_monitoring;
+        $extended_package = "Rs. ".$userPreview->extended_aintenance;
+        $insurance_coverage = "Rs. ".$userPreview->insurance_coverage;
+
+        $total = $userPreview->basic + $userPreview->structure_modification + $userPreview->discom_charge + $userPreview->mobile_app + $userPreview->solar_monitoring + $userPreview->extended_aintenance + $userPreview->insurance_coverage;
+
+        $img6 = public_path()."/img/img/order.jpg";
+
+        $picin = new \Imagick($img6); 
+        $picin->scaleimage(1920,1120); 
+        $height = $picin->getimageheight(); 
+
+        $draw = new \ImagickDraw(); 
+        $draw->setFillColor('#000'); 
+        $draw->setFontSize(18);
+        $draw->setFontWeight(600); 
+        //System Size
+        $picin->annotateImage($draw,1420,90,0,'Sharad Parekh | 7405235938'); 
+        $picin->annotateImage($draw,1230,115,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
+        
+
+        // $picin->annotateImage($draw,1470,250,0,$basic); 
+        // $picin->annotateImage($draw,1470,250,0,$basic); 
+
+        $draw->setFillColor('#000'); 
+        $draw->setFontSize(24);
+        $draw->setFontWeight(600); 
+
+        $picin->annotateImage($draw,1470,250,0,$basic); 
+        $picin->annotateImage($draw,1470,430,0,$structure_modification); 
+        $picin->annotateImage($draw,1470,500,0,$mobile_application); 
+        $picin->annotateImage($draw,1470,570,0,$solar_monitoring); 
+        $picin->annotateImage($draw,1470,640,0,$extended_package); 
+        $picin->annotateImage($draw,1470,760,0,$discom_charge); 
+        $picin->annotateImage($draw,1470,810,0,$insurance_coverage); 
+        $picin->annotateImage($draw,1470,850,0,"Rs. ".$total);
+
+        $picin->annotateImage($draw,1470,930,0,"Rs. 1234");
+        $picin->annotateImage($draw,1470,970,0,"Rs. 1234");
+        $picin->annotateImage($draw,1470,1015,0,"Rs. 1234"); 
+        
+
+        $imageName = md5(microtime()).".jpg";
+
+        $proposalImageOne =  public_path()."/pdf/".$imageName;
+
+        $picin->writeimage($proposalImageOne); 
+
+        $deleteProposalImage = UserProposalImage::where('proposal_id',$proposal_id)->where('type',8)->delete();
+
+        $saveProposal = new UserProposalImage;
+        $saveProposal->user_id = $id;
+        $saveProposal->proposal_id = $proposal_id;
+        $saveProposal->image = $imageName;
+        $saveProposal->type = 8;
+        $saveProposal->save();
+
+        return view('lead_assistant.presentation.image_eight',compact('id','proposal_id','imageName'));
     }
 
 
     public function imageTen($id,$proposal_id){
 
-        return view('lead_assistant.presentation.image_ten',compact('id','proposal_id'));
+        $img6 = public_path()."/img/img/summery.jpg";
+
+        $picin = new \Imagick($img6); 
+        $picin->scaleimage(1920,1120); 
+        $height = $picin->getimageheight(); 
+
+        $draw = new \ImagickDraw(); 
+        $draw->setFillColor('#000'); 
+        $draw->setFontSize(24);
+        $draw->setFontWeight(600); 
+        //System Size
+        $picin->annotateImage($draw,1435,150,0,'Sharad Parekh | 7405235938'); 
+        $picin->annotateImage($draw,1180,180,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
+
+        $imageName = md5(microtime()).".jpg";
+
+        $proposalImageOne =  public_path()."/pdf/".$imageName;
+
+        $picin->writeimage($proposalImageOne); 
+
+        $deleteProposalImage = UserProposalImage::where('proposal_id',$proposal_id)->where('type',10)->delete();
+
+        $saveProposal = new UserProposalImage;
+        $saveProposal->user_id = $id;
+        $saveProposal->proposal_id = $proposal_id;
+        $saveProposal->image = $imageName;
+        $saveProposal->type = 10;
+        $saveProposal->save();
+
+        return view('lead_assistant.presentation.image_ten',compact('id','proposal_id','imageName'));
     }
 
     public function imageEleven($id,$proposal_id){
+
+        $userPreview = UserPreview::where('user_id',$id)->first();
+
+        $basic = "Rs. ".$userPreview->basic;
+        $structure_modification = "Rs. ".$userPreview->structure_modification;
+        $discom_charge = "Rs. ".$userPreview->discom_charge;
 
         $img6 = public_path()."/img/img/10-10.jpg";
 
@@ -572,15 +704,15 @@ class PresentationController extends GlobalController
         $draw->setFontSize(48);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,260,550,0,"Rs. 6500"); 
+        $picin->annotateImage($draw,260,550,0,$basic); 
         //Area Required
         $draw->setFillColor('#ff6c2c');
 
-        $picin->annotateImage($draw,890,550,0,"Rs. 6500"); 
+        $picin->annotateImage($draw,890,550,0,$structure_modification); 
 
         $draw->setFillColor('#ff6c2c');
         //Investment
-        $picin->annotateImage($draw,1430,550,0,"Rs. 4500"); 
+        $picin->annotateImage($draw,1430,550,0,$discom_charge); 
 
         $imageName = md5(microtime()).".jpg";
 
@@ -602,7 +734,14 @@ class PresentationController extends GlobalController
 
     public function imageTwelve($id,$proposal_id){
 
-         $img6 = public_path()."/img/img/11-11.jpg";
+        $userPreview = UserPreview::where('user_id',$id)->first();
+
+        $mobile_application = "Rs. ".$userPreview->mobile_app;
+        $solar_monitoring = "Rs. ".$userPreview->solar_monitoring;
+        $extended_package = "Rs. ".$userPreview->extended_aintenance;
+        $insurance_coverage = "Rs. ".$userPreview->insurance_coverage;
+
+        $img6 = public_path()."/img/img/11-11.jpg";
 
         $picin = new \Imagick($img6); 
         $picin->scaleimage(1920,1120); 
@@ -613,13 +752,13 @@ class PresentationController extends GlobalController
         $draw->setFontSize(48);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,250,550,0,"FREE"); 
+        $picin->annotateImage($draw,240,550,0,$mobile_application); 
         //Area Required
-        $picin->annotateImage($draw,660,550,0,"FREE"); 
+        $picin->annotateImage($draw,640,550,0,$solar_monitoring); 
 
-        $picin->annotateImage($draw,1050,550,0,"Rs. 4500");
+        $picin->annotateImage($draw,1050,550,0,$extended_package);
 
-        $picin->annotateImage($draw,1470,550,0,"Rs. 5000");
+        $picin->annotateImage($draw,1470,550,0,$insurance_coverage);
 
         $imageName = md5(microtime()).".jpg";
 
@@ -642,6 +781,72 @@ class PresentationController extends GlobalController
     public function imageThirteen($id,$proposal_id){
 
         return view('lead_assistant.presentation.image_thirteen',compact('id','proposal_id'));
+    }
+
+    public function verifyPresentation($id,$proposal_id){
+
+        $i1 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',1)->first();
+        $i6 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',6)->first();
+        $i9 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',9)->first();
+        $i8 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',8)->first();
+        $i10 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',10)->first();
+        $i11 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',11)->first();
+        $i12 = UserProposalImage::where('proposal_id',$proposal_id)->where('type',12)->first();
+
+        $img1 = public_path()."/pdf/".$i1->image;
+        $img2 = public_path()."/img/img/2-02.jpg";
+        $img3 = public_path()."/img/img/3-03.jpg";
+        $img4 = public_path()."/img/img/4-04.jpg";
+        $img5 = public_path()."/img/img/5-05.jpg";
+        $img6 = public_path()."/pdf/".$i6->image;
+        $img8 = public_path()."/img/img/8-08.jpg";
+        $img9 = public_path()."/pdf/".$i9->image;
+        $img10 = public_path()."/pdf/".$i8->image;
+        $img11 = public_path()."/pdf/".$i11->image;
+        $img12 = public_path()."/pdf/".$i12->image;
+        $img13 = public_path()."/img/img/13-13.jpg";
+        
+
+        $images = array($img1, $img2,$img3,$img4,$img5,$img6,$img8,$img9,$img10,$img11,$img12,$img13);
+
+        $pdf = new \Imagick($images);
+        $pdf->setImageFormat('pdf');
+        
+        $proposal_name = md5(microtime()).".pdf";
+
+        $proposal = public_path().'/pdf/'.$proposal_name;
+
+        $pdf->writeImages($proposal, true); 
+
+        $findUser = User::where('id',$id)->first();
+
+        $token = mt_rand(100000,999999);
+
+        $message = "Your verfication otp is ##".$token."##";
+
+        $this->sendSms($message,$findUser->mobile,$token);
+
+        $updateUserProposal = UserProposal::where('proposal_id',$proposal_id)->where('user_id',$id)->update(['otp' => $token,'proposal_link' => $proposal_name]);
+
+
+        return view('lead_assistant.presentation.otp_verification',compact('id','proposal_id'));   
+    }
+
+    public function verifyOtp(Request $request){
+
+        $verify = UserProposal::where('user_id',$request->id)->where('otp',$request->otp)->update(['otp_verified' => 1]);
+
+        if($verify){
+            
+            $attend = AssignedLeadAssistant::where('user_id',$request->id)->update(['is_attend' => 1]);
+
+            return 'true';
+
+        } else {
+
+            return 'false';
+
+        }
     }
 
     public function getCalculationData(Request $request){
@@ -670,6 +875,41 @@ class PresentationController extends GlobalController
         }
 
         return $calculationData;
+    }
+
+    public function sendSms($message,$mobile_no,$otp){
+
+        $authkey = '118632ADgeSTsOyKEv5d6393e1';
+
+        $senderid = 'TFMMSG';
+
+        $message = urlencode($message);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://control.msg91.com/api/sendotp.php?otp=".$otp."&sender=".$senderid."&message=".$message."&mobile=".$mobile_no."&authkey=".$authkey,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } 
+
+        return "true";
     }
 }
         

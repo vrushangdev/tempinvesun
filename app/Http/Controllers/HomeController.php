@@ -42,6 +42,7 @@ class HomeController extends Controller
         $user = new User;
         $user->form_name = $request->name;
         $user->mobile = $request->mobile;
+        $user->account_registation = date('d-m-Y');
         if($request->shared_id != '' && $request->shared != ''){
             $user->signup_sharing_by = $request->shared;
             $user->signup_sharing = $request->shared_id;

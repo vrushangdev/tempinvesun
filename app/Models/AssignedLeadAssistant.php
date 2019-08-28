@@ -17,4 +17,8 @@ class AssignedLeadAssistant extends Model
     public function slot(){
     	return $this->hasOne('App\Models\TimeSlot','id','time_slot_id');
     }
+
+    public function userpropasal(){
+    	return $this->hasOne('App\Models\UserProposal','user_id','user_id');
+    }
 }

@@ -36,6 +36,15 @@
                 </a>
             </li>
 
+            <li class="menu-item @if(route::is('lead_assistant.attendedList')) active @endif">
+                <a href="{{ route('lead_assistant.attendedList') }}" class="menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Attednded List</span>
+                    </span>
+                    <span class="menu-icon"><i class="icon-placeholder fe fe-home "></i></span>
+                </a>
+            </li>
+
             <li class="menu-item @if(route::is('lead_assistant.workSchedule')) active @endif">
                 <a href="{{ route('lead_assistant.workSchedule') }}" class="menu-link">
                     <span class="menu-label">
