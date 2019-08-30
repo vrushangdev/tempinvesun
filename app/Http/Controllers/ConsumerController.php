@@ -6,6 +6,7 @@ use App\Models\AssignedLeadAssistant;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\UserPreview;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,23 @@ class ConsumerController extends Controller
 {
     public function __construct(){
 
-    	$this->middleware('auth');
+    	$this->middleware('auth',['except' => ['checkLogin']]);
+    }
+
+    public function checkLogin(Request $request){
+
+        $checkUser = User::where('mobile',$request->mobile)->where('otp',$request->otp)->first();
+
+        if(!is_null($checkUser)){
+
+            Auth::login($checkUser);
+
+            return 'true';
+
+        } else {
+
+            return 'false';
+        }
     }
 
     public function index(){

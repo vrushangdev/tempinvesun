@@ -607,8 +607,8 @@ class PresentationController extends GlobalController
         $draw->setFontSize(18);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,1420,90,0,'Sharad Parekh | 7405235938'); 
-        $picin->annotateImage($draw,1230,115,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
+        // $picin->annotateImage($draw,1420,90,0,'Sharad Parekh | 7405235938'); 
+        // $picin->annotateImage($draw,1230,115,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
         
 
         // $picin->annotateImage($draw,1470,250,0,$basic); 
@@ -664,8 +664,8 @@ class PresentationController extends GlobalController
         $draw->setFontSize(24);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,1435,150,0,'Sharad Parekh | 7405235938'); 
-        $picin->annotateImage($draw,1180,180,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
+        // $picin->annotateImage($draw,1435,150,0,'Sharad Parekh | 7405235938'); 
+        // $picin->annotateImage($draw,1180,180,0,'6 Popular Park, Odhav, Ahmedabad 382415, GJ, IN'); 
 
         $imageName = md5(microtime()).".jpg";
 

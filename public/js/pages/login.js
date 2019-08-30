@@ -84,5 +84,36 @@ $(document).ready(function() {
             }
         }
     });
+
+     $("#consumerLoginForm").validate({
+        errorElement: 'span',
+        rules: {
+            password: {
+                required: true,
+                minlength: 5
+            },
+            email: {
+                required: true,
+                minlength:10,
+                maxlength:10,
+                remote:{
+                    url: "/generate-user-otp",
+                    type: "post",
+                }
+            },
+        },
+        messages: {
+            password:{
+               required:"Please enter password",
+               minlength:"Please enter minimum 5 character"
+            },
+            email:{
+                required:"Please Enter Mobile Number",
+                remote:"This Mobile Not Exists in Our Records"
+            } 
+        },
+    });
+
+    
 });
 

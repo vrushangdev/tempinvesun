@@ -6,6 +6,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>@yield('title')</title>
         <link rel="icon" type="image/x-icon" href="assets/img/logo.png"/>
         <link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
@@ -42,6 +43,14 @@
         <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('js/pages/login.js') }}"></script>
         <script src="{{ asset('js/pages/common.js' )}}"></script> 
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+        @yield('js')
         <!--page specific scripts for demo-->
     </body>
 </html>

@@ -29,6 +29,10 @@ Route::get('/edit-pdf', 'HomeController@editPdf')->name('editPdf');
 Route::get('/terms-and-privacy', 'HomeController@termsAndPrivacy')->name('termsAndPrivacy');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy')->name('privacyPolicy');
 
+Route::post('/generate-user-otp', 'HomeController@generateUserOtp')->name('generateUserOtp');
+Route::post('/generate-otp', 'HomeController@generateOtp')->name('generateOtp');
+Route::post('/check-login', 'ConsumerController@checkLogin')->name('checkLogin');
+
 
 
 Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function () {

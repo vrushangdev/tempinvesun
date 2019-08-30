@@ -212,4 +212,74 @@ class HomeController extends Controller
         return view('front.home.thankyou');   
     }
 
+    public function sendSms($message,$mobile_no,$otp){
+
+        $authkey = '118632ADgeSTsOyKEv5d6393e1';
+
+        $senderid = 'TFMMSG';
+
+        $message = urlencode($message);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://control.msg91.com/api/sendotp.php?otp=".$otp."&sender=".$senderid."&message=".$message."&mobile=".$mobile_no."&authkey=".$authkey,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } 
+
+        return "true";
+    }
+
+    public function generateUserOtp(Request $request){
+
+        $getRequest = User::where('mobile',$request->email)->first();
+
+        if(!is_null($getRequest)){
+
+            return 'true';
+
+        } else {
+
+            return 'false';
+        }
+    }
+
+    public function generateOtp(Request $request){
+
+        $getRequest = User::where('mobile',$request->mobile)->first();
+
+        if(!is_null($getRequest)){
+
+            $token = mt_rand(100000,999999);
+
+            $message = "Your verfication otp is ##".$token."##";
+
+            $this->sendSms($message,$getRequest->mobile,$token);
+
+            $updateToken = User::where('id',$getRequest->id)->update(['otp' => $token]);
+
+            return 'true';
+
+        } else {
+
+            return 'false';
+        }
+    }
 }
