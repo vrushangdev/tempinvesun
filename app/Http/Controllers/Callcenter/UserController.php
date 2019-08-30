@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Callcenter;
 use App\Http\Controllers\Controller;
 use App\Models\AssignedLeadAssistant;
 use App\Models\City;
+use App\Models\Country;
 use App\Models\GetCallRequest;
 use App\Models\LeadAssistant;
+use App\Models\State;
 use App\Models\TimeSlot;
 use App\Models\User;
 use App\Models\UserCity;
@@ -21,6 +23,12 @@ class UserController extends Controller
     }
 
     public function editUserInfo($id){
+
+        $getCountry = Country::all();
+
+        $getState = State::all();
+
+        $getCity = City::all();
 
     	$getUserInfo =  User::where('id',$id)
                             ->with(['assigned_lead' => function($q){ $q->with(['lead_assistant','slot']); }])
@@ -56,7 +64,7 @@ class UserController extends Controller
             }
         }
 
-    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot','lead_data','getCityList'));
+    	return view('callcenter.user.user_edit_info',compact('getUserInfo','getTimeSlot','lead_data','getCityList','getCountry','getState','getCity'));
     }
 
     public function saveUserInfo(Request $request){

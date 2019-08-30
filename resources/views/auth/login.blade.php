@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('../img/login.svg');"></div>
+            <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('../img/login.jpg');"></div>
         </div>
     </div>
 </main>

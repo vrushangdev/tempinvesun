@@ -23,5 +23,6 @@
 <link href="{{ asset('plugins/dropify/dist/css/dropify.css') }}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{ asset('plugins/datedropper/datedropper.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/dropzone/dropzone.css') }}">
+<link rel="stylesheet" href="{{ asset('css/front/developer.css') }}">
 <!-- color picker -->
 

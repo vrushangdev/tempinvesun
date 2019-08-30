@@ -21,7 +21,7 @@
                                 <input type="checkbox" class="checkbox" name="lead_assistant" value="{{ $lv['lead_assistant_id']}}-1"> 
                             @endif
                         @else
-                            N/A
+                            -
                         @endif
                     </td>
                     <td style="text-align: center">
@@ -32,7 +32,7 @@
                                 <input type="checkbox" class="checkbox" name="lead_assistant" value="{{ $lv['lead_assistant_id']}}-2"> 
                             @endif
                         @else 
-                             N/A
+                             -
                         @endif
                     </td>
                     <td style="text-align: center">
@@ -43,7 +43,7 @@
                                 <input type="checkbox" class="checkbox" name="lead_assistant" value="{{ $lv['lead_assistant_id']}}-3"> 
                             @endif
                         @else
-                            N/A
+                            -
                         @endif
                     </td>
                 </tr>

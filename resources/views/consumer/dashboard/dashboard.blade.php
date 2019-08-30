@@ -35,13 +35,13 @@
                     <div class="list-group list  list-group-flush">
 
                         <div class="list-group-item p-all-15 h6 ">
-                            <i class="mdi mdi-briefcase"></i> {{ Auth::user()->email }}</a>
+                            <i class="mdi  mdi-18px mdi-email"></i> {{ Auth::user()->email }}</a>
                         </div>
                         <div class="list-group-item p-all-15 h6 ">
-                            <i class="mdi mdi-map-marker"></i> {{ Auth::user()->mobile }} </a>
+                            <i class="mdi  mdi-18px mdi-cellphone-iphone"></i> {{ Auth::user()->mobile }} </a>
                         </div>
                         <div class="list-group-item p-all-15 h6 ">
-                            <i class="mdi mdi-home"></i> {{ intval($getUserPreview->suggest_system_size,0) }} kWp</a>
+                            <i class="mdi  mdi-18px mdi-solar-power"></i> {{ intval($getUserPreview->suggest_system_size,0) }} kWp</a>
                         </div>
                     </div>
                 </div>
@@ -82,12 +82,12 @@
                     <div class="list-group list  list-group-flush">
                         @if(!is_null($getLeadRequest->lead_assistant))
                             <div class="list-group-item p-all-15 h6 text-muted ">
-                                <i class="mdi mdi-map-marker"></i>
+                                <i class="mdi mdi-account"></i>
                                 {{ $getLeadRequest->lead_assistant->name }}
                             </div>
 
                             <div class="list-group-item p-all-15 h6 text-muted ">
-                                <i class="mdi mdi-map-marker"></i>
+                                <i class="mdi mdi-cellphone-iphone"></i>
                                     {{ $getLeadRequest->lead_assistant->mobile }}
                             </div>
                         @else
@@ -101,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-8 m-b-30">
                 <div class="card">
                     <div class="card-header">
@@ -113,9 +114,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
-                                            </div>
+                                            @if(Auth::user()->account_registation != '')
+                                                <div class="avatar-title bg-success rounded-circle">
+                                                    <i class="mdi mdi-check-all"></i>
+                                                </div>
+                                            @else
+                                                <div class="avatar-title bg-grey rounded-circle">
+                                                    <i class="mdi mdi-alert-circle-outline"></i>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -129,9 +136,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
-                                            </div>
+                                            @if(Auth::user()->site_visit != '')
+                                                <div class="avatar-title bg-success rounded-circle">
+                                                    <i class="mdi mdi-check-all"></i>
+                                                </div>
+                                            @else
+                                                <div class="avatar-title bg-grey rounded-circle">
+                                                    <i class="mdi mdi-alert-circle-outline"></i>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -145,15 +158,23 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
-                                            </div>
+                                            @if($getLeadRequest->is_attend == 1)
+                                                <div class="avatar-title bg-success rounded-circle">
+                                                    <i class="mdi mdi-check-all"></i>
+                                                </div>
+                                            @else
+                                                <div class="avatar-title bg-grey rounded-circle">
+                                                    <i class="mdi mdi-alert-circle-outline"></i>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <h6 class="m-0">Proposal Recieved</h6>
                                     </div>
-                                    <div class="ml-auto col-auto text-muted">July 20, 2018</div>
+                                    @if($getLeadRequest->is_attend == 1)
+                                        <div class="ml-auto col-auto text-muted">{{ $getLeadRequest->proposal_recieved ? date('d M Y',strtotime($getLeadRequest->proposal_recieved)) : "" }}</div>
+                                    @endif
 
                                 </div>
 
@@ -163,15 +184,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
+                                            <div class="avatar-title bg-grey rounded-circle">
+                                                <i class="mdi mdi-alert-circle-outline"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <h6 class="m-0">Order Confirmed</h6>
                                     </div>
-                                    <div class="ml-auto col-auto text-muted">July 20, 2018</div>
+                                    <!-- <div class="ml-auto col-auto text-muted">July 20, 2018</div> -->
 
                                 </div>
 
@@ -181,15 +202,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
+                                            <div class="avatar-title bg-grey rounded-circle">
+                                                <i class="mdi mdi-alert-circle-outline"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <h6 class="m-0">Government Permission Applied</h6>
                                     </div>
-                                    <div class="ml-auto col-auto text-muted">July 20, 2018</div>
+                                    <!-- <div class="ml-auto col-auto text-muted">July 20, 2018</div> -->
 
                                 </div>
 
@@ -199,15 +220,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
+                                            <div class="avatar-title bg-grey rounded-circle">
+                                                <i class="mdi mdi-alert-circle-outline"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <h6 class="m-0">Permission Approved</h6>
                                     </div>
-                                    <div class="ml-auto col-auto text-muted">July 20, 2018</div>
+                                    <!-- <div class="ml-auto col-auto text-muted">July 20, 2018</div> -->
 
                                 </div>
 
@@ -217,15 +238,15 @@
                                 <div class="timeline-wrapper">
                                     <div class="">
                                         <div class="avatar avatar-sm">
-                                            <div class="avatar-title bg-success rounded-circle">
-                                                <i class="mdi mdi-check-all"></i>
+                                            <div class="avatar-title bg-grey rounded-circle">
+                                                <i class="mdi mdi-alert-circle-outline"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <h6 class="m-0">Plan Installation</h6>
                                     </div>
-                                    <div class="ml-auto col-auto text-muted">July 20, 2018</div>
+                                    <!-- <div class="ml-auto col-auto text-muted">July 20, 2018</div> -->
 
                                 </div>
 

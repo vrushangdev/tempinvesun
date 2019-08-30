@@ -60,22 +60,21 @@ class PresentationController extends GlobalController
         $img6 = public_path()."/img/img/1-02.jpg";
 
         $picin = new \Imagick($img6); 
-        $picin->scaleimage(800,0); 
-        $height = $picin->getimageheight(); 
+        $picin->scaleimage(1920,1120); 
 
         $draw = new \ImagickDraw(); 
         $draw->setFillColor('#000'); 
-        $draw->setFontSize(16);
-        $draw->setFontWeight(500); 
+        $draw->setFontSize(40);
+        $draw->setFontWeight(600); 
         //System Size
 
-        $picin->annotateImage($draw,467,220,0,$name);
-        $picin->annotateImage($draw,467,245,0,$location);
+        $picin->annotateImage($draw,1120,520,0,$name);
+        $picin->annotateImage($draw,1120,580,0,$location);
 
-        $picin->annotateImage($draw,468,320,0,$lname);
-        $picin->annotateImage($draw,467,345,0,$ldetails); 
+        $picin->annotateImage($draw,1125,755,0,$lname);
+        $picin->annotateImage($draw,1125,810,0,$ldetails); 
 
-        $picin->annotateImage($draw,467,420,0,$proposalId);
+        $picin->annotateImage($draw,1120,990,0,$proposalId);
 
         $imageName = md5(microtime()).".jpg";
 
@@ -752,15 +751,17 @@ class PresentationController extends GlobalController
         $draw->setFontSize(48);
         $draw->setFontWeight(600); 
         //System Size
-        $picin->annotateImage($draw,240,550,0,$mobile_application); 
+        $picin->annotateImage($draw,240,560,0,$mobile_application); 
         //Area Required
-        $picin->annotateImage($draw,640,550,0,$solar_monitoring); 
+        $picin->annotateImage($draw,640,560,0,$solar_monitoring); 
 
-        $picin->annotateImage($draw,1050,550,0,$extended_package);
+        $picin->annotateImage($draw,1050,560,0,$extended_package);
 
-        $picin->annotateImage($draw,1470,550,0,$insurance_coverage);
+        $picin->annotateImage($draw,1470,560,0,$insurance_coverage);
 
         $imageName = md5(microtime()).".jpg";
+
+        $imageName = "test.jpg";
 
         $proposalImageOne =  public_path()."/pdf/".$imageName;
 
@@ -812,9 +813,9 @@ class PresentationController extends GlobalController
         $pdf = new \Imagick($images);
         $pdf->setImageFormat('pdf');
         
-        $proposal_name = md5(microtime()).".pdf";
+        $proposal_name = $proposal_id.".pdf";
 
-        $proposal = public_path().'/pdf/'.$proposal_name;
+        $proposal = public_path().'/proposal/'.$proposal_name;
 
         $pdf->writeImages($proposal, true); 
 
@@ -823,7 +824,7 @@ class PresentationController extends GlobalController
         $token = mt_rand(100000,999999);
 
         $message = "Your verfication otp is ##".$token."##";
-
+        
         $this->sendSms($message,$findUser->mobile,$token);
 
         $updateUserProposal = UserProposal::where('proposal_id',$proposal_id)->where('user_id',$id)->update(['otp' => $token,'proposal_link' => $proposal_name]);
@@ -838,7 +839,7 @@ class PresentationController extends GlobalController
 
         if($verify){
             
-            $attend = AssignedLeadAssistant::where('user_id',$request->id)->update(['is_attend' => 1]);
+            $attend = AssignedLeadAssistant::where('user_id',$request->id)->update(['is_attend' => 1,'proposal_recieved' => date('d-m-Y')]);
 
             return 'true';
 

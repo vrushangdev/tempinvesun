@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no_scroll">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
@@ -28,19 +28,8 @@
 		<main>
 
 			<div class="container" style="max-width: 1140px;padding-top: 135px;padding-bottom: 35px;margin-right: auto;margin-left: auto;">	
-				<h2>Privacy Policy</h2>
-				<br><br>
-
-				<p>Our management has created this Privacy Statement (Policy) in order to demonstrate our firm commitment to help our users better understand what information we collect about them and what may happen to that information.</p><br><br>
-
-				<p>The terms &quot;We, invesun, Us&quot; refer to invesun.com and the terms &quot;You, Your&quot; refer to a user of invesun.com.</p><br><br>
-
-				<p>In the course of our business of helping our viewers plan their events and functions, we collect certain information from you.</p><br><br>
-
-				<p>In the course of registering for and availing various services we provide from time to time through our website and app:&nbsp;<a href="https://www.invesun.com/"><strong>invesun</strong></a>, you may be required to give your Name, address, Email address, phone number, City, Gender and Date of Birth.</p><br><br>
-
-				<p>The Personal Information is used for four general purposes: to customize the content you see, to fulfill your requests for certain services, to contact you about our services, and to help our partner vendors. Unless otherwise stated explicitly, this Policy applies to Personal Information as disclosed on any of the Media.</p><br><br>
-
+				
+				
 			</div>
 		</main>
 	</div>

@@ -67,8 +67,40 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="inputCountry">Country</label>
+                            <select class="form-control" name="country" id="inputCountry" required>
+                                <option value="">Select Country</option>
+                                @if(count($getCountry) > 0)
+                                    @foreach($getCountry as $yk => $yv)
+                                        <option value="{{ $yv->id }}" @if($yv->id == $getUserInfo->country) selected="selected" @endif>{{ $yv->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputState">State</label>
+                            <select class="form-control" name="state" id="inputState" required>
+                                <option value="">Select State</option>
+                                @if(count($getState) > 0)
+                                    @foreach($getState as $sk => $sv)
+                                        <option value="{{ $sv->id }}" @if($sv->id == $getUserInfo->state) selected="selected" @endif>{{ $sv->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <!-- $getUserInfo->city -->
+                        <div class="form-group">
                             <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" name="city" placeholder="City" value="{{ $getUserInfo->city }}" required>
+                            <select class="form-control" name="city" id="inputCity" required>
+                                <option value="">Select City</option>
+                                @if(count($getCity) > 0)
+                                    @foreach($getCity as $ck => $cv)
+                                        <option value="{{ $cv->id }}" @if($cv->id == $getUserInfo->city) selected="selected" @endif>{{ $cv->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
 
 
@@ -81,18 +113,6 @@
                             <label for="inputDistrict">District </label>
                             <input type="text" class="form-control" id="inputDistrict" name="district" value="{{ $getUserInfo->district }}" placeholder="District" required>
                         </div>
-
-                        <div class="form-group">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="inputState" placeholder="State" value="{{ $getUserInfo->state }}" name="state" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputCountry">Country</label>
-                            <input type="text" class="form-control" id="inputCountry" value="{{ $getUserInfo->country }}" placeholder="Country" name="country" required>
-                        </div>
-
-                                       
 
                     </div>
                 </div>
@@ -180,7 +200,7 @@
                                 >Pending</option>
                                 <option value="3"
                                 @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 3) selected="selected" @endif
-                                >Successfull</option>
+                                >Attended</option>
                                 <option value="4"
                                 @if(!is_null($getUserInfo->assigned_lead) && $getUserInfo->user_status == 4) selected="selected" @endif
                                 >Not Interested</option>
@@ -273,6 +293,33 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+     $(document).on('change','#inputCountry',function(){
+        $.ajax({
+            url: "{{ route('getStateList') }}",
+            type: "POST",
+            data:{ 
+                id: $(this).val(),
+            },
+            success: function(data){
+               $('#inputState').html(data);
+            }
+        });
+    });
+
+
+    $(document).on('change','#inputState',function(){
+        $.ajax({
+            url: "{{ route('getCityList') }}",
+            type: "POST",
+            data:{ 
+                id: $(this).val(),
+            },
+            success: function(data){
+               $('#inputCity').html(data);
+            }
+        });
+    });
+    
     $(document).on('change','#selectCity',function(){
         $.ajax({
             type: "post",

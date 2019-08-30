@@ -1,13 +1,33 @@
-@extends('layouts.presentation')
+@extends('layouts.presentation_new')
 @section('title','Lead Assistant Dashboard | Invesun')
 @section('content')
-
-<div id="page">
-	<img src="{{ asset('img/img/13-13.jpg') }}">                
-</div>
-<br>
-<center>
-	<a href="{{ route('imageTwelve',[$id,$proposal_id]) }}" class="previous">&laquo; Previous</a>
-	<a href="{{ route('verifyPresentation',[$id,$proposal_id]) }}" class="next">Verify Presentation &raquo;</a>
-</center>
+<section class="gradient-01">
+    <div class="container ">
+        <div class="row m-h-100 ">
+            <div class="col-md-12 col-lg-12 m-auto">
+            	<div class="avatar">
+                    <a href="{{ route('imageTwelve',[$id,$proposal_id]) }}" class="previous">
+    			        <div class="avatar avatar-title bg-success rounded-circle slider-btn-left">
+    			        	<i class="mdi mdi-arrow-left-thick"></i>
+    			        </div>
+                    </a>
+			    </div>
+			    <div class="avatar right">
+			    	<a href="{{ route('verifyPresentation',[$id,$proposal_id]) }}" class="next">
+				        <div class="avatar avatar-title bg-success rounded-circle slider-btn-right">
+				        	<i class="mdi mdi-arrow-right-thick"></i>
+				        </div>
+				    </a>
+			    </div>
+                <div class="bg-white rounded shadow-lg">
+                    <div class=" padding-box-2 p-all-25">
+                        <div class="">
+                           	<img src="{{ asset('img/img/13-13.jpg') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

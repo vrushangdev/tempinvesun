@@ -37,8 +37,7 @@ class ConsumerController extends Controller
 
     	$getId = Auth::user()->id;
 
-    	$getLeadRequest = AssignedLeadAssistant::where('is_attend',1)
-                                               ->where('user_id',$getId)
+    	$getLeadRequest = AssignedLeadAssistant::where('user_id',$getId)
                                                ->with(['user','slot','userpropasal','lead_assistant'])->first();
 		
 		$getCity = City::where('id',Auth::user()->city)->first();
@@ -46,7 +45,7 @@ class ConsumerController extends Controller
 		$getCountry = Country::where('id',Auth::user()->country)->first();                                               
 
 		$getUserPreview = UserPreview::where('user_id',$getId)->first();                                               
-		
+
     	return view('consumer.dashboard.dashboard',compact('getLeadRequest','getUserPreview','getCity','getCountry'));	
     }
 }

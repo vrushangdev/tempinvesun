@@ -48,7 +48,7 @@
                                             <td>{{ $cv->date }}</td>
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
-                                                <a href="{{ asset('pdf') }}/{{ $cv->userpropasal->proposal_link }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">View PDF</a>
+                                                <a href="{{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">View PDF</a>
                                             </td>
                                         </tr>
                                     @endforeach

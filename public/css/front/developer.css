@@ -1,0 +1,161 @@
+.slider-btn-left{
+	margin-top: 600px;
+    position: fixed;
+    margin-left: -115px;
+}
+
+.slider-btn-right{
+	margin-top: 600px;
+    position: fixed;
+    margin-left: 115px;
+}
+
+.slider-btn-left-otp{
+
+	margin-top: 375px;
+    position: fixed;
+    margin-left: -115px;
+}
+
+.slider-btn-right-otp{
+
+	margin-top: 375px;
+    position: fixed;
+    margin-left: 115px;
+}
+
+.slider-btn-right-one{
+	margin-top: 600px;
+    position: fixed;
+    margin-left: 115px;
+}
+
+.slider-btn-left-one{
+	margin-top: 600px;
+    position: fixed;
+    margin-left: -115px;
+}
+
+.slider-btn-left-preview{
+
+	margin-top: 565px;
+    position: fixed;
+    margin-left: -115px;
+}
+
+.slider-btn-right-preview{
+
+	margin-top: 565px;
+    position: fixed;
+    margin-left: 115px;
+}
+
+.hide{
+	display: none;
+}
+
+.right{
+	float: right;
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+
+	.slider-btn-left{
+		margin-top: 635px;
+	    position: fixed;
+	    margin-left: -40px;
+	}
+	.slider-btn-right{
+
+		margin-top: 635px;
+	    position: fixed;
+	    margin-left: 40px;
+	}
+	.slider-btn-right-one{
+		margin-top: 700px;
+	    position: fixed;
+	    margin-left: 40px;
+	}
+
+	.slider-btn-left-one{
+		margin-top: 700px;
+	    position: fixed;
+	    margin-left: -40px;
+	}
+
+	.slider-btn-left-preview{
+
+		margin-top: 625px;
+	    position: fixed;
+	    margin-left: -40px;
+	}
+
+	.slider-btn-right-preview{
+
+		margin-top: 625px;
+	    position: fixed;
+	    margin-left: 40px;
+	}
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) { 
+
+	.slider-btn-left{
+		margin-top: 600px;
+	    position: fixed;
+	    margin-left: -35px;
+	}
+	.slider-btn-right{
+
+		margin-top: 600px;
+	    position: fixed;
+	    margin-left: 35px;
+	}
+
+	.slider-btn-right-one{
+		margin-top: 950px;
+	    position: fixed;
+	    margin-left: 28px;
+	}
+
+	.slider-btn-left-one{
+		margin-top: 950px;
+	    position: fixed;
+	    margin-left: -28px;
+	}
+
+	.slider-btn-left-preview{
+
+		margin-top: 625px;
+	    position: fixed;
+	    margin-left: -28px;
+	}
+
+	.slider-btn-right-preview{
+
+		margin-top: 625px;
+	    position: fixed;
+	    margin-left: 28px;
+	}
+
+	.slider-btn-left-otp{
+
+		margin-top: 300px;
+	    position: fixed;
+	    margin-left: -5px;
+	}
+
+	.slider-btn-right-otp{
+
+		margin-top: 300px;
+	    position: fixed;
+	    margin-left: 5px;
+	}
+
+}

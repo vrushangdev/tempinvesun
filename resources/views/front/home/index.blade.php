@@ -101,7 +101,7 @@
 							<div class="form-group">
 								<div class="custom_checkbox">
 									<input type="checkbox" name="checkbox" class="custom_input" required>
-									<span></span> I agree to <a href="#" title="Terms and conditions">Terms and conditions</a><br>
+									<span></span> I agree to <a href="{{ route('termsAndPrivacy') }}" title="Terms and conditions" target="_blank">Terms and conditions</a><br>
 									<span id="check_error"></span>
 								</div>
 								
@@ -114,7 +114,7 @@
 							<nav>
 								<ul>
 									<li><a href="#" title="About US">{{ trans('sentence.About') }}</a></li>
-									<li><a href="#" title="Terms & Privacy">{{ trans('sentence.T&C') }}</a></li>
+									<li><a href="{{ route('termsAndPrivacy') }}" title="Terms & Privacy">{{ trans('sentence.T&C') }}</a></li>
 									<li><a href="#" title="Solar101">{{ trans('sentence.Solar101') }}</a></li>
 									<li><a href="#" title="Installer">{{ trans('sentence.Installer') }}</a></li>
 								</ul>
