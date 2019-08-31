@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="robots" content="noindex,nofollow" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
@@ -23,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/fonts/materialdesignicons/materialdesignicons.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/front/atmos.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/developer.css') }}">
+        <link rel="icon" href="{{ asset('img/front/favicon.ico') }}">
     </head>
     <body class="jumbo-page">
 

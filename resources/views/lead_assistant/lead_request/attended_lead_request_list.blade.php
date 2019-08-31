@@ -48,7 +48,9 @@
                                             <td>{{ $cv->date }}</td>
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
-                                                <a href="{{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">View PDF</a>
+                                                <a href="{{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank" title="View Proposal"><i class="mdi mdi-eye-outline"></i></a>
+                                                <a href="whatsapp://send?text={{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" data-action="" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank" title="Share on whatsapp"><i class="mdi mdi-whatsapp"></i></a>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach

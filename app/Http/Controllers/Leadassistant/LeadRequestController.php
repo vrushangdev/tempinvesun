@@ -78,7 +78,7 @@ class LeadRequestController extends Controller
 
         $leadData = explode('-',$request->lead_assistant);
 
-        $deleteLead = AssignedLeadAssistant::where('user_id',$request->id)->where('date',$request->appointment_date)->where('lead_assistant_id',$leadData[0])->delete();
+        $deleteLead = AssignedLeadAssistant::where('user_id',$request->id)->where('lead_assistant_id',$leadData[0])->delete();
 
         $assign = new AssignedLeadAssistant;
         $assign->lead_assistant_id = $leadData[0];

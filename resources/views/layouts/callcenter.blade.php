@@ -2,11 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="robots" content="noindex,nofollow" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <link rel="icon" href="{{ asset('img/front/favicon.ico') }}">
         <title>@yield('title')</title>
         @include('partials.callcenter.header_link')
     </head>

@@ -2,12 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="robots" content="noindex,nofollow" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <title>@yield('title')</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.png') }}"/>
+        <link rel="icon" href="{{ asset('img/front/favicon.ico') }}">
         <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/png" sizes="16x16">
         <link rel="stylesheet" href="{{ asset('plugins/pace/pace.css') }}">
         <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
