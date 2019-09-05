@@ -127,7 +127,7 @@
 					<center>
 						<div class="client-logos">
 								<div class="owl-carousel owl-theme">
-								    <div class="item"><img src="{{ asset('img/installer/1.png') }}"></div>
+								    <div class="item"><img src="{{ asset('img/installer/1.jpg') }}"></div>
 								    <div class="item"><img src="{{ asset('img/installer/2.jpg') }}"></div>
 								    <div class="item"><img src="{{ asset('img/installer/3.jpg') }}"></div>
 								    <div class="item"><img src="{{ asset('img/installer/4.jpg') }}"></div>
