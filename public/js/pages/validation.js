@@ -148,4 +148,97 @@ $(document).ready(function() {
         }
     });
 
+     $("#installerRequest").validate({
+        errorElement: 'span',
+        rules: {
+            company_name:{
+                required: true,
+            },
+            owner_name:{
+                required: true,
+            },
+            owner_mobile:{
+                required: true,
+            },
+            owner_email:{
+                required: true,
+            },
+            constitation:{
+                required: true,
+            },
+            pincode:{
+                required: true,
+            },
+            city:{
+                required: true,
+            },
+            state:{
+                required: true,
+            },
+            installation_capacity:{
+                required: true,
+            },
+            gst:{
+                required: true,
+            },
+            // mobile:{
+            //     required: true,
+            //     minlength:10,
+            //     maxlength:10,
+            //     remote:{
+            //         url: "/check-user-mobile",
+            //         type: "post",
+            //     }
+            // },
+            checkbox:{
+                required: true,
+            }
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr("type") == "checkbox") {                   
+                error.insertAfter('#check_error');
+            }
+            else { // This is the default behavior of the script for all fields
+                error.insertAfter( element );
+            }
+        },
+        messages: {
+            company_name:{
+                required: 'Please Enter Company Name',
+            },
+            owner_name:{
+                required: 'Please Enter Owner Name',
+            },
+            owner_mobile:{
+                required: 'Please Enter Owner Mobile',
+            },
+            owner_email:{
+                required: 'Please Enter Owner Email',
+            },
+            constitation:{
+                required: 'Please Select Constitation',
+            },
+            pincode:{
+                required: 'Please Enter Pincode',
+            },
+            city:{
+                required: 'Please Enter City',
+            },
+            state:{
+                required: 'Please Enter State',
+            },
+            installation_capacity:{
+                required: 'Please Select Installation Capacity',
+            },
+            gst:{
+                required: 'Please Enter GST',
+            },
+            checkbox:{
+                required: 'Please check this field',
+            }
+        }
+    });
+
+    
+
 });

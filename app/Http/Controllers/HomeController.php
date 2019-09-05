@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\EnergyDataSet;
 use App\Models\GetCallRequest;
+use App\Models\Installer;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -281,5 +282,35 @@ class HomeController extends Controller
 
             return 'false';
         }
+    }
+
+    public function installer(){
+        return view('front.home.installer');
+    }
+
+    public function saveInstaller(Request $request){
+
+        $saveInstaller = new Installer;
+        $saveInstaller->company_name = $request->company_name;
+        $saveInstaller->owner_name = $request->owner_name;
+        $saveInstaller->owner_mobile = $request->owner_mobile;
+        $saveInstaller->owner_email = $request->owner_email;
+        $saveInstaller->constitation = $request->constitation;
+        $saveInstaller->pincode = $request->pincode;
+        $saveInstaller->city = $request->city;
+        $saveInstaller->state = $request->state;
+        $saveInstaller->installation_capacity = $request->installation_capacity;
+        $saveInstaller->gst = $request->gst;
+        $saveInstaller->save();
+
+        return redirect()->back()->with('messages', [
+              [
+                  'type' => 'success',
+                  'title' => 'Request',
+                  'message' => 'Your request successfully submitted. We are contact you shortly!',
+              ],
+        ]);
+
+
     }
 }

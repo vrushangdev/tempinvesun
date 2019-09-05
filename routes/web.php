@@ -12,6 +12,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/thank-you', 'HomeController@thankYou')->name('thankYou');
 
+//Installer Page Route
+Route::get('/installer', 'HomeController@installer')->name('installer');
+Route::post('save-installer', 'HomeController@saveInstaller')->name('saveInstaller');
+
+
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('save-get-call-request', 'HomeController@saveGetCallRequest')->name('saveGetCallRequest');
