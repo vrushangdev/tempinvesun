@@ -230,7 +230,9 @@
 @section('js')
 <script type="text/javascript">
     $('.submit').on('click',function(){
-        $('#login').submit();
+        if($('#login').valid()){
+            $('#login').submit();
+        }
     });
 
 </script>

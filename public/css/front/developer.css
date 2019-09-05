@@ -64,13 +64,13 @@ and (max-device-width : 1024px)
 and (orientation : landscape) {
 
 	.slider-btn-left{
-		margin-top: 635px;
+		margin-top: 55%;
 	    position: fixed;
 	    margin-left: -40px;
 	}
 	.slider-btn-right{
 
-		margin-top: 635px;
+		margin-top: 55%;
 	    position: fixed;
 	    margin-left: 40px;
 	}
@@ -88,14 +88,14 @@ and (orientation : landscape) {
 
 	.slider-btn-left-preview{
 
-		margin-top: 625px;
+		margin-top: 55%;
 	    position: fixed;
 	    margin-left: -40px;
 	}
 
 	.slider-btn-right-preview{
 
-		margin-top: 625px;
+		margin-top: 55%;
 	    position: fixed;
 	    margin-left: 40px;
 	}
