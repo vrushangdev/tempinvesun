@@ -50,6 +50,7 @@
                                             <td>
                                                 <a href="{{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank" title="View Proposal"><i class="mdi mdi-eye-outline"></i></a>
                                                 <a href="whatsapp://send?text={{ asset('proposal') }}/{{ $cv->userpropasal->proposal_link }}" data-action="" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank" title="Share on whatsapp"><i class="mdi mdi-whatsapp"></i></a>
+                                                <a href="{{ route('form_fourteen',[$cv->userpropasal->user_id,$cv->userpropasal->proposal_id]) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank" title="View Proposal"><i class="mdi mdi-plus"></i></a>
                                                 
                                             </td>
                                         </tr>

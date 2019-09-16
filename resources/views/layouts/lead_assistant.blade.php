@@ -20,6 +20,7 @@
             @yield('content')
         </main>
         @include('partials.lead_assistant.footer_link')
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCG_sqbBhTzUacobqwsf3_QNbBaKu9dM_c&signed_in=true&libraries=places"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {

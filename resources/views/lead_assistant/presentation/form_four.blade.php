@@ -29,24 +29,22 @@
                                 <input type="hidden" id="user_id" name="id" value="{{ $id }}">
                                 <input type="hidden" name="user_site_survey" @if(count($energy) > 0) value="{{ $energy->id }}" @else value="" @endif>
 
-                                <div class="form-group">
-                                    <label for="inputFirstName">Roof</label>
-                                    <input type="text" class="form-control" id="inputFirstName" name="roof_length" placeholder="Length x Width" @if(count($energy) > 0) value="{{ $energy->roof_length }}" @else value="" @endif required>
-                                </div>
+                                <div class="form-row" >
+                                    <div class="form-group col-md-4">
+                                        <label for="inputFirstName">Roof Length</label>
+                                        <input type="text" class="form-control width" id="inputRoofLength" name="roof_length" placeholder="Length" @if(count($energy) > 0) value="{{ $energy->roof_length }}" @else value="" @endif required>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="roof_pic_one">Roof Picture One</label>
-                                    <input type="file" class="form-control dropify" id="roof_pic_one" name="roof_pic_one"  @if(count($energy) > 0) data-default-file="{{ asset('uploads/site_survey') }}/{{ $energy->roof_image_one }}" @else required @endif>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="roof_pic_two">Roof Picture Two</label>
-                                    <input type="file" class="form-control dropify" id="roof_pic_two" name="roof_pic_two" placeholder="Sectioned Load" @if(count($energy) > 0) data-default-file="{{ asset('uploads/site_survey') }}/{{ $energy->roof_image_two }}" @else required @endif>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputFirstName">Roof Width</label>
+                                        <input type="text" class="form-control width" id="inputRoofWidth" name="roof_width" placeholder="Width" @if(count($energy) > 0) value="{{ $energy->roof_width }}" @else value="" @endif required>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="form-group">
                                     <label for="area">Area</label>
-                                    <input type="text" class="form-control width" id="area" name="area" placeholder="Area" @if(count($energy) > 0) value="{{ $energy->area }}" @endif required>
+                                    <input type="text" class="form-control width" id="area" name="area" placeholder="Area" @if(count($energy) > 0) value="{{ $energy->area }}" @endif readonly required>
                                 </div>
 
 
@@ -59,6 +57,19 @@
                                     <label for="column_of_panel">Column of Panels</label>
                                     <input type="text" class="form-control width" id="column_of_panel" name="column_of_panel" placeholder="Column of Panels" @if(count($energy) > 0) value="{{ $energy->column }}" @endif required>
                                 </div>
+                                
+
+                                <div class="form-group">
+                                    <label for="roof_pic_one">Roof Picture One</label>
+                                    <input type="file" class="form-control dropify" id="roof_pic_one" name="roof_pic_one"  @if(count($energy) > 0) data-default-file="{{ asset('uploads/site_survey') }}/{{ $energy->roof_image_one }}" @else required @endif>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="roof_pic_two">Roof Picture Two</label>
+                                    <input type="file" class="form-control dropify" id="roof_pic_two" name="roof_pic_two" placeholder="Sectioned Load" @if(count($energy) > 0) data-default-file="{{ asset('uploads/site_survey') }}/{{ $energy->roof_image_two }}" @else required @endif>
+                                </div>
+
+                               
 
                                 <div class="form-group">
                                     <label for="panel_orientation">Panel Orientation</label>
@@ -132,82 +143,83 @@
                                 <br>
                                 
                                 <div class="form-group">
-                                    <h2>Access to Roof :</h2><br>
+                                    <h5>Access to Roof :</h5><br>
+                                    
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_roof" value="1" @if(count($energy) > 0 && $energy->access_of_roof == 1) checked @endif>Excellent 
+                                      <input type="radio" name="access_of_roof" value="1" @if(count($energy) > 0 && $energy->access_of_roof == 1) checked @endif> Excellent 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_roof" value="2" @if(count($energy) > 0 && $energy->access_of_roof == 2) checked @endif>Good 
+                                      <input type="radio" name="access_of_roof" value="2" @if(count($energy) > 0 && $energy->access_of_roof == 2) checked @endif> Good 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_roof" value="3" @if(count($energy) > 0 && $energy->access_of_roof == 3) checked @endif>Difficult 
+                                      <input type="radio" name="access_of_roof" value="3" @if(count($energy) > 0 && $energy->access_of_roof == 3) checked @endif> Difficult 
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="access_of_roof" value="4" @if(count($energy) > 0 && $energy->access_of_roof == 4) checked @endif>Worst 
+                                      <input type="radio" name="access_of_roof" value="4" @if(count($energy) > 0 && $energy->access_of_roof == 4) checked @endif> Worst 
                                     </label>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <h2>Access to House :</h2><br>
+                                    <h5>Access to House :</h5><br>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_house" value="1" @if(count($energy) > 0 && $energy->access_of_house == 1) checked @endif>Excellent 
+                                      <input type="radio" name="access_of_house" value="1" @if(count($energy) > 0 && $energy->access_of_house == 1) checked @endif> Excellent 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_house" value="2" @if(count($energy) > 0 && $energy->access_of_house == 2) checked @endif>Good 
+                                      <input type="radio" name="access_of_house" value="2" @if(count($energy) > 0 && $energy->access_of_house == 2) checked @endif> Good 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="access_of_house" value="3" @if(count($energy) > 0 && $energy->access_of_house == 3) checked @endif>Difficult 
+                                      <input type="radio" name="access_of_house" value="3" @if(count($energy) > 0 && $energy->access_of_house == 3) checked @endif> Difficult 
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="access_of_house" value="4" @if(count($energy) > 0 && $energy->access_of_house == 4) checked @endif>Worst 
+                                      <input type="radio" name="access_of_house" value="4" @if(count($energy) > 0 && $energy->access_of_house == 4) checked @endif> Worst 
                                     </label>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <h2>Site Condition :</h2><br>
+                                    <h5>Site Condition :</h5><br>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="site_conditions" value="1" @if(count($energy) > 0 && $energy->site_condition == 1) checked @endif>Excellent 
+                                      <input type="radio" name="site_conditions" value="1" @if(count($energy) > 0 && $energy->site_condition == 1) checked @endif> Excellent 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="site_conditions" value="2" @if(count($energy) > 0 && $energy->site_condition == 2) checked @endif>Good 
+                                      <input type="radio" name="site_conditions" value="2" @if(count($energy) > 0 && $energy->site_condition == 2) checked @endif> Good 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="site_conditions" value="3" @if(count($energy) > 0 && $energy->site_condition == 3) checked @endif>Difficult 
+                                      <input type="radio" name="site_conditions" value="3" @if(count($energy) > 0 && $energy->site_condition == 3) checked @endif> Difficult 
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="site_conditions" value="4" @if(count($energy) > 0 && $energy->site_condition == 4) checked @endif>Worst 
+                                      <input type="radio" name="site_conditions" value="4" @if(count($energy) > 0 && $energy->site_condition == 4) checked @endif> Worst 
                                     </label>
                                 </div>
                                 <br>
                                  <div class="form-group">
-                                    <h2>Shadding :</h2><br>
+                                    <h5>Shadding :</h5><br>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="shadding" value="1" @if(count($energy) > 0 && $energy->shadding == 1) checked @endif>Excellent 
+                                      <input type="radio" name="shadding" value="1" @if(count($energy) > 0 && $energy->shadding == 1) checked @endif> Excellent 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="shadding" value="2" @if(count($energy) > 0 && $energy->shadding == 2) checked @endif>Good 
+                                      <input type="radio" name="shadding" value="2" @if(count($energy) > 0 && $energy->shadding == 2) checked @endif> Good 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="shadding" value="3" @if(count($energy) > 0 && $energy->shadding == 3) checked @endif>Difficult 
+                                      <input type="radio" name="shadding" value="3" @if(count($energy) > 0 && $energy->shadding == 3) checked @endif> Difficult 
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="shadding" value="4" @if(count($energy) > 0 && $energy->shadding == 4) checked @endif>Worst 
+                                      <input type="radio" name="shadding" value="4" @if(count($energy) > 0 && $energy->shadding == 4) checked @endif> Worst 
                                     </label>
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <h2>Age of Roof :</h2><br>
+                                    <h5>Age of Roof :</h5><br>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="age_of_roof" value="1" @if(count($energy) > 0 && $energy->age_of_roof == 1) checked @endif>Excellent 
+                                      <input type="radio" name="age_of_roof" value="1" @if(count($energy) > 0 && $energy->age_of_roof == 1) checked @endif> Excellent 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="age_of_roof" value="2" @if(count($energy) > 0 && $energy->age_of_roof == 2) checked @endif>Good 
+                                      <input type="radio" name="age_of_roof" value="2" @if(count($energy) > 0 && $energy->age_of_roof == 2) checked @endif> Good 
                                     </label>
                                     <label class="radio-inline" style="float:left;margin-right: 15px;">
-                                      <input type="radio" name="age_of_roof" value="3" @if(count($energy) > 0 && $energy->age_of_roof == 3) checked @endif>Difficult 
+                                      <input type="radio" name="age_of_roof" value="3" @if(count($energy) > 0 && $energy->age_of_roof == 3) checked @endif> Difficult 
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="age_of_roof" value="4" @if(count($energy) > 0 && $energy->age_of_roof == 4) checked @endif>Worst 
+                                      <input type="radio" name="age_of_roof" value="4" @if(count($energy) > 0 && $energy->age_of_roof == 4) checked @endif> Worst 
                                     </label>
                                 </div>
                                 <br>
@@ -234,6 +246,26 @@
             $('#login').submit();
         }
     });
+
+    $(document).on('keyup','#inputRoofLength',function(){
+
+        var length = $(this).val();
+        var width = $('#inputRoofWidth').val();
+        var total = length * width;
+        $('#area').val(total);
+
+    })
+
+    $(document).on('keyup','#inputRoofWidth',function(){
+
+
+        var length = $(this).val();
+        var width = $('#inputRoofLength').val();
+        var total = length * width;
+        $('#area').val(total);
+        
+    })
+
 
 </script>
 @endsection

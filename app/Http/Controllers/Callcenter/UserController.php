@@ -133,22 +133,24 @@ class UserController extends Controller
 
         if(!is_null($findLeadAssistant)){
             foreach($findLeadAssistant as $fk => $fv){
-                $getLeadAssistantData = AssignedLeadAssistant::where('lead_assistant_id',$fv->user_id)->where('date',$request->date)->get();
-                $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->get();
-                $leadAssistantArray[$fk]['lead_assistant_id'] = $fv->leadassistant->id;
-                $leadAssistantArray[$fk]['lead_assistant'] = $fv->leadassistant->name;
-                if(!is_null($getLeadAssistantData)){
-                    foreach($getLeadAssistantData as $lk => $lv){
-                        $leadAssistantArray[$fk]['data'][] = $lv->time_slot_id;
+                if(!is_null($fv->leadassistant)){
+                    $getLeadAssistantData = AssignedLeadAssistant::where('lead_assistant_id',$fv->user_id)->where('date',$request->date)->get();
+                    $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->get();
+                    $leadAssistantArray[$fk]['lead_assistant_id'] = $fv->leadassistant->id;
+                    $leadAssistantArray[$fk]['lead_assistant'] = $fv->leadassistant->name;
+                    if(!is_null($getLeadAssistantData)){
+                        foreach($getLeadAssistantData as $lk => $lv){
+                            $leadAssistantArray[$fk]['data'][] = $lv->time_slot_id;
+                        }
                     }
-                }
 
-                $leaveArray = array(1,2,3);
+                    $leaveArray = array(1,2,3);
 
-                foreach($leaveArray as $lk => $lv){
-                    $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->where('type',$lv)->first();
-                    if(!is_null($getWorkSchedule)){
-                        $leadAssistantArray[$fk]['leave_data'][$lk]['is_selected'] = 1;
+                    foreach($leaveArray as $lk => $lv){
+                        $getWorkSchedule = WorkSchedule::where('lead_assistant_id',$fv->user_id)->where('date',$date)->where('type',$lv)->first();
+                        if(!is_null($getWorkSchedule)){
+                            $leadAssistantArray[$fk]['leave_data'][$lk]['is_selected'] = 1;
+                        }
                     }
                 }
 

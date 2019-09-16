@@ -33,6 +33,7 @@
                                     <th>Sr.no</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
+                                    <th>Address</th>
                                     <th>Date</th>
                                     <th>Slot</th>
                                     <th>Action</th>
@@ -45,10 +46,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $cv->user->first_name }} {{ $cv->user->middle_name }} {{ $cv->user->last_name }}</td>
                                             <td>{{ $cv->user->mobile }}</td>
+                                            <td>{{ $cv->user->address1 }}, {{ $cv->user->address2 }}, {{ $cv->user->district }} - {{ $cv->user->pincode }}</td>
                                             <td>{{ $cv->date }}</td>
                                             <td>{{ $cv->slot->name }}</td>
                                             <td>
-                                                <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark" target="_blank">Start</a>
+                                                <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark">Start</a>
                                                 <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark reschedule" data-id="{{ $cv->user->id }}" data-value="{{ $cv->id }}">Reschedule</a>
                                                 
                                             </td>

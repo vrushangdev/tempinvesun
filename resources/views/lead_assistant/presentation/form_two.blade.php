@@ -95,14 +95,14 @@
 
                                 @if(count($getMonth) > 0)
                                     @foreach($getMonth as $mk =>$mv)
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                        <div class="form-row" >
+                                            <div class="form-group col-md-6" style="display:none;">
                                                 <label for="month{{ $mk }}">Month</label>
                                                 <input type="text" class="form-control" name="data[{{$mv->id}}][month]" id="month{{ $mk }}" placeholder="Month" value="{{ $mv->month }}" readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="unit{{ $mk }}">Unit Consumed</label>
-                                                <input type="text" class="form-control width" name="data[{{$mv->id}}][unit]" id="unit{{ $mk }}" placeholder="Unit Consumed" value="@if(count($month) > 0) {{ $month[$mv->id] }}@else 0 @endif">
+                                                <input type="text" class="form-control width" name="data[{{$mv->id}}][unit]" id="unit{{ $mk }}" placeholder="{{ $mv->month }} Month's Unit Consumed" value="@if(count($month) > 0) {{ $month[$mv->id] }}@else 0 @endif">
                                             </div>
                                         </div>
                                     @endforeach
@@ -121,14 +121,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="totalAmount">Total Amount</label>
-                                    <input type="text" class="form-control width" id="totalAmount" name="total_amount" placeholder="Total Amount" @if(!is_null($energyConsumptionData) && $energyConsumptionData->total_amount != '') value="{{ $energyConsumptionData->total_amount }}" @endif required>
+                                    <label for="totalAmount">Last Month Bill Amount</label>
+                                    <input type="text" class="form-control width" id="totalAmount" name="total_amount" placeholder="Last Month Bill Amount" @if(!is_null($energyConsumptionData) && $energyConsumptionData->total_amount != '') value="{{ $energyConsumptionData->total_amount }}" @endif required>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="unit_consumed">Unit Consumed</label>
-                                    <input type="text" class="form-control width" id="unit_consumed" name="unit_consumed" placeholder="Unit Consumed" @if(!is_null($energyConsumptionData) && $energyConsumptionData->unit_consumed != '') value="{{ $energyConsumptionData->unit_consumed }}" @endif required>
+                                    <label for="unit_consumed">Last Month Unit Consumed</label>
+                                    <input type="text" class="form-control width" id="unit_consumed" name="unit_consumed" placeholder="Last Month Unit Consumed" @if(!is_null($energyConsumptionData) && $energyConsumptionData->unit_consumed != '') value="{{ $energyConsumptionData->unit_consumed }}" @endif required>
                                 </div>
 
                                  <div class="form-group">

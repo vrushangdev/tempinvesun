@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Leadassistant;
 
 use App\Http\Controllers\GlobalController;
 use App\Models\AssignedLeadAssistant;
+use App\Models\Calculation;
 use App\Models\City;
 use App\Models\ConsumptionTrend;
 use App\Models\Country;
@@ -13,8 +14,8 @@ use App\Models\Month;
 use App\Models\State;
 use App\Models\TimeSlot;
 use App\Models\User;
+use App\Models\UserDocument;
 use App\Models\UserPreview;
-use App\Models\Calculation;
 use App\Models\UserProposal;
 use App\Models\UserProposalImage;
 use App\Models\UserSiteSurvey;
@@ -42,10 +43,22 @@ class PresentationController extends GlobalController
 
         $proposalId = "IN".date('Y')."".date('m')."".date('d')."".$proposalId;
 
-        $saveProposal = new UserProposal;
-        $saveProposal->user_id = $id;
-        $saveProposal->proposal_id = $proposalId;
-        $saveProposal->save();
+        $findUserProposal = UserProposal::where('id',$id)->where('proposal_link','=','')->first();
+
+        $proposalSecret = $this->randomStringGenerater(32);
+
+        if(is_null($findUserProposal)){
+
+            $saveProposal = new UserProposal;
+            $saveProposal->user_id = $id;
+            $saveProposal->proposal_id = $proposalId;
+            $saveProposal->secret = $proposalSecret;
+            $saveProposal->save();
+
+        } else {
+
+            $proposalId = $findUserProposal->proposal_id;
+        }
 
         $findUser = User::where('id',$id)->with(['cityname','countryname'])->first();
 
@@ -332,28 +345,62 @@ class PresentationController extends GlobalController
         } else {
             $energy = new UserPreview;
         }
-        $energy->user_id = $request->id;
-        $energy->suggest_system_size = $request->suggested_system_size;
-        $energy->area_required = $request->area_required;
-        $energy->investment = $request->investment;
-        $energy->payable = $request->net_payable;
-        $energy->saving_per_year = $request->net_saving;
-        $energy->emi_start_at = $request->emi_start;
-        $energy->basic = $request->basic; 
-        $energy->gst = $request->gst; 
-        $energy->total = $request->total; 
-        $energy->subsidy = $request->subsidy; 
-        $energy->subsidize_amount = $request->subsidize_amount; 
-        $energy->net_payable = $request->net_payable; 
-        $energy->discom_charge = $request->discom_charge; 
-        $energy->structure_modification = $request->structure_modification; 
-        $energy->mobile_app = $request->mobile_app; 
-        $energy->solar_monitoring = $request->solar_monitoring; 
-        $energy->extended_aintenance = $request->extended_aintenance; 
-        $energy->insurance_coverage = $request->insurance_coverage; 
-        $energy->solar_panel = $request->solar_panel; 
-        $energy->grid_tie_inverter = $request->grid_tie_inverter; 
-        $energy->structure = $request->structure; 
+        if($request->solarpanel == ''){
+            
+            $getCalculation = Calculation::where('plant_size',ceil($request->suggested_system_size))->first();
+
+            $suggestedSystem = ceil($request->suggested_system_size);
+            $unit_rate = $request->unit_rate;
+            $area_required = $suggestedSystem * 80;
+            $savingPerYear = $suggestedSystem * 1500 * $unit_rate;
+            $emiStart = $suggestedSystem * 750;
+
+            $energy->user_id = $request->id;
+            $energy->suggest_system_size = $request->suggested_system_size;
+            $energy->area_required = $area_required;
+            $energy->investment = $getCalculation->total;
+            $energy->payable = $getCalculation->net_payable;
+            $energy->saving_per_year = $savingPerYear;
+            $energy->emi_start_at = $emiStart;
+            $energy->basic = $getCalculation->basic; 
+            $energy->gst = $getCalculation->gst; 
+            $energy->total = $getCalculation->total; 
+            $energy->subsidy = $getCalculation->subsidy; 
+            $energy->subsidize_amount = $getCalculation->subsidize_amount; 
+            $energy->net_payable = $getCalculation->net_payable; 
+            $energy->discom_charge = $getCalculation->discom_charge; 
+            $energy->structure_modification = $getCalculation->structure_modification; 
+            $energy->mobile_app = $getCalculation->mobile_app; 
+            $energy->solar_monitoring = $getCalculation->solar_monitoring; 
+            $energy->extended_aintenance = $getCalculation->extended_aintenance; 
+            $energy->insurance_coverage = $getCalculation->insurance_coverage; 
+            $energy->solar_panel = $getCalculation->solar_panel; 
+            $energy->grid_tie_inverter = $getCalculation->grid_tie_inverter; 
+            $energy->structure = $getCalculation->structure; 
+        } else {
+            $energy->user_id = $request->id;
+            $energy->suggest_system_size = $request->suggested_system_size;
+            $energy->area_required = $request->area_required;
+            $energy->investment = $request->investment;
+            $energy->payable = $request->net_payable;
+            $energy->saving_per_year = $request->net_saving;
+            $energy->emi_start_at = $request->emi_start;
+            $energy->basic = $request->basic; 
+            $energy->gst = $request->gst; 
+            $energy->total = $request->total; 
+            $energy->subsidy = $request->subsidy; 
+            $energy->subsidize_amount = $request->subsidize_amount; 
+            $energy->net_payable = $request->net_payable; 
+            $energy->discom_charge = $request->discom_charge; 
+            $energy->structure_modification = $request->structure_modification; 
+            $energy->mobile_app = $request->mobile_app; 
+            $energy->solar_monitoring = $request->solar_monitoring; 
+            $energy->extended_aintenance = $request->extended_aintenance; 
+            $energy->insurance_coverage = $request->insurance_coverage; 
+            $energy->solar_panel = $request->solar_panel; 
+            $energy->grid_tie_inverter = $request->grid_tie_inverter; 
+            $energy->structure = $request->structure; 
+        }
         $energy->save();
 
         $img9 = public_path()."/img/img/6-06.jpg";
@@ -435,6 +482,7 @@ class PresentationController extends GlobalController
         }
         $energy->user_id = $request->id;
         $energy->roof_length = $request->roof_length;
+        $energy->roof_width = $request->roof_width;
         $energy->area = $request->area;
         $energy->rows = $request->row_of_panel;
         $energy->column = $request->column_of_panel;
@@ -819,18 +867,59 @@ class PresentationController extends GlobalController
 
         $pdf->writeImages($proposal, true); 
 
-        $findUser = User::where('id',$id)->first();
+        //$findUser = User::where('id',$id)->first();
 
-        $token = mt_rand(100000,999999);
+        //$token = mt_rand(100000,999999);
 
-        $message = "Your verfication otp is ##".$token."##";
+        //$message = "Your verfication otp is ##".$token."##";
         
-        $this->sendSms($message,$findUser->mobile,$token);
+        //$this->sendSms($message,$findUser->mobile,$token);
 
-        $updateUserProposal = UserProposal::where('proposal_id',$proposal_id)->where('user_id',$id)->update(['otp' => $token,'proposal_link' => $proposal_name]);
+        $updateUserProposal = UserProposal::where('proposal_id',$proposal_id)->where('user_id',$id)->update(['proposal_link' => $proposal_name]);
 
+        $attend = AssignedLeadAssistant::where('user_id',$request->id)->update(['is_attend' => 1,'proposal_recieved' => date('d-m-Y')]);
 
-        return view('lead_assistant.presentation.otp_verification',compact('id','proposal_id'));   
+        //return view('lead_assistant.presentation.otp_verification',compact('id','proposal_id'));   
+
+        return redirect(route('lead_assistant.attendedList'))->with('messages', [
+              [
+                  'type' => 'success',
+                  'title' => 'Password',
+                  'message' => 'Proposal Successfully Created!',
+              ],
+        ]); 
+
+        //return view('lead_assistant.presentation.confirmation_page',compact('id','proposal_id'));   
+    }
+
+    public function form_fourteen($id,$proposal_id){
+
+        return view('lead_assistant.presentation.confirmation_page',compact('id','proposal_id'));      
+    }
+
+    public function form_fifth(Request $request){
+
+        $id = $request->id;
+        $proposal_id = $request->proposal_id;
+
+        if($request->customRadio == 1){
+
+            return view('lead_assistant.presentation.apply_loan',compact('id','proposal_id')); 
+
+        } elseif($request->customRadio == 4) {
+
+            return view('lead_assistant.presentation.registation',compact('id','proposal_id')); 
+
+        } else {
+
+            return redirect(route('lead_assistant.attendedList'))->with('messages', [
+                  [
+                      'type' => 'success',
+                      'title' => 'Password',
+                      'message' => 'Proposal Successfully Created!',
+                  ],
+            ]); 
+        }
     }
 
     public function verifyOtp(Request $request){
@@ -911,6 +1000,85 @@ class PresentationController extends GlobalController
         } 
 
         return "true";
+    }
+
+    public function saveIdDocumnetDetails(Request $request){
+
+        if(isset($request->aadhar_card)){
+            $aadhar_card = $this->uploadImage($request->aadhar_card,'aadhar_card');
+            $saveAadhar = new UserDocument;
+            $saveAadhar->user_id = $request->id; 
+            $saveAadhar->proposal_id = $request->proposal_id;
+            $saveAadhar->type = $request->type;
+            $saveAadhar->proof_type = 'AADHAR';
+            $saveAadhar->file_name = $aadhar_card;
+            $saveAadhar->uploaded_on = date('d-m-Y');
+            $saveAadhar->save();
+        }
+
+        if(isset($request->passport)){
+            $passport = $this->uploadImage($request->passport,'passport');
+            $saveAadhar = new UserDocument;
+            $saveAadhar->user_id = $request->id; 
+            $saveAadhar->proposal_id = $request->proposal_id;
+            $saveAadhar->type = $request->type;
+            $saveAadhar->proof_type = 'AADHAR';
+            $saveAadhar->file_name = $passport;
+            $saveAadhar->uploaded_on = date('d-m-Y');
+            $saveAadhar->save();
+        }
+        
+        if($request->type == 1){
+
+            if(isset($request->bank_statement)){
+                $bank_statement = $this->uploadImage($request->bank_statement,'bank_statement');
+                $saveAadhar = new UserDocument;
+                $saveAadhar->user_id = $request->id; 
+                $saveAadhar->proposal_id = $request->proposal_id;
+                $saveAadhar->type = $request->type;
+                $saveAadhar->proof_type = 'BANK_STATEMENT';
+                $saveAadhar->file_name = $bank_statement;
+                $saveAadhar->uploaded_on = date('d-m-Y');
+                $saveAadhar->save();
+            }
+
+        } else {
+
+            if(isset($request->resedential_proof)){
+                $resedential_proof = $this->uploadImage($request->resedential_proof,'resedential_proof');
+                $saveAadhar = new UserDocument;
+                $saveAadhar->user_id = $request->id; 
+                $saveAadhar->proposal_id = $request->proposal_id;
+                $saveAadhar->type = $request->type;
+                $saveAadhar->proof_type = 'RESEDENTIAL';
+                $saveAadhar->file_name = $resedential_proof;
+                $saveAadhar->uploaded_on = date('d-m-Y');
+                $saveAadhar->save();
+            }
+        }
+
+        if(isset($request->other_document) && count($request->other_document)){
+            foreach($request->other_document as $ok => $ov){
+                $other = $this->uploadImage($ov,'other');
+                $saveAadhar = new UserDocument;
+                $saveAadhar->user_id = $request->id; 
+                $saveAadhar->proposal_id = $request->proposal_id;
+                $saveAadhar->type = $request->type;
+                $saveAadhar->proof_type = 'OTHER';
+                $saveAadhar->file_name = $other;
+                $saveAadhar->uploaded_on = date('d-m-Y');
+                $saveAadhar->save();
+
+            }
+        }
+
+        return redirect(route('lead_assistant.attendedList'))->with('messages', [
+              [
+                  'type' => 'success',
+                  'title' => 'Password',
+                  'message' => 'User\'s document successfully uploaded',
+              ],
+        ]); 
     }
 }
         

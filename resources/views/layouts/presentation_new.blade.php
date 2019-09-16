@@ -14,6 +14,7 @@
 <body class="jumbo-page noScroll">
 @yield('content')
 @include('partials.admin.footer_link')
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCG_sqbBhTzUacobqwsf3_QNbBaKu9dM_c&signed_in=true&libraries=places"></script>
 @yield('js')
 </body>
 </html>

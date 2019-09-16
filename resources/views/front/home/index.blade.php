@@ -116,7 +116,7 @@
 									<li><a href="#" title="About US">{{ trans('sentence.About') }}</a></li>
 									<li><a href="{{ route('termsAndPrivacy') }}" title="Terms & Privacy">{{ trans('sentence.T&C') }}</a></li>
 									<li><a href="#" title="Solar101">{{ trans('sentence.Solar101') }}</a></li>
-									<li><a href="#" title="Installer">{{ trans('sentence.Installer') }}</a></li>
+									<li><a href="{{ route('installer') }}" title="Installer">{{ trans('sentence.Installer') }}</a></li>
 								</ul>
 							</nav>
 						</footer>

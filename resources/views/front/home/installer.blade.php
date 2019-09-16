@@ -36,7 +36,7 @@
 
 			<section class="info_section contact_form">
 
-				<div class="img_block" style="background:white;">
+				<div class="img_block" style="background:white!important;">
 
 					<div class="form_outer">
 						<form action="{{ route('saveInstaller') }}" method="post" id="installerRequest">
@@ -126,6 +126,8 @@
 				<div class="container">
 					<center>
 						<div class="client-logos">
+							<h1 style="font-size: 25px">Our Preferred Partners</h1>
+							<br><br>
 								<div class="owl-carousel owl-theme">
 								    <div class="item"><img src="{{ asset('img/installer/1.jpg') }}"></div>
 								    <div class="item"><img src="{{ asset('img/installer/2.jpg') }}"></div>

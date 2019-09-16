@@ -27,8 +27,8 @@
                                 @csrf
                                 
                                 <input type="hidden" id="user_id" name="id" value="{{ $getUserInfo->id }}">
-                                <input type="hidden" name="latitude" id="latitude" value="{{ $getUserInfo->lat }}">  
-                                <input type="hidden" name="longitude" id ="longitude" value="{{ $getUserInfo->lang }}">
+                                <!-- <input type="hidden" name="latitude" id="latitude" value="{{ $getUserInfo->lat }}">  
+                                <input type="hidden" name="longitude" id ="longitude" value="{{ $getUserInfo->lang }}"> -->
                                 <input type="hidden" name="proposal_id" id ="proposal_id" value="{{ $proposal_id }}">    
                                 
                                 <div class="form-group">
@@ -155,6 +155,19 @@
                                     <label for="pacinput">Location Search</label>
                                     <input type="text" class="form-control" name="location" id="pacinput" placeholder="Location Search" value="{{ $getUserInfo->google_location }}" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="pacinput">Latitude</label>
+                                    <input type="text" class="form-control" name="latitude" id="latitude" value="{{ $getUserInfo->lat }}" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pacinput">Longitude</label>
+                                    <input type="text" class="form-control" name="longitude" id ="longitude" value="{{ $getUserInfo->lang }}" readonly>
+                                </div>
+
+                                  
+                                
                             </form>
                         </div>
                     </div>
@@ -225,6 +238,9 @@
             var cityName = $(toInsertData).filter('.locality').text().trim();
             var stateName = $(toInsertData).filter('.region').text().trim();
             var countryName = $(toInsertData).filter('.country-name').text().trim();
+
+            console.log(latti);
+            console.log(longi);
 
             $("#latitude").val(latti);
             $("#longitude").val(longi);

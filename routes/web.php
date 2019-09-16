@@ -188,6 +188,10 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::get('/presentation/verify-presentation/{id}/{proposal_id}', 'PresentationController@verifyPresentation')->name('verifyPresentation');
 	Route::post('/presentation/verify-otp', 'PresentationController@verifyOtp')->name('verifyOtp');
 	
+	Route::get('/presentation/form-fourteen/{id}/{proposal_id}', 'PresentationController@form_fourteen')->name('form_fourteen');
+	Route::post('/presentation/form-fifteen', 'PresentationController@form_fifth')->name('form_fifth');
+	Route::post('/presentation/save-document-details', 'PresentationController@saveIdDocumnetDetails')->name('saveIdDocumnetDetails');
+	
 	
 
 });

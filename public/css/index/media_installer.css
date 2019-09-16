@@ -73,6 +73,9 @@
 	footer nav ul li { margin: 0 0 10px 0; width: 50%; text-align: center; }
 	.hero_banner .container { margin-top: -50px; }
 	.custom_checkbox { margin: 20px 0; }
+	.client-logos{
+		margin-top: 60%;margin-bottom: 5%;justify-content: center;width:75%;
+	}
 }
 
 @media(max-width: 767px){
@@ -108,7 +111,7 @@
 	.info_section .img_block, .info_section .img_block img { width: 100%; }
 	.rs-container { height: 196px !important; width: 196px !important; }
 	.orange_btn { font-size: 14px; line-height: 18px; height: 45px; padding: 0 25px; }
-	.info_section.contact_form { background: -webkit-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -o-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -ms-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: -moz-linear-gradient(287deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); background: linear-gradient(163deg, rgb(145, 102, 220) 0%, rgb(112, 59, 201) 80%, rgb(105, 51, 197) 100%); padding: 40px 25px 28px; }
+	.info_section.contact_form { padding: 40px 25px 28px; }
 	.info_section.contact_form .content_block p { font-size: 20px; line-height: 26px; color: #fff; text-align: center; margin: 0 20px 37px; }
 	.info_section.contact_form .img_block h2 { margin-bottom: 38px; }
 	.form_outer { width: 100%; }
@@ -126,6 +129,9 @@
 	footer nav ul li { width: auto; margin: 0 23px 0 0; }
 	footer nav ul li a { font-size: 12px; line-height: 16px; }
 	.custom_checkbox { font-size: 15px; line-height: 19px; }
+	.client-logos{
+		margin-top: 18%!important;margin-bottom: 5%;justify-content: center;width:75%;
+	}
 }
 
 @media (max-width: 991px) and (orientation: landscape){
@@ -145,4 +151,8 @@
 
 	footer nav ul { margin: 0 -10px; }
 	footer nav ul li { margin: 0 15px 0 0; }
+
+	.client-logos{
+		margin-top: 17%!important;margin-bottom: 5%;justify-content: center;width:75%;
+	}
 }
