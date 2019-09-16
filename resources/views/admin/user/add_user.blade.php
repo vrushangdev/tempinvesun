@@ -60,6 +60,17 @@
                                 <input type="text" class="form-control" name="occupation" id="inputOccupation" placeholder="Please enter occupation" autocomplete="false" data-msg="Please enter occpation">
                             </div>
 
+                            <div class="form-group reatiler_id" style="display:none;">
+                                <label class="font-secondary">Retailer List</label>
+                                <select class="form-control" name="reatiler_id">
+                                    <option value="">Select Reatiler</option>
+                                @if(count($retailerList) > 0)
+                                    @foreach($retailerList as $rk => $rv)
+                                        <option value="{{ $rv->id }}">{{ $rv->name }}</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label for="inputEmail">Email</label>
@@ -94,12 +105,15 @@
         if($(this).val() == 3){
             $('.occupation').show();
             $('.city').show();
+            $('.reatiler_id').show();
             $(".js-select2-module").select2({
                 placeholder: "Select City Name",
             });
+            
         } else {
             $('.occupation').hide();
             $('.city').hide();
+            $('.reatiler_id').hide();
         }
     });
 </script>

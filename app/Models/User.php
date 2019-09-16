@@ -85,6 +85,9 @@ class User extends Authenticatable
     public function countryname(){
         return $this->hasOne('App\Models\Country','id','country');
     }
-   
+    
+    public function lead(){
+        return $this->hasOne('App\Models\LeadAssistant','sharing_id','signup_sharing');   
+    }
 
 }

@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\EnergyDataSet;
 use App\Models\GetCallRequest;
 use App\Models\Installer;
+use App\Models\LeadAssistant;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,6 +48,21 @@ class HomeController extends Controller
         if($request->shared_id != '' && $request->shared != ''){
             $user->signup_sharing_by = $request->shared;
             $user->signup_sharing = $request->shared_id;
+        }
+        if($request->shared == 'leadassistant' || $request->shared == 'retailer'){
+            if($request->shared == 'leadassistant'){
+                $findLeadAssistant = LeadAssistant::where('sharing_id',$request->shared_id)->first();
+                if(!is_null($findLeadAssistant) && $findLeadAssistant->retailer_id != ''){
+                    $user->is_callcenter = 0;
+                } else {
+                    $user->is_callcenter = 1;
+                }
+            }
+            if($request->shared == 'retailer'){
+                $user->is_callcenter = 0;
+            }
+        } else {
+            $user->is_callcenter = 1;
         }
         $user->save();
 

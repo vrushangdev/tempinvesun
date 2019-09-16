@@ -29,7 +29,11 @@
                                     @foreach($getTotalLead as $tk => $tv)
                                         <tr>
                                             <td>{{ $tv->user->first_name }} {{ $tv->user->last_name }}</td>
-                                            <td>{{ $slot[$tv->time_slot_id] }}</td>
+                                            @if(in_array($tv->time_slot_id,$slot))
+                                                <td>{{ $slot[$tv->time_slot_id] }}</td>
+                                            @else
+                                                <td>------------</td>
+                                            @endif
                                             <td>{{ $tv->user->address1 }}</td>
                                             <td>{{ $tv->user->address2 }}</td>
                                         </tr>

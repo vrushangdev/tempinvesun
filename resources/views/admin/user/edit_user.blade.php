@@ -65,6 +65,18 @@
                                 <input type="text" class="form-control" name="occupation" id="inputOccupation" placeholder="Please enter occupation" autocomplete="false" value="{{ $userDetail->mobile }}" data-msg="Please enter occpation">
                             </div>
                            
+                            <div class="form-group reatiler_id" @if($userDetail->retailer_id == '') style="display:none;" @endif>
+                                <label class="font-secondary">Retailer List</label>
+                                <select class="form-control" name="reatiler_id">
+                                    <option value="">Select Reatiler</option>
+                                @if(count($retailerList) > 0)
+                                    @foreach($retailerList as $rk => $rv)
+                                        <option value="{{ $rv->id }}" @if($rv->id == $userDetail->retailer_id) selected="selected" @endif>{{ $rv->name }}</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="inputEmail">Email</label>

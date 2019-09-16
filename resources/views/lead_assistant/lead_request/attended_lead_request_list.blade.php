@@ -8,6 +8,9 @@
 .datepicker{
     z-index: 1100 !important;
 }
+.error{
+    color:red;
+}
 </style>
 <section class="admin-content">
     <div class="bg-dark">
@@ -70,13 +73,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Reschedule</h4>
+                <h4 class="modal-title">Assign Leadassistant</h4>
             </div>
             <div class="modal-body">
-                <form action="{{ route('lead_assistant.saveSchedule') }}" method="post" id="userForm">
+                <form action="{{ route('retailer.saveLeadAssistantSchedule') }}" method="post" id="userForm">
                     @csrf
                     <input type="hidden" name="id" value="" id="id">
-                    <input type="hidden" name="reschedule_id" value="" id="reschedule_id">
+                    
                     <div class="form-group">
                         <label for="inputAppoDate">Appointment Date</label>
                         <input type="text" class="form-control js-datepicker" id="inputAppoDate" placeholder="Appointment Date" name="appointment_date" value="" autocomplete="off" required>

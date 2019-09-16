@@ -19,7 +19,7 @@
             </li>
 
             <li class="menu-item">
-                <a href="http://invesun.homipod.com?shared=retailer&sharing_id={{ Auth::guard('retailer')->user()->sharing_id }}" class="menu-link" target="_blank">
+                <a href="https://invesun.com?shared=retailer&sharing_id={{ Auth::guard('retailer')->user()->sharing_id }}" class="menu-link" target="_blank">
                     <span class="menu-label">
                         <span class="menu-name">Share Refferal</span>
                     </span>

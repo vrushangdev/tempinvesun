@@ -58,7 +58,9 @@ class UserController extends GlobalController
 
       $cityList = City::all();
 
-   		return view('admin.user.add_user',compact('roleList','cityList'));
+      $retailerList = Retailer::where('is_active',1)->where('is_delete',0)->get();
+
+   		return view('admin.user.add_user',compact('roleList','cityList','retailerList'));
    	}
 
    	public function saveUser(Request $request){
@@ -88,6 +90,10 @@ class UserController extends GlobalController
    		$user->password = Hash::make($request->password);
    		$user->mobile = $request->mobile;
       $user->sharing_id = $this->randomStringGenerater(32);
+      if($request->reatiler_id != ''){
+        $user->is_linked_retailer = 1;
+        $user->retailer_id = $request->reatiler_id;
+      }
    		$user->save();
 
       if(isset($request->city) && count($request->city) > 0){
@@ -152,7 +158,9 @@ class UserController extends GlobalController
 
         $cityList = City::all();
 
-   		return view('admin.user.edit_user',compact('userDetail','roleList','cityList','cityId'));
+        $retailerList = Retailer::where('is_active',1)->where('is_delete',0)->get();
+
+   		return view('admin.user.edit_user',compact('userDetail','roleList','cityList','cityId','retailerList'));
    	}
 
    	public function saveEditedUser(Request $request){
@@ -180,6 +188,13 @@ class UserController extends GlobalController
         $user->occupation = $request->occupation;
         $user->email = $request->email;
         $user->mobile = $request->mobile;
+        if($request->reatiler_id != ''){
+          $user->is_linked_retailer = 1;
+          $user->retailer_id = $request->reatiler_id;
+        } else {
+          $user->is_linked_retailer = 0;
+          $user->retailer_id = '';
+        }
         $user->save();
 
         if(isset($request->city) && count($request->city) > 0){

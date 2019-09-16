@@ -249,6 +249,9 @@ Route::group(['prefix' => 'partner', 'namespace' => 'Retailer'], function () {
 	//My Leads
 	Route::get('/get-retailer-leads', 'RetailerController@getMyLeads')->name('retailer.getMyLeads');
 
+	Route::post('/get-retailer-lead-assistant', 'RetailerController@getRetailerLeadAssistant')->name('retailer.getRetailerLeadAssistant');
+	Route::post('/save-leadassistant-schedule', 'RetailerController@saveLeadAssistantSchedule')->name('retailer.saveLeadAssistantSchedule');
+	
 });
 
 

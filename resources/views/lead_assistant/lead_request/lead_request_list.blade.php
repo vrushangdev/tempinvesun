@@ -46,9 +46,17 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $cv->user->first_name }} {{ $cv->user->middle_name }} {{ $cv->user->last_name }}</td>
                                             <td>{{ $cv->user->mobile }}</td>
-                                            <td>{{ $cv->user->address1 }}, {{ $cv->user->address2 }}, {{ $cv->user->district }} - {{ $cv->user->pincode }}</td>
+                                            @if($cv->user->address1 != '')
+                                                <td>{{ $cv->user->address1 }}, {{ $cv->user->address2 }}, {{ $cv->user->district }} - {{ $cv->user->pincode }}</td>
+                                            @else
+                                                <td>---------</td>
+                                            @endif
                                             <td>{{ $cv->date }}</td>
-                                            <td>{{ $cv->slot->name }}</td>
+                                            @if(!is_null($cv->slot))
+                                                <td>{{ $cv->slot->name }}</td>
+                                            @else
+                                                <td>---------</td>
+                                            @endif
                                             <td>
                                                 <a href="{{ route('imageOne',$cv->user_id) }}" class="btn m-b-15 ml-2 mr-2 btn-dark">Start</a>
                                                 <a href="javascript:void(0);" class="btn m-b-15 ml-2 mr-2 btn-dark reschedule" data-id="{{ $cv->user->id }}" data-value="{{ $cv->id }}">Reschedule</a>

@@ -10,7 +10,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right">
-                    <a class="dropdown-item" href="http://invesun.homipod.com?shared=retailer&sharing_id={{ Auth::guard('retailer')->user()->sharing_id }}" target="_blank"> Sharing Link</a>
+                    <a class="dropdown-item" href="https://invesun.com?shared=retailer&sharing_id={{ Auth::guard('retailer')->user()->sharing_id }}" target="_blank"> Sharing Link</a>
                     <input type="hidden" class="copyLinkUrl" id="copyTarget" value="http://invesun.homipod.com?shared=retailer&sharing_id={{ Auth::guard('retailer')->user()->sharing_id }}">
                    <!--  <a class="dropdown-item" href="{{ route('retailer.changePassoword') }}">  Change Password</a>
                     <div class="dropdown-divider"></div> -->

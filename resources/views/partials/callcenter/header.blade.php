@@ -10,7 +10,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right">
-                    <a class="dropdown-item" href="http://invesun.homipod.com?shared=callcenter&sharing_id={{ Auth::guard('callcenter')->user()->sharing_id }}" target="_blnk">  Add Link</a>
+                    <a class="dropdown-item" href="https://invesun.com?shared=callcenter&sharing_id={{ Auth::guard('callcenter')->user()->sharing_id }}" target="_blnk">  Add Link</a>
                      <!-- <input type="hidden" class="copyLinkUrl" id="copyTarget" value=""> -->
                     <!-- <a class="dropdown-item" href="{{ route('callcenter.changePassoword') }}">  Change Password</a> -->
                     <!-- <div class="dropdown-divider"></div> -->
