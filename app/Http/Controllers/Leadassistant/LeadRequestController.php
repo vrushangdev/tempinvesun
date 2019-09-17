@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Leadassistant;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignedLeadAssistant;
+use App\Models\User;
+use App\Models\UserDocument;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\URL;
 
 class LeadRequestController extends Controller
 {
@@ -28,8 +32,9 @@ class LeadRequestController extends Controller
 
         $getLeadRequest = AssignedLeadAssistant::where('is_attend',1)
                                                ->where('lead_assistant_id',Auth::guard('lead_assistant')->user()->id)
-                                               ->with(['user','slot','userpropasal'])->get();
-       
+                                               ->with(['user','slot','userpropasal','userdocument'])->get();
+    
+
         return view('lead_assistant.lead_request.attended_lead_request_list',compact('getLeadRequest'));   
     }
 
@@ -94,5 +99,44 @@ class LeadRequestController extends Controller
                   'message' => 'Lead Request rescheduled!',
               ],
         ]); 
+    }
+
+    public function downloadUserDocumnet($id){
+
+        $findUserDocument = UserDocument::where('user_id',$id)->get();
+
+        $findUser  = User::where('id',$id)->first();
+
+        $imgArray = array();
+
+        if(!is_null($findUserDocument)){
+            foreach($findUserDocument as $fk => $fv){
+                if($fv->proof_type == 'AADHAR'){
+                    $imgArray[] = public_path()."/uploads/aadhar_card/".$fv->file_name;
+                }
+
+                if($fv->proof_type == 'PASSPORT'){
+                    $imgArray[] = public_path()."/uploads/passport/".$fv->file_name;
+                }
+
+                if($fv->proof_type == 'BANK_STATEMENT'){
+                    $imgArray[] = public_path()."/uploads/bank_statement/".$fv->file_name;
+                }
+
+                if($fv->proof_type == 'RESEDENTIAL'){
+                    $imgArray[] = public_path()."/uploads/resedential_proof/".$fv->file_name;
+                }
+
+                if($fv->proof_type == 'OTHER'){
+                    $imgArray[] = public_path()."/uploads/other/".$fv->file_name;
+                }
+            }
+        }
+
+        $name = "proof/".$findUser->first_name."_".$findUser->last_name.".zip";
+
+        \Zipper::make($name)->add($imgArray)->close();
+        return response()->download($name);
+        unlink(public_path($name));
     }
 }

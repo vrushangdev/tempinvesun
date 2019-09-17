@@ -192,6 +192,8 @@ Route::group(['prefix' => 'lead-assistant', 'namespace' => 'Leadassistant'], fun
 	Route::post('/presentation/form-fifteen', 'PresentationController@form_fifth')->name('form_fifth');
 	Route::post('/presentation/save-document-details', 'PresentationController@saveIdDocumnetDetails')->name('saveIdDocumnetDetails');
 	
+	Route::get('/download-user-document/{id}', 'LeadRequestController@downloadUserDocumnet')->name('downloadUserDocumnet');
+	
 	
 
 });

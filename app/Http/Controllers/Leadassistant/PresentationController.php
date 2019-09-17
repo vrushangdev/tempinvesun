@@ -1013,7 +1013,7 @@ class PresentationController extends GlobalController
     public function saveIdDocumnetDetails(Request $request){
 
         if(isset($request->aadhar_card)){
-            $aadhar_card = $this->uploadImage($request->aadhar_card,'aadhar_card');
+            $aadhar_card = $this->uploadUserImage($request->aadhar_card,'aadhar_card','aadhar_card');
             $saveAadhar = new UserDocument;
             $saveAadhar->user_id = $request->id; 
             $saveAadhar->proposal_id = $request->proposal_id;
@@ -1025,12 +1025,12 @@ class PresentationController extends GlobalController
         }
 
         if(isset($request->passport)){
-            $passport = $this->uploadImage($request->passport,'passport');
+            $passport = $this->uploadUserImage($request->passport,'passport','passport');
             $saveAadhar = new UserDocument;
             $saveAadhar->user_id = $request->id; 
             $saveAadhar->proposal_id = $request->proposal_id;
             $saveAadhar->type = $request->type;
-            $saveAadhar->proof_type = 'AADHAR';
+            $saveAadhar->proof_type = 'PASSPORT';
             $saveAadhar->file_name = $passport;
             $saveAadhar->uploaded_on = date('d-m-Y');
             $saveAadhar->save();
@@ -1039,7 +1039,7 @@ class PresentationController extends GlobalController
         if($request->type == 1){
 
             if(isset($request->bank_statement)){
-                $bank_statement = $this->uploadImage($request->bank_statement,'bank_statement');
+                $bank_statement = $this->uploadUserImage($request->bank_statement,'bank_statement','bank_statement');
                 $saveAadhar = new UserDocument;
                 $saveAadhar->user_id = $request->id; 
                 $saveAadhar->proposal_id = $request->proposal_id;
@@ -1053,7 +1053,7 @@ class PresentationController extends GlobalController
         } else {
 
             if(isset($request->resedential_proof)){
-                $resedential_proof = $this->uploadImage($request->resedential_proof,'resedential_proof');
+                $resedential_proof = $this->uploadUserImage($request->resedential_proof,'resedential_proof','resedential_proof');
                 $saveAadhar = new UserDocument;
                 $saveAadhar->user_id = $request->id; 
                 $saveAadhar->proposal_id = $request->proposal_id;
@@ -1067,7 +1067,7 @@ class PresentationController extends GlobalController
 
         if(isset($request->other_document) && count($request->other_document)){
             foreach($request->other_document as $ok => $ov){
-                $other = $this->uploadImage($ov,'other');
+                $other = $this->uploadUserImage($ov,'other','other');
                 $saveAadhar = new UserDocument;
                 $saveAadhar->user_id = $request->id; 
                 $saveAadhar->proposal_id = $request->proposal_id;
@@ -1087,6 +1087,15 @@ class PresentationController extends GlobalController
                   'message' => 'User\'s document successfully uploaded',
               ],
         ]); 
+    }
+
+    public function uploadUserImage($image,$path,$name){
+        $imagedata = $image;
+        $destinationPath = 'uploads/'.$path; 
+        $extension = $imagedata->getClientOriginalExtension(); 
+        $fileName = rand(11111,99999).'_'.$name.'.'.$extension;
+        $imagedata->move($destinationPath, $fileName);
+        return $fileName;
     }
 }
         

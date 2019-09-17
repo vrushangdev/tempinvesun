@@ -1,64 +1,70 @@
-@extends('layouts.presentation_new')
+@extends('layouts.lead_assistant')
 @section('title','Lead Assistant Dashboard | Invesun')
 @section('content')
-<section class="gradient-01">
-    <div class="container ">
-        <div class="row m-h-100 ">
-            <div class="col-md-12 col-lg-12 m-auto">
-            	<div class="avatar">
-                    <a href="{{ route('formThree',[$id,$proposal_id]) }}" class="previous">
-                        <div class="avatar avatar-title bg-success rounded-circle slider-btn-left-one" style="margin-top: 268px!important;">
-                            <i class="mdi mdi-arrow-left-thick"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="avatar right">
-                    <a href="javascript:void(0);" class="next submit">
-                        <div class="avatar avatar-title bg-success rounded-circle slider-btn-right-one" style="margin-top: 268px!important;">
-                            <i class="mdi mdi-arrow-right-thick"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded shadow-lg">
-                    <div class=" padding-box-2 p-all-25">
-                        <div class="">
-                           	<form id="login" name="login" action="{{ route('form_fifth') }}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                
-                                <input type="hidden" name="proposal_id" id ="proposal_id" value="{{ $proposal_id }}">
-                                <input type="hidden" id="user_id" name="id" value="{{ $id }}">
-
-                                <div class="m-b-10">
-                                    <p class="font-secondary">
-                                        Select Option
-                                    </p>
-                                    
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" name="customRadio" value="1" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="customRadio1">Apply For Loan</label>
+<section class="admin-content">
+    <div class="container m-t-60">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+            <form action="{{ route('form_fifth') }}" id="login" method="post">
+                @csrf
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Select Option
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 m-b-30">
+                                <center>
+                                    <div class="option-box-grid">
+                                        <input id="check1" name="customRadio" type="radio" value="1">
+                                        <label for="check1">
+                                            <span class="radio-content p-all-15 text-center">
+                                                <span class="mdi h1 d-block mdi-bank"></span>
+                                                <span class="h5" style="font-size:14px;">Apply For Loan</span>
+                                            </span>
+                                        </label>
                                     </div>
-
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="customRadio" value="2" class="custom-control-input" required disabled>
-                                        <label class="custom-control-label" for="customRadio2">Pay UpFront 30%  </label>
+                                </center>
+                            </div>
+                            <div class="col-sm-4 m-b-30">
+                                <center>
+                                    <div class="option-box-grid">
+                                        <input id="check2" name="customRadio" type="radio" value="2" disabled>
+                                        <label for="check2">
+                                            <span class="radio-content p-all-15 text-center">
+                                                <span class="mdi h1  d-block mdi-credit-card"></span>
+                                                <span class="h5" style="font-size:14px;">Pay UpFront 30%</span>
+                                            </span>
+                                        </label>
                                     </div>
-
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio4" name="customRadio" value="4" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="customRadio4">Registation  </label>
+                                </center>
+                            </div>
+                            <div class="col-sm-4 m-b-30">
+                                <center>
+                                    <div class="option-box-grid">
+                                        <input id="check3" name="customRadio" type="radio" value="4">
+                                        <label for="check3">
+                                            <span class="radio-content p-all-15 text-center">
+                                                <span class="mdi h1  d-block mdi-library-books"></span>
+                                                <span class="h5" style="font-size:14px;">Registation</span>
+                                            </span>
+                                        </label>
                                     </div>
-                                </div>
-                                
-                            </form>
+                                </center>
+                            </div>
+                            
                         </div>
+                        <center><button type="button" class="btn m-b-15 ml-2 mr-2 btn-success submit">Submit</button></center>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
 </section>
 @endsection
-@section('js')
 @section('js')
 <script type="text/javascript">
     $('.submit').on('click',function(){

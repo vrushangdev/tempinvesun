@@ -21,4 +21,8 @@ class AssignedLeadAssistant extends Model
     public function userpropasal(){
     	return $this->hasOne('App\Models\UserProposal','user_id','user_id');
     }
+
+    public function userdocument(){
+        return $this->hasMany('App\Models\UserDocument','user_id','user_id');   
+    }
 }
