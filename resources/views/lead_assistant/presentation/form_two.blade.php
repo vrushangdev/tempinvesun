@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="service_name">Service Numaber</label>
+                                    <label for="service_name">Service Number</label>
                                     <input type="text" class="form-control width" id="service_name" name="service_number" placeholder="Service Numaber" @if(!is_null($energyConsumptionData) && $energyConsumptionData->service_number != '') value="{{ $energyConsumptionData->service_number }}" @endif required>
                                 </div>
 

@@ -13,7 +13,7 @@
                     </a>
 			    </div>
 			    <div class="avatar right">
-			    	<a href="{{ route('imageThree',[$id,$proposal_id]) }}" class="next">
+			    	<a href="{{ route('imageSix',[$id,$proposal_id]) }}" class="next">
 				        <div class="avatar avatar-title bg-success rounded-circle slider-btn-right">
 				        	<i class="mdi mdi-arrow-right-thick"></i>
 				        </div>

@@ -64,8 +64,16 @@ class PresentationController extends GlobalController
 
         $leadAssistant = LeadAssistant::where('id',Auth::guard('lead_assistant')->user()->id)->first();
 
-        $name = $findUser->first_name." ".$findUser->middle_name." ".$findUser->last_name;
-        $location = $findUser->cityname->name.", ".$findUser->countryname->name;
+        if($findUser->first_name != ''){
+            $name = $findUser->first_name." ".$findUser->middle_name." ".$findUser->last_name;
+        } else {
+            $name = $findUser->form_name;
+        }
+        if(!is_null($findUser->cityname)){
+            $location = $findUser->cityname->name.", ".$findUser->countryname->name;
+        } else {
+            $location = '';
+        }
 
         $lname = $leadAssistant->name;
         $ldetails = $leadAssistant->email;
@@ -553,7 +561,7 @@ class PresentationController extends GlobalController
         $energy->save();
 
         
-        return redirect(route('imageSix',[$request->id,$request->proposal_id]))->with('messages', [
+        return redirect(route('imageSeven',[$request->id,$request->proposal_id]))->with('messages', [
               [
                   'type' => 'success',
                   'title' => 'Password',
@@ -854,9 +862,9 @@ class PresentationController extends GlobalController
         $img11 = public_path()."/pdf/".$i11->image;
         $img12 = public_path()."/pdf/".$i12->image;
         $img13 = public_path()."/img/img/13-13.jpg";
-        
+        $img14 = public_path()."/img/img/summery.jpg";
 
-        $images = array($img1, $img2,$img3,$img4,$img5,$img6,$img8,$img9,$img10,$img11,$img12,$img13);
+        $images = array($img1,$img2,$img8,$img3,$img4,$img5,$img6,$img9,$img11,$img12,$img10,$img14,$img13);
 
         $pdf = new \Imagick($images);
         $pdf->setImageFormat('pdf');
@@ -877,7 +885,7 @@ class PresentationController extends GlobalController
 
         $updateUserProposal = UserProposal::where('proposal_id',$proposal_id)->where('user_id',$id)->update(['proposal_link' => $proposal_name]);
 
-        $attend = AssignedLeadAssistant::where('user_id',$request->id)->update(['is_attend' => 1,'proposal_recieved' => date('d-m-Y')]);
+        $attend = AssignedLeadAssistant::where('user_id',$id)->update(['is_attend' => 1,'proposal_recieved' => date('d-m-Y')]);
 
         //return view('lead_assistant.presentation.otp_verification',compact('id','proposal_id'));   
 

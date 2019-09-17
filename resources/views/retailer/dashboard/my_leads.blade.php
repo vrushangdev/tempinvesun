@@ -99,6 +99,7 @@
                $('.schedule').html(data);
                $('#myModal').modal('show');
                $('#id').val(user_id);
+               $(".js-datepicker").datepicker({ format: 'dd/mm/yyyy' });
             }
         });
     });

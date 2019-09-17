@@ -6,7 +6,7 @@
         <div class="row m-h-100 ">
             <div class="col-md-12 col-lg-12 m-auto">
             	<div class="avatar">
-                    <a href="{{ route('imageSeven',[$id,$proposal_id]) }}" class="previous">
+                    <a href="{{ route('imageTwelve',[$id,$proposal_id]) }}" class="previous">
     			        <div class="avatar avatar-title bg-success rounded-circle slider-btn-left">
     			        	<i class="mdi mdi-arrow-left-thick"></i>
     			        </div>
