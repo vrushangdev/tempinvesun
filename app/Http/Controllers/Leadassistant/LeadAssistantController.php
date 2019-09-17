@@ -26,7 +26,7 @@ class LeadAssistantController extends Controller
 
         $id = Auth::guard('lead_assistant')->user()->id;
 
-        $slot = array('1'=>'Morning','2'=>'Afternoon','3' => 'Evening');
+        $slot = array('0' => '----------','1'=>'Morning','2'=>'Afternoon','3' => 'Evening');
 
     	$getTotalLead = AssignedLeadAssistant::where('lead_assistant_id',$id)->where('date',date('d/m/Y'))->with(['user'])->get();
 

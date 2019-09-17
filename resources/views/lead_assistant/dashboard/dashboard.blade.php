@@ -19,6 +19,7 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Mobile</th>
                                     <th>Slot</th>
                                     <th>Address</th>
                                     <th>Area</th>
@@ -28,14 +29,24 @@
                                 @if(count($getTotalLead) > 0)
                                     @foreach($getTotalLead as $tk => $tv)
                                         <tr>
-                                            <td>{{ $tv->user->first_name }} {{ $tv->user->last_name }}</td>
+                                            @if($tv->user->first_name != '')
+                                                <td>{{ $tv->user->first_name }} {{ $tv->user->last_name }}</td>
+                                            @else
+                                                <td>{{ $tv->user->form_name }}</td>
+                                            @endif
+                                            <th>{{ $tv->user->mobile }}</th>
                                             @if(in_array($tv->time_slot_id,$slot))
                                                 <td>{{ $slot[$tv->time_slot_id] }}</td>
                                             @else
                                                 <td>------------</td>
                                             @endif
-                                            <td>{{ $tv->user->address1 }}</td>
-                                            <td>{{ $tv->user->address2 }}</td>
+                                            @if($tv->user->address1 != '')
+                                                <td>{{ $tv->user->address1 }}</td>
+                                                <td>{{ $tv->user->address2 }}</td>
+                                            @else 
+                                                <td>------------</td>
+                                                <td>------------</td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 @else
